@@ -1,0 +1,136 @@
+/* Custom CSS for FPT University Academic Portal */
+body {
+    background-color: #fff;
+}
+
+.head_logo {
+    width: 200px;
+    height: auto;
+}
+
+/* Style for the header image */
+.header-image {
+    background: url('../img/Screenshot_2023-10-05_135733-removebg-preview.png') no-repeat;
+    background-size: cover;
+    width: 69%; /* Adjust the width and height as needed */
+    height: 79%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1; /* Place it behind other content */
+}
+
+.spacer {
+    width: 140px; /* Adjust the width as needed */
+    display: inline-block;
+}
+
+.body_content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-column {
+    position: relative;
+    display: inline-block;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.tag {
+    position: absolute;
+    bottom: 13px;
+    right: -323px; /* Overlap 4px to the right */
+    background-color: white;
+    padding: 18px; /* Adjust the padding as needed */
+    margin-left: 301px;
+}
+
+.tag h1 {
+    font-size: 50px;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    color: blue;
+    text-transform: uppercase;
+}
+
+.tag p {
+    font-size: 18px;
+}
+
+.login-column {
+    flex: 1;
+    padding-top: 50px;
+    padding-left: 400px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.login-form {
+    border-radius: 20px;
+    background-color: var(--white);
+    box-shadow: 0 0 20px 0 rgba(29,31,89,.1);
+    padding: 35px 25px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.login-form h4 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-form label {
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 10px;
+}
+
+.btn-primary:hover {
+    width: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg,#2c31cf 0%,#5419dd 100%);
+    color: var(--white);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    padding: 13px 15px;
+    margin: 20px 0;
+}
+
+.btn-google {
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 10px;
+}
+
+.btn-google:hover {
+    background-color: #357ae8;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 60px;
+    }
+}
