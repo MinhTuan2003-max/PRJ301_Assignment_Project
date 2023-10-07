@@ -133,4 +133,25 @@ img {
     .container {
         margin-top: 60px;
     }
+
+    .login-column {
+        text-align: center;
+        padding-left: 0; /* Reset padding-left */
+        padding-top: 0; /* Reset padding-top */
+    }
+
+    .image-column {
+        display: block; /* Display the image-column as a block to stack it below */
+        text-align: center; /* Center-align the image */
+    }
+
+    .tag {
+        position: static; /* Reset position */
+        background-color: transparent; /* Reset background color */
+        padding: 0; /* Reset padding */
+        margin-left: 0; /* Reset margin-left */
+    }
 }
+
+
+
