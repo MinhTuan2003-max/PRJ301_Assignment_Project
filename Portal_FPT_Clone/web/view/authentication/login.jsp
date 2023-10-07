@@ -11,7 +11,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FPT University Academic Portal</title>
-        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
         <!-- Add Bootstrap CSS link -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
@@ -59,9 +59,9 @@
             <div class="row">
                 <div class="image-column">
                     <img src="img/8716597e8b9a5fc4068b-removebg-preview.png" alt=""/>
-                    <div class="tag">
+                    <div class="tag" style="bottom: 0px">
                         <h1>Welcome to FAP</h1>                       
-                        <p>FPT students are always steadfast in doing things differently to do well</p>
+                        <p>Sinh viên FPT luôn luôn nỗ lực, cố gắng, quyết tâm làm khác để làm tốt</p>
                     </div>
                 </div>
 

@@ -42,7 +42,6 @@ img {
 
 .tag {
     position: absolute;
-    bottom: 13px;
     right: -323px; /* Overlap 4px to the right */
     background-color: white;
     padding: 18px; /* Adjust the padding as needed */
@@ -150,6 +149,11 @@ img {
         background-color: transparent; /* Reset background color */
         padding: 0; /* Reset padding */
         margin-left: 0; /* Reset margin-left */
+    }
+    
+    .tag p {
+        text-align: center;
+        padding-left: 24px;
     }
 }
 
