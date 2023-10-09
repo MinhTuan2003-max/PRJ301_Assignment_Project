@@ -97,7 +97,12 @@
                                                 Đăng Nhập
                                             </strong> 
                                         </button>
+                                        <label for="remember" class="remember-label">
+                                            <input type="checkbox" name="remember" id="remember" class="remember-checkbox">
+                                            Remember Account
+                                        </label>
                                     </div>
+
                                 </form>
                         </div>
                     </div>
