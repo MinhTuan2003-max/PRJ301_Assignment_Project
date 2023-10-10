@@ -60,7 +60,7 @@
             <div class="row">
                 <div class="image-column">
                     <img src="img/8716597e8b9a5fc4068b-removebg-preview.png" alt=""/>
-                    <div class="tag" style="bottom: 14px">
+                    <div class="tag" style="bottom: 0px">
                         <h1>Welcome to FAP</h1>                       
                         <p>Sinh viên FPT luôn luôn nỗ lực, cố gắng, quyết tâm làm khác để làm tốt</p>
                     </div>
@@ -70,44 +70,42 @@
                     <div class="page-header">              
                         <div class="login-form" id="login-form">
                             <h4>Đăng nhập FAP</h4>
-                            <select class="form-control" id="userSelectType" style="width: 100%;">
-                                <option value="type1">Sinh viên, Giảng viên, Cán bộ ĐH-FPT</option>
-                                <option value="type2">Phụ huynh</option>
-                            </select>
-                            <form onsubmit="return validateStudentLecturerLoginForm();"></br>
+                            <form action="login" method="POST" onsubmit="return validateLoginForm();">
                                 <div class="form-group">
-                                    <select class="form-control" id="studentLecturerCampusSelect" style="width: 100%;">
-                                        <option value="studentLecturerCampusSelect">Select Campus</option>
-                                        <option value="campus1">FU-Hòa Lạc</option>
-                                        <option value="campus2">FU-Hồ Chí Minh</option>
-                                        <option value="campus3">FU-Đà Nẵng</option>
-                                        <option value="campus4">FU-Quy Nhơn</option>
-                                        <option value="campus5">FU-Cần Thơ</option>
+                                    <select class="form-control" id="typeChoiceSelect" style="width: 100%;">
+                                        <option value="typeChoice">Select Type</option>
+                                        <option value="type1">Sinh viên, Giảng viên, Cán bộ ĐH-FPT</option>
+                                        <option value="type2">Phụ Huynh</option>
                                     </select>
+                                    <option></option>                                   
+                                        <select class="form-control" id="studentLecturerCampusSelect" style="width: 100%;">
+                                            <option value="studentLecturerCampusSelect">Select Campus</option>
+                                            <option value="campus1">FU-Hòa Lạc</option>
+                                            <option value="campus2">FU-Hồ Chí Minh</option>
+                                            <option value="campus3">FU-Đà Nẵng</option>
+                                            <option value="campus4">FU-Quy Nhơn</option>
+                                            <option value="campus5">FU-Cần Thơ</option>
+                                        </select>
                                 </div>
-                                <form onsubmit="return validateLoginForm();">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" required id="username" placeholder="Enter gmail">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" required id="password" placeholder="Enter password">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block">
-                                            <strong>
-                                                Đăng Nhập
-                                            </strong> 
-                                        </button>
-                                        <label  style="margin-top: 10px;" for="remember" class="remember-label">
-                                            <input type="checkbox" name="remember" id="remember" class="remember-checkbox">
-                                            Remember Account
-                                        </label>
-                                        <span>
-                                            <a href="url" target="target">Forgot a password</a>
-                                        </span>
-                                    </div>
 
-                                </form>
+                                <div class="form-group">
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter gmail">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        <strong>
+                                            Sign In
+                                        </strong> 
+                                    </button>
+                                    <label  style="margin-top: 10px;" for="remember" class="remember-label">
+                                        <input type="checkbox" name="remember" id="remember" class="remember-checkbox">
+                                        Remember Account
+                                    </label>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -136,17 +134,6 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            function validateLoginForm() {
-                var selectedCampus = document.getElementById("studentLecturerCampusSelect").value;
-
-                if (selectedCampus === "studentLecturerCampusSelect") {
-                    alert("Please select campus before.");
-                    return false;
-                }
-                return true;
-            }
-        </script>
     </body>
 </html>
 

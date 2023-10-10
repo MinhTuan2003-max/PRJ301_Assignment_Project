@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/javascript.js to edit this template
  */
 function validateLoginForm() {
+    console.log("validateLoginForm function called");
     var selectedCampus = document.getElementById("studentLecturerCampusSelect").value;
+    var selectedType = document.getElementById("typeChoiceSelect").value;
 
-    if (selectedCampus === "studentLecturerCampusSelect") {
-        alert("Please select campus before.");
+    if (selectedCampus === "studentLecturerCampusSelect" || selectedType === "typeChoice") {
+        alert("Please select campus and type before.");
         return false;
     }
     return true;
