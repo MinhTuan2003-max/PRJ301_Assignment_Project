@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author MINH TUAN
  */
-@WebServlet(name="LoginController", urlPatterns={"/login"})
+@WebServlet(name="LoginController", urlPatterns={"login"})
 public class LoginController extends HttpServlet {
    
     /** 

@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FPT University Academic Portal</title>
         <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="${pageContext.request.contextPath}/js/validate.js" type="text/javascript"></script>
         <!-- Add Bootstrap CSS link -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
@@ -59,7 +60,7 @@
             <div class="row">
                 <div class="image-column">
                     <img src="img/8716597e8b9a5fc4068b-removebg-preview.png" alt=""/>
-                    <div class="tag" style="bottom: 0px">
+                    <div class="tag" style="bottom: 14px">
                         <h1>Welcome to FAP</h1>                       
                         <p>Sinh viên FPT luôn luôn nỗ lực, cố gắng, quyết tâm làm khác để làm tốt</p>
                     </div>
@@ -97,10 +98,13 @@
                                                 Đăng Nhập
                                             </strong> 
                                         </button>
-                                        <label for="remember" class="remember-label">
+                                        <label  style="margin-top: 10px;" for="remember" class="remember-label">
                                             <input type="checkbox" name="remember" id="remember" class="remember-checkbox">
                                             Remember Account
                                         </label>
+                                        <span>
+                                            <a href="url" target="target">Forgot a password</a>
+                                        </span>
                                     </div>
 
                                 </form>
@@ -132,6 +136,17 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateLoginForm() {
+                var selectedCampus = document.getElementById("studentLecturerCampusSelect").value;
+
+                if (selectedCampus === "studentLecturerCampusSelect") {
+                    alert("Please select campus before.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </body>
 </html>
 
