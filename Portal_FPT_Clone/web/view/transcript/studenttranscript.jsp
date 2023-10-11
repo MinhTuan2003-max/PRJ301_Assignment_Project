@@ -1,19 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
+<%-- 
+    Document   : studenttranscript
+    Created on : 11-Oct-2023, 20:20:18
+    Author     : MINH TUAN
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-            <title>FPT University Academic Portal</title>
-            <style type="text/css">
-                .style1 {
-                    font-weight: bold;
-                }
-            </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <title>FPT University Academic Portal</title>
+        <style type="text/css">
+            .style1 {
+                font-weight: bold;
+            }
+        </style>
     </head>
     <body>
         <div class="header-image"></div>
@@ -22,7 +24,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <div class="container">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="https://daihoc.fpt.edu.vn/">
-                            <img style="width: 200px; height: auto;" class="head_logo" src="img/2017-FPTU-S-01.png" alt=""/>
+                            <img style="width: 200px; height: auto;" class="head_logo" src="../img/2017-FPTU-S-01.png" alt=""/>
                         </a>
                         <div class="spacer"></div>
                     </div>
@@ -42,12 +44,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <tr>
                             <td>
                                 <a href="https://apps.apple.com/app/id1527723314">
-                                    <img style="width: 120px; height: 40px" src="img/img-app-store.png" alt="appstore"/>
+                                    <img style="width: 120px; height: 40px" src="../img/img-app-store.png" alt="appstore"/>
                                 </a>
                             </td>
                             <td>
                                 <a href="https://play.google.com/store/apps/details?id=com.fuct" class="">
-                                    <img style="width: 120px; height: 43px" src="img/img-play-store.png" alt=""/>
+                                    <img style="width: 120px; height: 43px" src="../img/img-play-store.png" alt=""/>
                                 </a>
                             </td>
                         </tr>
@@ -63,7 +65,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <a href="?view=user">
                                 <span id="ctl00_lblLogIn" class="label label-success">tuanhmhe173175</span>
                             </a>
-                            | <a href="logout" class="label label-success">logout</a>
+                            | <a href="../logout" class="label label-success">logout</a>
                             |
                             <span id="ctl00_lblCampusName" class="label label-success">CAMPUS: FPTU-Hòa Lạc</span>
                         </div>
@@ -71,7 +73,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <ol class="breadcrumb">
                             <li>
                                 <span id="ctl00_lblNavigation">
-                                    <a href="/login">Home</a>
+                                    <a href="../login">Home</a>
                                     &nbsp;|&nbsp;<b>Grade Transcript</b>
                                 </span>
                             </li>

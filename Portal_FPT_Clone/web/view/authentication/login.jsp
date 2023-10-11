@@ -78,14 +78,14 @@
                                         <option value="type2">Phụ Huynh</option>
                                     </select>
                                     <option></option>                                   
-                                        <select class="form-control" id="studentLecturerCampusSelect" style="width: 100%;">
-                                            <option value="studentLecturerCampusSelect">Select Campus</option>
-                                            <option value="campus1">FU-Hòa Lạc</option>
-                                            <option value="campus2">FU-Hồ Chí Minh</option>
-                                            <option value="campus3">FU-Đà Nẵng</option>
-                                            <option value="campus4">FU-Quy Nhơn</option>
-                                            <option value="campus5">FU-Cần Thơ</option>
-                                        </select>
+                                    <select class="form-control" id="studentLecturerCampusSelect" style="width: 100%;">
+                                        <option value="studentLecturerCampusSelect">Select Campus</option>
+                                        <option value="campus1">FU-Hòa Lạc</option>
+                                        <option value="campus2">FU-Hồ Chí Minh</option>
+                                        <option value="campus3">FU-Đà Nẵng</option>
+                                        <option value="campus4">FU-Quy Nhơn</option>
+                                        <option value="campus5">FU-Cần Thơ</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -114,19 +114,10 @@
         <!-- Footer -->
         <footer class="footer bg-white text-black p-4">
             <div class="container text-center">
-                <p>&copy; Powered by
-                    <span>
-                        <a href="http://fpt.edu.vn/">FPT University</a>
-                    </span> |
-                    <span>
-                        <a href="http://cms.fpt.edu.vn/">CMS</a>
-                    </span> |
-                    <span>
-                        <a href="http://library.fpt.edu.vn/">Library</a>
-                    </span>
-                    <span>
-                        <a href="http://library.books24x7.com/">books24x7</a>
-                    </span>
+                <p>&copy; Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>
+                    &nbsp;|&nbsp;<a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>
+                    &nbsp;|&nbsp;<a href="http://library.fpt.edu.vn" target="_blank">library</a>
+                    &nbsp;|&nbsp;<a href="http://library.books24x7.com" target="_blank">books24x7</a>
                 </p>
             </div>
         </footer>
