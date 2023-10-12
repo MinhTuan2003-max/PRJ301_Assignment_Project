@@ -51,15 +51,23 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String campus = request.getParameter("campus");
+        String type = request.getParameter("type");
+
+        int campusStudy = Integer.parseInt(campus);
+        int typeChoice = Integer.parseInt(type);
         Account param = new Account();
         param.setUsername(username);
         param.setPassword(password);
+        param.setCampusID(campusStudy);
+        param.setTypeID(typeChoice);
 
         AccountDBContext db = new AccountDBContext();
         Account loggedUser = db.get(param);
 
         if (loggedUser == null) {
-            response.getWriter().println("incorrect username or password");
+            response.getWriter().println("<h1>" + "Tài khoản của bạn không được phép đăng nhập vào hệ thống" + "</h1>");
+            request.getRequestDispatcher("view/authentication/login.jsp").forward(request, response);
         } else {
             String remember = request.getParameter("remember");
 
@@ -74,8 +82,7 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_user);
                 response.addCookie(c_pass);
             }
-
-            response.getWriter().println("Hello " + loggedUser.getDisplayname());
+            response.sendRedirect("view/transcript/studenttranscript.jsp");
         }
     }
 

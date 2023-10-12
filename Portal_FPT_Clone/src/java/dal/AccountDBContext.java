@@ -41,16 +41,22 @@ public class AccountDBContext extends DBContext<Account> {
     @Override
     public Account get(Account entity) {
         try {
-            String sql = "SELECT username,displayname FROM Account\n"
-                    + "WHERE username = ? AND [password] = ?";
+            String sql = "SELECT a.username, a.displayname, c.cid, t.tid FROM Account a \n"
+                    + "INNER JOIN Campus c ON a.cid = c.cid\n"
+                    + "INNER JOIN [Type] t ON a.tid = t.tid\n"
+                    + "WHERE a.username = ? AND a.[password] = ? AND c.cid = ? AND t.tid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, entity.getUsername());
             stm.setString(2, entity.getPassword());
+            stm.setInt(3, entity.getCampusID());
+            stm.setInt(4, entity.getTypeID());
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 Account account = new Account();
                 account.setUsername(rs.getString("username"));
                 account.setDisplayname(rs.getString("displayname"));
+                account.setCampusID(rs.getInt("cid"));
+                account.setTypeID(rs.getInt("tid"));
                 return account;
             }
 

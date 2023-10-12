@@ -44,12 +44,12 @@
                         <tr>
                             <td>
                                 <a href="https://apps.apple.com/app/id1527723314">
-                                    <img style="width: 120px; height: 40px" src="../img/img-app-store.png" alt="appstore"/>
+                                    <img style="width: 120px; height: 40px" src="../../img/img-app-store.png" alt="appstore"/>
                                 </a>
                             </td>
                             <td>
                                 <a href="https://play.google.com/store/apps/details?id=com.fuct" class="">
-                                    <img style="width: 120px; height: 43px" src="../img/img-play-store.png" alt=""/>
+                                    <img style="width: 120px; height: 43px" src="../../img/img-play-store.png" alt=""/>
                                 </a>
                             </td>
                         </tr>
@@ -65,7 +65,7 @@
                             <a href="?view=user">
                                 <span id="ctl00_lblLogIn" class="label label-success">tuanhmhe173175</span>
                             </a>
-                            | <a href="../logout" class="label label-success">logout</a>
+                            | <a href="../../logout" class="label label-success">logout</a>
                             |
                             <span id="ctl00_lblCampusName" class="label label-success">CAMPUS: FPTU-Hòa Lạc</span>
                         </div>
@@ -73,7 +73,7 @@
                         <ol class="breadcrumb">
                             <li>
                                 <span id="ctl00_lblNavigation">
-                                    <a href="../login">Home</a>
+                                    <a href="../../login">Home</a>
                                     &nbsp;|&nbsp;<b>Grade Transcript</b>
                                 </span>
                             </li>

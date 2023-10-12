@@ -13,6 +13,8 @@ public class Account extends BaseEntity {
     private String username;
     private String password;
     private String displayname;
+    private int cid;
+    private int tid;
 
     public String getUsername() {
         return username;
@@ -37,4 +39,21 @@ public class Account extends BaseEntity {
     public void setDisplayname(String displayname) {
         this.displayname = displayname;
     }
+
+    public int getCampusID() {
+        return cid;
+    }
+
+    public void setCampusID(int campusID) {
+        this.cid = campusID;
+    }
+
+    public int getTypeID() {
+        return tid;
+    }
+
+    public void setTypeID(int typeID) {
+        this.tid = typeID;
+    }
+
 }

@@ -72,19 +72,20 @@
                             <h4>Đăng nhập FAP</h4>
                             <form action="login" method="POST" onsubmit="return validateLoginForm();">
                                 <div class="form-group">
-                                    <select class="form-control" id="typeChoiceSelect" style="width: 100%;">
+                                    <select class="form-control" name="type" id="typeChoiceSelect" style="width: 100%;">
                                         <option value="typeChoice">Select Type</option>
-                                        <option value="type1">Sinh viên, Giảng viên, Cán bộ ĐH-FPT</option>
-                                        <option value="type2">Phụ Huynh</option>
+                                        <option value="1">Giảng viên, Cán bộ Đại Học - FPT</option>
+                                        <option value="2">Sinh viên</option>
+                                        <option value="3">Phụ Huynh</option>
                                     </select>
                                     <option></option>                                   
-                                    <select class="form-control" id="studentLecturerCampusSelect" style="width: 100%;">
+                                    <select class="form-control" name="campus" id="studentLecturerCampusSelect" style="width: 100%;">
                                         <option value="studentLecturerCampusSelect">Select Campus</option>
-                                        <option value="campus1">FU-Hòa Lạc</option>
-                                        <option value="campus2">FU-Hồ Chí Minh</option>
-                                        <option value="campus3">FU-Đà Nẵng</option>
-                                        <option value="campus4">FU-Quy Nhơn</option>
-                                        <option value="campus5">FU-Cần Thơ</option>
+                                        <option value="1">FU-Hòa Lạc</option>
+                                        <option value="2">FU-Hồ Chí Minh</option>
+                                        <option value="3">FU-Đà Nẵng</option>
+                                        <option value="4">FU-Quy Nhơn</option>
+                                        <option value="5">FU-Cần Thơ</option>
                                     </select>
                                 </div>
 
