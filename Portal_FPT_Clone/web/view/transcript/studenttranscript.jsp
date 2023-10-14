@@ -73,7 +73,7 @@
                         <ol class="breadcrumb">
                             <li>
                                 <span id="ctl00_lblNavigation">
-                                    <a href="../../login">Home</a>
+                                    <a href="../home/home.jsp">Home</a>
                                     &nbsp;|&nbsp;<b>Grade Transcript</b>
                                 </span>
                             </li>

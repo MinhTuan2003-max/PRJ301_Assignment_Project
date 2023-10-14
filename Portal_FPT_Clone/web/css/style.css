@@ -42,10 +42,11 @@ img {
 
 .tag {
     position: absolute;
-    right: -323px; /* Overlap 4px to the right */
+    right: -319px; /* Overlap 4px to the right */
+    bottom: 27px;
     background-color: white;
-    padding: 18px; /* Adjust the padding as needed */
-    margin-left: 301px;
+    padding: 10px; /* Adjust the padding as needed */
+    margin-left: 302px;
 }
 
 .tag h1 {
@@ -75,7 +76,7 @@ img {
     border-radius: 20px;
     background-color: var(--white);
     box-shadow: 0 0 20px 0 rgba(29,31,89,.1);
-    padding: 35px 25px;
+    padding: 16px 33px;
     position: relative;
     z-index: 1;
     width: 100%;
@@ -150,7 +151,7 @@ img {
         padding: 0; /* Reset padding */
         margin-left: 0; /* Reset margin-left */
     }
-    
+
     .tag p {
         text-align: center;
         padding-left: 24px;

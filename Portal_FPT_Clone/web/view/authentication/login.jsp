@@ -60,7 +60,7 @@
             <div class="row">
                 <div class="image-column">
                     <img src="img/8716597e8b9a5fc4068b-removebg-preview.png" alt=""/>
-                    <div class="tag" style="bottom: 0px">
+                    <div class="tag" style="bottom: 46px">
                         <h1>Welcome to FAP</h1>                       
                         <p>Sinh viên FPT luôn luôn nỗ lực, cố gắng, quyết tâm làm khác để làm tốt</p>
                     </div>
@@ -90,10 +90,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter gmail">
+                                    <input type="text" name="username" required class="form-control" id="username" placeholder="Enter gmail">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control" id="password" placeholder="Enter password">
+                                    <input type="password" name="password" required class="form-control" id="password" placeholder="Enter password">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block">

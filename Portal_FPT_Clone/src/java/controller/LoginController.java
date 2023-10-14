@@ -7,7 +7,6 @@ package controller;
 import dal.AccountDBContext;
 import entity.Account;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -49,6 +48,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String campus = request.getParameter("campus");
@@ -66,8 +66,9 @@ public class LoginController extends HttpServlet {
         Account loggedUser = db.get(param);
 
         if (loggedUser == null) {
-            response.getWriter().println("<h1>" + "Tài khoản của bạn không được phép đăng nhập vào hệ thống" + "</h1>");
-            request.getRequestDispatcher("view/authentication/login.jsp").forward(request, response);
+            String errorMessage = "Tài khoản của bạn không được phép đăng nhập vào hệ thống";
+            response.getWriter().println("<script>alert('" + errorMessage + "');"
+                    + "window.location.href='login';</script>");
         } else {
             String remember = request.getParameter("remember");
 
@@ -82,7 +83,7 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_user);
                 response.addCookie(c_pass);
             }
-            response.sendRedirect("view/transcript/studenttranscript.jsp");
+            response.sendRedirect("view/home/home.jsp");
         }
     }
 
