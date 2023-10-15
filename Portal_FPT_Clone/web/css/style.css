@@ -43,7 +43,7 @@ img {
 .tag {
     position: absolute;
     right: -319px; /* Overlap 4px to the right */
-    bottom: 27px;
+    bottom: 0px;
     background-color: white;
     padding: 10px; /* Adjust the padding as needed */
     margin-left: 302px;
