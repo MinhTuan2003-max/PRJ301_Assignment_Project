@@ -60,7 +60,7 @@
             <div class="row">
                 <div class="image-column">
                     <img src="img/8716597e8b9a5fc4068b-removebg-preview.png" alt=""/>
-                    <div class="tag" style="bottom: 46px">
+                    <div class="tag" style="bottom: 27px;">
                         <h1>Welcome to FAP</h1>                       
                         <p>Sinh viên FPT luôn luôn nỗ lực, cố gắng, quyết tâm làm khác để làm tốt</p>
                     </div>
