@@ -1,0 +1,171 @@
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Header Styles */
+header {
+    background-color: #fff;
+    color: #333;
+    padding: 2px 0;
+}
+
+.head-text {
+    font-size: 14px;
+}
+
+/* Hero Section Styles */
+.hero {
+    background-size: cover;
+    text-align: center;
+    color: #333;
+    padding: 100px 0;
+    border-radius: 20px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.divUser {
+    padding-left: 45.5rem;
+    background-color: rgb(241,241,241);
+    border-radius: 3px;
+    padding-right: 4px;
+}
+
+.divUser a {
+    background-color: rgb(92,184,92);
+    border-radius: 5px;
+    padding: 0 7px 2px 7px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.divUser a:hover {
+    color: #fff;
+}
+
+.divUser b {
+    background-color: rgb(92,184,92);
+    border-radius: 5px;
+    padding: 0 7px 2px 7px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.overlay {
+    position: relative;
+}
+
+.tag {
+    height: 53px;
+    line-height: 50px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -31px;
+    padding: 0 15px;
+    color: #fff;
+    border-radius: 5px 5px 0 0;
+    background-color: #ef8d01;
+}
+
+.tag p {
+    font-size: 30px;
+    background-position: 0 -400px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.cta-button:hover {
+    background-color: darkgoldenrod;
+    color: #fff;
+}
+
+.content {
+    box-shadow: 0 0 5px #c4cacc;
+    border-radius: 0 5px 5px 5px;
+}
+
+/* Contact Section Styles */
+.contact {
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    padding: 100px 0;
+    border-radius: 20px;
+}
+
+.contact h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.contact p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: black;
+}
+
+footer {
+    color: #333;
+    padding: 10px 0;
+    margin-left: 57px;
+}
+
+@media screen and (max-width: 992px) {
+    .container {
+        padding: 0;
+    }
+
+    .divUser {
+        background-color: rgb(241,241,241);
+        border-radius: 5px;
+        font-size: 11px;
+        padding: 0px;
+        color: #333;
+    }
+
+    .divUser a {
+        background-color: rgb(92,184,92);
+    }
+
+    .divUser a:hover {
+        color: #fff;
+    }
+
+    .divUser b {
+        background-color: rgb(92,184,92);
+    }
+
+    footer {
+        text-align: left;
+        margin-left: 14px;
+    }
+}
+
+
