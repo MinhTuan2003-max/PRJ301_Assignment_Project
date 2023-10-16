@@ -1,0 +1,83 @@
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(240,240,240);
+    border-radius: 4px;
+}
+
+.divControl {
+    padding-left: 8px;
+}
+
+.divUser {
+    padding-right: 7px;
+
+}
+
+.divUser a {
+    background-color: rgb(92,184,92);
+    border-radius: 5px;
+    padding: 0 7px 2px 7px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.divUser a:hover {
+    color: #fff;
+}
+
+.divUser b {
+    background-color: rgb(92,184,92);
+    border-radius: 5px;
+    padding: 0 7px 2px 7px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.image-avatar {
+    width: 100%;
+}
+
+.show-img {
+    text-align: center;
+}
+
+.content-body {
+    display: flex;
+    padding-left: 10px;
+}
+
+.information-student {
+    border: 1px solid rgb(221,221,221);
+    text-align: left;
+    padding: 10px 12px;
+    display: flex;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 0 5px #c4cacc;
+
+}
+
+.profile-table th, .academic-table th {
+    padding: 5px 8px;
+    font-size: 20px;
+    border-top: 1px solid rgb(221,221,221);
+    border-bottom: 1px solid rgb(221,221,221);
+}
+
+.row-1 {
+    border-right: 1px solid rgb(221,221,221);
+}
+
+.academic-table {
+    margin-left: 5px;
+}
+
+.profile-table td, .academic-table td {
+    padding: 10px;
+    border-bottom: 1px solid rgb(221,221,221);
+
+}
+
+
+

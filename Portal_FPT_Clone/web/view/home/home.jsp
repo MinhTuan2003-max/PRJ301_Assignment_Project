@@ -55,10 +55,10 @@
                     <tr>
                         <td>
                             <p>
-                                <a href="#" target="_blank">
+                                <a href="../detail/userdetail.jsp">
                                     <strong>${sessionScope.account.displayname}</strong>
                                 </a>
-                                &nbsp;|&nbsp;<a href="../../logout" target="_blank">
+                                &nbsp;|&nbsp;<a href="../../logout">
                                     <strong>Logout</strong>
                                 </a>
                                 &nbsp;|&nbsp;<b>CAMPUS: FPTU-Hòa Lạc</b>                                                            
@@ -117,6 +117,5 @@
                 </tr>
             </table>
         </footer>
-
     </body>
 </html>
