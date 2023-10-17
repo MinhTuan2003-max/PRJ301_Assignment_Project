@@ -5,7 +5,9 @@
 package controller;
 
 import dal.AccountDBContext;
+import dal.CampusDBContext;
 import entity.Account;
+import entity.Campus;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  *
@@ -55,15 +58,10 @@ public class LoginController extends HttpServlet {
         String type = request.getParameter("type");
 
         int campusStudy = Integer.parseInt(campus);
-        int typeChoice = Integer.parseInt(type);
-        Account param = new Account();
-        param.setUsername(username);
-        param.setPassword(password);
-        param.setCampusID(campusStudy);
-        param.setTypeID(typeChoice);
+        int typeStudy = Integer.parseInt(type);
 
         AccountDBContext db = new AccountDBContext();
-        Account loggedUser = db.get(param);
+        Account loggedUser = db.get(username, password, campusStudy);
 
         if (loggedUser == null) {
             String errorMessage = "Tài khoản của bạn không được phép đăng nhập vào hệ thống";
@@ -71,10 +69,10 @@ public class LoginController extends HttpServlet {
                     + "window.location.href='login';</script>");
         } else {
             String remember = request.getParameter("remember");
-
+            int id = loggedUser.getUserID();
             HttpSession session = request.getSession();
             session.setAttribute("account", loggedUser);
-
+            session.setAttribute("id", id);
             if (remember != null) {
                 Cookie c_user = new Cookie("user", username);
                 Cookie c_pass = new Cookie("pass", password);
@@ -83,6 +81,7 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_user);
                 response.addCookie(c_pass);
             }
+
             response.sendRedirect("view/home/home.jsp");
         }
     }

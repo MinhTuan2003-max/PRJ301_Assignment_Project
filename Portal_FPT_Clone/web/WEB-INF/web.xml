@@ -34,7 +34,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
-        <url-pattern>/home</url-pattern>
+        <url-pattern>/student/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StudentDetailController</servlet-name>

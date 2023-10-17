@@ -4,17 +4,31 @@
  */
 package entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author MINH TUAN
  */
 public class Account extends BaseEntity {
 
+    private int userID;
     private String username;
     private String password;
     private String displayname;
-    private int cid;
+    private Campus campus;
     private int tid;
+    private String studentID;
+
+    ArrayList<Student> students = new ArrayList<>();
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     public String getUsername() {
         return username;
@@ -40,20 +54,36 @@ public class Account extends BaseEntity {
         this.displayname = displayname;
     }
 
-    public int getCampusID() {
-        return cid;
+    public Campus getCampus() {
+        return campus;
     }
 
-    public void setCampusID(int campusID) {
-        this.cid = campusID;
+    public void setCampus(Campus campus) {
+        this.campus = campus;
     }
 
-    public int getTypeID() {
+    public int getTid() {
         return tid;
     }
 
-    public void setTypeID(int typeID) {
-        this.tid = typeID;
+    public void setTid(int tid) {
+        this.tid = tid;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
     }
 
 }

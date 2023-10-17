@@ -23,7 +23,7 @@ public abstract class DBContext<T extends BaseEntity> {
 
     public DBContext() {
         try {
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=PRJ301DatabaseTest";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=PRJ301_Assignment_Project";
             String user = "sa";
             String pass = "minhtuanha2003";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -36,13 +36,4 @@ public abstract class DBContext<T extends BaseEntity> {
 
     }
 
-    public abstract ArrayList<T> list();
-
-    public abstract void insert(T entity);
-
-    public abstract void update(T entity);
-
-    public abstract void delete(T entity);
-
-    public abstract T get(T entity);
 }

@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author MINH TUAN
@@ -12,6 +14,7 @@ public class Campus extends BaseEntity {
 
     private int cid;
     private String cname;
+    ArrayList<Account> accounts = new ArrayList<>();
 
     public int getCid() {
         return cid;
@@ -27,6 +30,14 @@ public class Campus extends BaseEntity {
 
     public void setCname(String cname) {
         this.cname = cname;
+    }
+
+    public ArrayList<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(ArrayList<Account> accounts) {
+        this.accounts = accounts;
     }
 
 }

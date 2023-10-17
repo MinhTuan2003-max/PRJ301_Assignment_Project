@@ -73,7 +73,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
         if (isAuthenticated(request)) {
             doGet(request, response, (Account) request.getSession().getAttribute("account"));
         } else {
-            response.getWriter().println("<h1>" + "Access Denied !!" + "</h1>");
+            response.sendRedirect("../login");
         }
     }
 
@@ -97,7 +97,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
         if (isAuthenticated(request)) {
             doPost(request, response, (Account) request.getSession().getAttribute("account"));
         } else {
-            response.getWriter().println("<h1>" + "Access Denied !!" + "</h1>");
+            response.sendRedirect("../login");
         }
     }
 
