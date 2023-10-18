@@ -12,6 +12,7 @@ import entity.Campus;
 import entity.Student;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -32,30 +33,28 @@ public class StudentDetailController extends BaseRequiredAuthenticationControlle
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int a = (int) request.getSession().getAttribute("id");
+        int userID = Integer.parseInt(request.getParameter("user_id"));
         StudentDBContext studb = new StudentDBContext();
-        ArrayList<Student> students = studb.getStudent(a);
+        Student students = studb.getStudent(userID);
         request.setAttribute("students", students);
-
-        CampusDBContext camp = new CampusDBContext();
-        ArrayList<Campus> campus = camp.search(a);
+        
+        CampusDBContext cdb = new CampusDBContext();
+        ArrayList<Campus> campus = cdb.search(userID);
         request.setAttribute("campus", campus);
-
         request.getRequestDispatcher("view/detail/userdetail.jsp").forward(request, response);
 
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account loggedAccount) throws ServletException, IOException {
-        processRequest(request, response, loggedAccount);
-
+        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response, Account loggedAccount) throws ServletException, IOException {
-        processRequest(request, response, loggedAccount);
+        processRequest(request, response);
     }
 
 }

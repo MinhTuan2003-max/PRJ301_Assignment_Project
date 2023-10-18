@@ -25,7 +25,6 @@ public class AccountDBContext extends DBContext<Account> {
                     + "      ,[password]\n"
                     + "      ,[displayname]\n"
                     + "      ,[cid]\n"
-                    + "      ,[tid]\n"
                     + "  FROM [Account] a"
                     + "WHERE a.username = ? AND a.[password] = ? AND a.cid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -59,7 +58,6 @@ public class AccountDBContext extends DBContext<Account> {
                 + "      ,[password]\n"
                 + "      ,[displayname]\n"
                 + "      ,[cid]\n"
-                + "      ,[tid]\n"
                 + "  FROM [Account]"
                 + "WHERE username = ? AND [password] = ? AND cid = ?";
         try {
@@ -90,39 +88,23 @@ public class AccountDBContext extends DBContext<Account> {
         return null;
     }
 
-    public Account getAccount(int accountID) {
+    public Account getAccount(int userID) {
         String sql = "SELECT [user_id]\n"
                 + "      ,[username]\n"
-                + "      ,[password]\n"
-                + "      ,[displayname]\n"
-                + "      ,[cid]\n"
-                + "      ,[tid]\n"
-                + "  FROM [Account]";
-        PreparedStatement stm = null;
-        ResultSet rs = null;
+                + "  FROM [Account] WHERE [user_id] = ?";
         try {
-            stm = connection.prepareStatement(sql);
-            stm.setInt(1, accountID);
-            rs = stm.executeQuery();
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userID);
+            ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                Account a = new Account();
-                a.setUserID(rs.getInt("user_id"));
-                a.setUsername(rs.getString("username"));
-                return a;
+                Account account = new Account();
+                account.setUserID(rs.getInt("user_id"));
+                account.setUsername(rs.getString("username"));
+                return account;
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                rs.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                stm.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
-            }
             try {
                 connection.close();
             } catch (SQLException ex) {

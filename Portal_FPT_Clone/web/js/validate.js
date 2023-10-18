@@ -5,10 +5,9 @@
 function validateLoginForm() {
     console.log("validateLoginForm function called");
     var selectedCampus = document.getElementById("studentLecturerCampusSelect").value;
-    var selectedType = document.getElementById("typeChoiceSelect").value;
 
-    if (selectedCampus === "studentLecturerCampusSelect" || selectedType === "typeChoice") {
-        alert("Please select campus and type before.");
+    if (selectedCampus === "studentLecturerCampusSelect") {
+        alert("Please select campus before.");
         return false;
     }
     return true;

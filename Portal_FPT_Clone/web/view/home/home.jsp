@@ -55,7 +55,7 @@
                     <tr>
                         <td>
                             <p>
-                                <a href="../detail/userdetail.jsp">
+                                <a href="../../userdetail?user_id=${sessionScope.account.userID}">
                                     <strong>${sessionScope.account.displayname}</strong>
                                 </a>
                                 &nbsp;|&nbsp;<a href="../../logout">

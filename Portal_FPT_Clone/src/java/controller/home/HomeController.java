@@ -36,7 +36,7 @@ public class HomeController extends BaseRequiredAuthenticationController {
         HttpSession session = request.getSession(false); // Don't create a new session if it doesn't exist
         if (session == null || session.getAttribute("loggedAccount") == null) {
             // Session is expired or the user is not logged in, redirect to login page
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("../login.jsp");
         } else {
             request.getRequestDispatcher("view/home/home.jsp").forward(request, response);
         }

@@ -70,15 +70,9 @@
                     <div class="page-header">              
                         <div class="login-form" id="login-form">
                             <h4>Đăng nhập FAP</h4>
+                            <h4>Cổng Thông tin Học Thuật FPT</h4>
                             <form action="login" method="POST" onsubmit="return validateLoginForm();">
                                 <div class="form-group">
-                                    <select class="form-control" name="type" id="typeChoiceSelect" style="width: 100%;">
-                                        <option value="typeChoice">Select Type</option>
-                                        <option value="1">Giảng viên, Cán bộ Đại Học - FPT</option>
-                                        <option value="2">Sinh viên</option>
-                                        <option value="3">Phụ Huynh</option>
-                                    </select>
-                                    <option></option>                                   
                                     <select class="form-control" name="campus" id="studentLecturerCampusSelect" style="width: 100%;">
                                         <option value="studentLecturerCampusSelect">Select Campus</option>
                                         <option value="1">FU-Hòa Lạc</option>
@@ -122,10 +116,6 @@
                 </p>
             </div>
         </footer>
-        <!-- Bootstrap JavaScript -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
 

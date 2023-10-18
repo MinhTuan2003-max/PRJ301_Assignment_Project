@@ -19,24 +19,24 @@ import java.util.logging.Logger;
  */
 public class StudentDBContext extends DBContext<Student> {
 
-    public ArrayList<Student> getStudent(int userID) {
-        ArrayList<Student> students = new ArrayList<>();
+    public Student getStudent(int userID) {
         try {
-            String sql = "SELECT [student_ID]\n" 
-                    + "      ,[student_Name]\n"
-                    + "      ,[student_Gender]\n"
-                    + "      ,[student_dob]\n"
-                    + "      ,[student_Address]\n"
-                    + "      ,[student_IDCard]\n"
-                    + "      ,[student_Phone]\n"
-                    + "      ,[student_Email]\n"
-                    + "      ,[student_Img]\n"
-                    + "      ,[user_id]\n"
-                    + "  FROM [Student]";
+            String sql = "SELECT s.[student_ID]\n"
+                    + "      ,s.[student_Name]\n"
+                    + "      ,s.[student_Gender]\n"
+                    + "      ,s.[student_dob]\n"
+                    + "      ,s.[student_Address]\n"
+                    + "      ,s.[student_IDCard]\n"
+                    + "      ,s.[student_Phone]\n"
+                    + "      ,s.[student_Email]\n"
+                    + "      ,s.[student_Img]\n"
+                    + "      ,a.[user_id]\n"
+                    + "  FROM [Student] s INNER JOIN Account a ON s.[user_id] = a.[user_id]"
+                    + " WHERE s.[user_id] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, userID);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
+            if(rs.next()) {
                 Student student = new Student();
                 student.setStudent_ID(rs.getString("student_ID"));
                 student.setStudent_Name(rs.getString("student_Name"));
@@ -50,7 +50,7 @@ public class StudentDBContext extends DBContext<Student> {
                 Account account = new Account();
                 account.setUserID(rs.getInt("user_id"));
                 student.setAccount(account);
-                students.add(student);
+                return student;
             }
 
         } catch (SQLException ex) {
@@ -62,6 +62,6 @@ public class StudentDBContext extends DBContext<Student> {
                 Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return students;
+        return null;
     }
 }

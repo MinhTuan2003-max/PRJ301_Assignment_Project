@@ -30,15 +30,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StudentTranscriptController</servlet-name>
-        <url-pattern>/student/transcriptstudent</url-pattern>
+        <url-pattern>/transcriptstudent</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
-        <url-pattern>/student/home</url-pattern>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StudentDetailController</servlet-name>
-        <url-pattern>/student/userdetail</url-pattern>
+        <url-pattern>/userdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

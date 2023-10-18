@@ -55,10 +55,8 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String campus = request.getParameter("campus");
-        String type = request.getParameter("type");
 
         int campusStudy = Integer.parseInt(campus);
-        int typeStudy = Integer.parseInt(type);
 
         AccountDBContext db = new AccountDBContext();
         Account loggedUser = db.get(username, password, campusStudy);
@@ -69,10 +67,8 @@ public class LoginController extends HttpServlet {
                     + "window.location.href='login';</script>");
         } else {
             String remember = request.getParameter("remember");
-            int id = loggedUser.getUserID();
             HttpSession session = request.getSession();
             session.setAttribute("account", loggedUser);
-            session.setAttribute("id", id);
             if (remember != null) {
                 Cookie c_user = new Cookie("user", username);
                 Cookie c_pass = new Cookie("pass", password);

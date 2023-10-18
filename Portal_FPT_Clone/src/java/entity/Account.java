@@ -4,8 +4,6 @@
  */
 package entity;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author MINH TUAN
@@ -17,10 +15,7 @@ public class Account extends BaseEntity {
     private String password;
     private String displayname;
     private Campus campus;
-    private int tid;
-    private String studentID;
-
-    ArrayList<Student> students = new ArrayList<>();
+    private Student student;
 
     public int getUserID() {
         return userID;
@@ -62,28 +57,12 @@ public class Account extends BaseEntity {
         this.campus = campus;
     }
 
-    public int getTid() {
-        return tid;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setTid(int tid) {
-        this.tid = tid;
-    }
-
-    public String getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
-    }
-
-    public ArrayList<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
 }
