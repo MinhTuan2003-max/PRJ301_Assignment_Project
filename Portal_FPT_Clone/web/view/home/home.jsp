@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${pageContext.request.contextPath}/css/homestyle.css" rel="stylesheet" type="text/css"/>
@@ -35,12 +35,12 @@
                             <tr>
                                 <td>
                                     <a href="https://apps.apple.com/app/id1527723314">
-                                        <img style="width: 120px; height: 40px" src="../../img/img-app-store.png" alt="appstore"/>
+                                        <img style="width: 120px; height: 40px" src="img/img-app-store.png" alt="appstore"/>
                                     </a>
                                 </td>
                                 <td>
                                     <a href="https://play.google.com/store/apps/details?id=com.fuct" class="">
-                                        <img style="width: 120px; height: 43px" src="../../img/img-play-store.png" alt=""/>
+                                        <img style="width: 120px; height: 43px" src="img/img-play-store.png" alt=""/>
                                     </a>
                                 </td>
                             </tr>
@@ -55,13 +55,13 @@
                     <tr>
                         <td>
                             <p>
-                                <a href="../../userdetail?user_id=${sessionScope.account.userID}">
+                                <a href="userdetail?user_id=${sessionScope.account.userID}">
                                     <strong>${sessionScope.account.displayname}</strong>
                                 </a>
-                                &nbsp;|&nbsp;<a href="../../logout">
+                                &nbsp;|&nbsp;<a href="logout">
                                     <strong>Logout</strong>
                                 </a>
-                                &nbsp;|&nbsp;<b>CAMPUS: FPTU-Hòa Lạc</b>                                                            
+                                &nbsp;|&nbsp;<b>FPTU - FPT University</b>                                                            
                             </p>
                         </td>
                     </tr>
@@ -87,7 +87,7 @@
                     <section class="contact">
                         <h1>Student Transcript</h1>
                         <p>View the final score of all subjects you have studied</p>
-                        <a href="../transcript/studenttranscript.jsp" class="cta-button">
+                        <a href="${pageContext.request.contextPath}/transcriptstudent" class="cta-button">
                             <strong>Student Transcript</strong>
                         </a>
                     </section>

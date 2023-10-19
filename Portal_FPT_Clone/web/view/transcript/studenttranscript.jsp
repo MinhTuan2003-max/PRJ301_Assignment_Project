@@ -75,7 +75,7 @@
                         <ol class="breadcrumb">
                             <li>
                                 <span id="ctl00_lblNavigation">
-                                    <a href="../home/home.jsp">Home</a>
+                                    <a href="${pageContext.request.contextPath}/home">Home</a>
                                     &nbsp;|&nbsp;<b>Grade Transcript</b>
                                 </span>
                             </li>

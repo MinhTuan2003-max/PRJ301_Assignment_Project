@@ -77,8 +77,9 @@ public class LoginController extends HttpServlet {
                 response.addCookie(c_user);
                 response.addCookie(c_pass);
             }
+            response.sendRedirect(request.getContextPath() + "/home");
 
-            response.sendRedirect("view/home/home.jsp");
+            
         }
     }
 

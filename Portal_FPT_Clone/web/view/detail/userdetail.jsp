@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>User Detail</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${pageContext.request.contextPath}/css/detailstyle.css" rel="stylesheet" type="text/css"/>
@@ -54,7 +54,7 @@
                 <div class="col-md-12">                    
                     <div class="content-container">
                         <div class="divControl">
-                            <a href="view/home/home.jsp">Home</a>
+                            <a href="${pageContext.request.contextPath}/home">Home</a>
                             &nbsp;|&nbsp;<b>User Detail</b>
                         </div>
                         <div class="divUser">
@@ -84,7 +84,7 @@
             </div>
             <div class="row content-body">
                 <div class="show-img col-md-4">
-                    <img class="image-avatar" src="img/avatar.png" alt="alt"/>
+                    <img class="image-avatar" src="${requestScope.students.student_Img}" alt="Student Img"/>
                 </div>
                 <div class="information-student col-md-8">
                     <div class="profile-table">
@@ -151,7 +151,7 @@
                             </tr>
                             <tr>
                                 <td>Member Code</td>
-                                <td><c:out value="${s.account.displayname}" /></td>                        
+                                <td><c:out value="${account.displayname}" /></td>                        
                             </tr>
                             <tr>
                                 <td>Mode</td>

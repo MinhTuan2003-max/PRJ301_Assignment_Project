@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>StudentTranscriptController</servlet-name>
-        <servlet-class>controller.transcript.StudentTranscriptController</servlet-class>
+        <servlet-class>controller.student.StudentTranscriptController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HomeController</servlet-name>

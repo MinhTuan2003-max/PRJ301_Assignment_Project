@@ -12,9 +12,9 @@ import entity.Campus;
 import entity.Student;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
@@ -39,12 +39,19 @@ public class StudentDetailController extends BaseRequiredAuthenticationControlle
         StudentDBContext studb = new StudentDBContext();
         Student students = studb.getStudent(userID);
         request.setAttribute("students", students);
-        
+
         CampusDBContext cdb = new CampusDBContext();
         ArrayList<Campus> campus = cdb.search(userID);
         request.setAttribute("campus", campus);
         request.getRequestDispatcher("view/detail/userdetail.jsp").forward(request, response);
 
+        HttpSession session = request.getSession(false); // Don't create a new session if it doesn't exist
+        if (session == null || session.getAttribute("loggedAccount") == null) {
+            // Session is expired or the user is not logged in, redirect to login page
+            response.sendRedirect("login.jsp");
+        } else {
+            request.getRequestDispatcher("view/home/home.jsp").forward(request, response);
+        }
     }
 
     @Override
