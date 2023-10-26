@@ -108,9 +108,9 @@
                 <tr>
                     <td>
                         <p style="text-align: center">
-                            © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>
+                            &copy; Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>
                             &nbsp;|&nbsp;<a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>
-                            &nbsp;|&nbsp;<a href="http://library.fpt.edu.vn" target="_blank">Library</a>
+                            &nbsp;|&nbsp;<a href="http://library.fpt.edu.vn" target="_blank">library</a>
                             &nbsp;|&nbsp;<a href="http://library.books24x7.com" target="_blank">books24x7</a>
                         </p>
                     </td>

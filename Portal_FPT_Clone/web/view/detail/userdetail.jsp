@@ -125,7 +125,7 @@
                                 <td>${s.student_Address}</td>
                             </tr>
                             <tr>
-                                <td class="row-1">Phone number</td>
+                                <td class="row-1">Phone Num</td>
                                 <td>0${s.student_Phone}</td>
                             </tr>
                             <tr>

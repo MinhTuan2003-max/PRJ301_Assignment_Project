@@ -62,7 +62,9 @@
                     <img src="img/8716597e8b9a5fc4068b-removebg-preview.png" alt=""/>
                     <div class="tag">
                         <h1>Welcome to FAP</h1>                       
-                        <p>Sinh viên FPT luôn luôn nỗ lực, cố gắng, quyết tâm làm khác để làm tốt</p>
+                        <p> 
+                            Giáo dục đào tạo đáp ứng nhu cầu xã hội và dựa trên các công nghệ đào tạo tiên tiến nhất
+                        </p>
                     </div>
                 </div>
 
@@ -70,7 +72,7 @@
                     <div class="page-header">              
                         <div class="login-form" id="login-form">
                             <h4>Đăng nhập FAP</h4>
-                            <h4>Cổng Thông tin Học Thuật FPT</h4>
+                            <h4>Cổng Thông tin Học Thuật FPTU</h4>
                             <form action="login" method="POST" onsubmit="return validateLoginForm();">
                                 <div class="form-group">
                                     <select class="form-control" name="campus" id="studentLecturerCampusSelect" style="width: 100%;">
