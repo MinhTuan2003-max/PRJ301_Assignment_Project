@@ -77,7 +77,7 @@
                     <section class="hero">
                         <h1>Mark Report</h1>
                         <p>View scores for each subject by Semester</p>
-                        <a href="#" class="cta-button">
+                        <a href="mark?user_id=${sessionScope.account.userID}" class="cta-button">
                             <strong>Mark Report</strong>
                         </a>
                     </section>
