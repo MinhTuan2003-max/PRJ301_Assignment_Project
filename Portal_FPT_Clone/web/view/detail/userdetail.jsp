@@ -117,10 +117,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="row-1">ID Card</td>
-                                <td>${s.student_IDCard}</td>
-                            </tr>
-                            <tr>
                                 <td class="row-1">Address</td>
                                 <td>${s.student_Address}</td>
                             </tr>
@@ -162,12 +158,8 @@
                                 <td>4</td>
                             </tr>
                             <tr>
-                                <td>Major</td>
-                                <td>BIT</td>
-                            </tr>
-                            <tr>
                                 <td>Curriculum</td>
-                                <td>BIT_SE_17C_NJ</td>
+                                <td>${requestScope.majors.major_name}</td>
                             </tr>
                             <tr>
                                 <td>Cumulative GPA</td>
@@ -178,5 +170,28 @@
                 </div>
             </div>
         </div>
+        <br>
+        <footer>
+            <table width="100%" border="0">
+                <tr>
+                    <td style="padding-left: 210px">
+                        <b>Mọi góp ý, thắc mắc xin liên hệ:</b>
+                        <span>Phòng dịch vụ sinh viên</span>: Email:
+                        <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a>.
+                        Điện thoại: <strong>(024)7308.13.13</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="text-align: center">
+                            &copy; Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>
+                            &nbsp;|&nbsp;<a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>
+                            &nbsp;|&nbsp;<a href="http://library.fpt.edu.vn" target="_blank">library</a>
+                            &nbsp;|&nbsp;<a href="http://library.books24x7.com" target="_blank">books24x7</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </footer>
     </body>
 </html>

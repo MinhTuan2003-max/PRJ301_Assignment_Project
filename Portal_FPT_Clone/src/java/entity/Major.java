@@ -14,13 +14,13 @@ public class Major extends BaseEntity {
 
     private int major_id;
     private String major_name;
-    private ArrayList<Student> students;
+    private Student students;
 
-    public ArrayList<Student> getStudents() {
+    public Student getStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
+    public void setStudents(Student students) {
         this.students = students;
     }
 

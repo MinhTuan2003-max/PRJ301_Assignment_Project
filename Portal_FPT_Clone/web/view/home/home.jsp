@@ -55,7 +55,7 @@
                     <tr>
                         <td>
                             <p>
-                                <a href="userdetail?user_id=${sessionScope.account.userID}">
+                                <a href="userdetail?user_id=${sessionScope.account.userID}&studentID=${requestScope.students.student_ID}">
                                     <strong>${sessionScope.account.displayname}</strong>
                                 </a>
                                 &nbsp;|&nbsp;<a href="logout">

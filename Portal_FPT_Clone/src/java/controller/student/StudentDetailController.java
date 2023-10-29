@@ -6,15 +6,16 @@ package controller.student;
 
 import controller.BaseRequiredAuthenticationController;
 import dal.CampusDBContext;
+import dal.MajorDBContext;
 import dal.StudentDBContext;
 import entity.Account;
 import entity.Campus;
+import entity.Major;
 import entity.Student;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +39,11 @@ public class StudentDetailController extends BaseRequiredAuthenticationControlle
         int userID = Integer.parseInt(request.getParameter("user_id"));
         StudentDBContext studb = new StudentDBContext();
         Student students = studb.getStudent(userID);
+        
+        MajorDBContext mdbc = new MajorDBContext();
+        Major majors = mdbc.get(students.getStudent_ID());
         request.setAttribute("students", students);
+        request.setAttribute("majors", majors);
 
         CampusDBContext cdb = new CampusDBContext();
         ArrayList<Campus> campus = cdb.search(userID);

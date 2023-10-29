@@ -35,8 +35,16 @@ public class ScoreDBContext extends DBContext<Score> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Score s = new Score();
-                s.setScore_ID(rs.getInt("score_id"));
-                s.setScore(rs.getDouble("score"));
+                int scoreId = rs.getInt("score_id");
+                double scoreValue = rs.getDouble("score");
+
+                if (rs.wasNull()) {
+                    s.setScore_ID(scoreId);
+                    s.setScore(null);
+                } else {
+                    s.setScore_ID(scoreId);
+                    s.setScore(scoreValue);
+                }
                 Assessment a = new Assessment();
                 a.setAssessment_ID(rs.getString("assessment_id"));
                 a.setCourse_grade_weight(rs.getDouble("course_grade_weight"));
@@ -50,5 +58,4 @@ public class ScoreDBContext extends DBContext<Score> {
         return scores;
     }
 
-    
 }

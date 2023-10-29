@@ -7,11 +7,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -91,93 +86,102 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <br>
             <div>
                 <br>
-                <h2>Grade Report for Ha Minh Tuan (HE173175)</h2>
+                <h2>Grade Report for ${requestScope.students.student_Name} (${requestScope.students.student_ID})</h2>
             </div>
             <br>
             <div>
                 <br>
                 <div>
-                    <h4>Select a term, course ...</h4>
-                </div>
-                <div>
-                    <table border="1">
-                        <tr>
-                            <td class="grade-term-course">Term</td>
-                            <td class="grade-term-course">Course</td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <a href="javascript:void(0);" onclick="showCourse('Summer2022')">Summer2022</a>
-                            </td>
-                            <td>
-                                <div class="grade-course" id="Summer2022Course"  style="display: none;">
-                                    English 5 (TRS501) (TRS501.5.P1, from 16/05/2022 - 24/06/2022) <br>
-                                    Transition (TRS601) (TRS601.4.P2, from 11/07/2022 - 26/08/2022) <br>
-                                    Vovinam 2 (VOV124) (VOV124.XH6.P1, from 04/05/2022 - 23/06/2022) <br>
-                                    Vovinam 3 (VOV134) (VOV134.HL64.P2, from 18/07/2022 - 24/08/2022) <br>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:void(0);" onclick="showCourse('Fall2022')">Fall2022</a>
-                            </td>
-                            <td>
-                                <div class="grade-course" id="Fall2022Course"  style="display: none;">
-                                    <c:forEach items="${requestScope.enrollments}" var="e">
-                                        <a href="javascript:void(0);" onclick="showGrades('${e.course.course_id}')">
-                                            ${e.course.course_name}(${e.course.course_id})
-                                        </a>
-                                        <span>
-                                            (${e.group.group_name}, from ${e.startDate} to ${e.endDate})
-                                        </span>
-                                        <br>
-                                    </c:forEach>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div id="CEA201Grades"  style="display: none;">
-                    <table border="1">
-                        <tr>
-                            <td class="grade-title">GRADE CATEGORY</td>
-                            <td class="grade-title">GRADE ITEM</td>
-                            <td class="grade-title">WEIGHT</td>
-                            <td class="grade-title">VALUE</td>
-                            <td class="grade-title">COMMENT</td>
-                        </tr>
-                        <c:forEach items="${requestScope.scores}" var="s" varStatus="loop">
+                    <br>
+                    <div>
+                        <h4>Select a term, course ...</h4>
+                    </div>
+                    <div>
+                        <table>
                             <tr>
-                                <td>${requestScope.assessments[loop.index].course_grade_group} </td>
-                                <td>${requestScope.assessments[loop.index].grade.grade_name}</td>
-                                <td>${s.assessment.course_grade_weight * 100} %</td>
-                                <c:choose>
-                                    <c:when test="${not empty s.score}">
-                                        <td>${s.score}</td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td></td>
-                                    </c:otherwise>
-                                </c:choose>
-                                <td></td>
+                                <td class="grade-term-course">Term</td>
+                                <td class="grade-term-course">Course</td>
                             </tr>
-                        </c:forEach>
-                        <tr>
-                            <th rowspan="2">COURSE TOTAL</th>
-                            <th>AVERAGE</th>
-                            <th>${requestScope.gpa}</th>
-                        </tr>
-                        <tr>
-                            <th>STATUS</th>
-                            <th>${requestScope.status}</th>
-                        </tr>
-                    </table>
+                            <tr>
+                                <td style="padding-right: 15px">
+                                    <c:forEach items="${requestScope.enrollments}" var="e" varStatus="loop">
+                                        <c:if test="${loop.first}">
+                                            <a href="javascript:void(0);" onclick="showCourse('Fall2022', '${e.student.student_ID}')" id="fallLink">Fall2022</a>
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+
+                                <td>
+                                    <div class="grade-course" id="Fall2022Course"  style="display: none;">
+                                        <c:forEach items="${requestScope.enrollments}" var="e">
+                                            <a href="javascript:void(0);" onclick="showGrades('${e.course.course_id}')">
+                                                ${e.course.course_name}(${e.course.course_id})
+                                            </a>
+                                            <span>
+                                                (${e.group.group_name}, from ${e.startDate} to ${e.endDate})
+                                            </span>
+                                            <br>
+                                        </c:forEach>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br>
+                    <div id="CEA201Grades"  style="display: none;">
+                        <h3>... then see report</h3>
+                        <table >
+                            <tr>
+                                <td class="grade-title" style="padding-right: 10px; padding-left: 5px">GRADE CATEGORY</td>
+                                <td class="grade-title" style="padding-right: 10px; padding-left: 5px">GRADE ITEM</td>
+                                <td class="grade-title" style="padding-right: 10px; padding-left: 5px">WEIGHT</td>
+                                <td class="grade-title" style="padding-right: 10px; padding-left: 5px">VALUE</td>
+                                <td class="grade-title" style="padding-right: 10px; padding-left: 5px">COMMENT</td>
+                            </tr>
+                            <c:forEach items="${requestScope.scores}" var="s" varStatus="loop">
+                                <tr>
+                                    <c:choose>
+                                        <c:when test="${loop.first || (requestScope.assessments[loop.index].course_grade_group != requestScope.assessments[loop.index - 1].course_grade_group && requestScope.assessments[loop.index].course_grade_group != 'Total')}">
+                                            <td style="padding-right: 10px; padding-left: 5px">
+                                                ${requestScope.assessments[loop.index].course_grade_group}
+                                            </td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td></td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <td style="padding-right: 10px; padding-left: 5px">
+                                        ${requestScope.assessments[loop.index].grade.grade_name}
+                                    </td>
+                                    <td style="padding-right: 10px; padding-left: 5px">
+                                        ${s.assessment.course_grade_weight * 100} %
+                                    </td>
+                                    <td style="padding-right: 10px; padding-left: 5px">
+                                        ${s.score}
+                                    </td>
+                                    <td style="padding-right: 10px; padding-left: 5px"></td>
+                                </tr>
+                            </c:forEach>
+                            <tr>
+                                <th rowspan="1" style="padding-right: 10px; padding-left: 5px">
+                                    COURSE TOTAL
+                                </th>
+                                <th style="padding-right: 10px; padding-left: 5px">
+                                    AVERAGE
+                                </th>
+                                <th style="padding-right: 10px; padding-left: 5px">
+                                    ${requestScope.gpa}
+                                </th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <th style="padding-right: 10px; padding-left: 5px">STATUS</th>
+                                <th style="padding-right: 10px; padding-left: 5px">${requestScope.status}</th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
     </body>
 </html>
 

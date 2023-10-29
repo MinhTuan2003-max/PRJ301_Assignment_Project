@@ -5,6 +5,7 @@
 package dal;
 
 import entity.Major;
+import entity.Student;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,18 +46,19 @@ public class MajorDBContext extends DBContext<Major> {
         return majors;
     }
 
-    public Major get(int id) {
+    public Major get(String studentID) {
 
         try {
-            String sql = "SELECT [major_id]\n"
-                    + "      ,[major_name]\n"
-                    + "  FROM [Major]"
-                    + "WHERE major_id = ?";
+            String sql = "SELECT m.[major_id]\n"
+                    + "      ,m.[major_name]\n"
+                    + "  FROM [dbo].[Major] m INNER JOIN [Student] s ON m.major_id = s.major_ID\n"
+                    + "  WHERE s.[student_ID] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, id);
+            stm.setString(1, studentID);
             ResultSet rs = stm.executeQuery();
-            Major m = new Major();
+            
             if (rs.next()) {
+                Major m = new Major();
                 m.setMajor_id(rs.getInt("major_id"));
                 m.setMajor_name(rs.getString("major_name"));
                 return m;
