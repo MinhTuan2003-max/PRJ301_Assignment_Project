@@ -15,7 +15,7 @@ public class Account extends BaseEntity {
     private String password;
     private String displayname;
     private Campus campus;
-    private Student student;
+    private entity.Student student;
 
     public int getUserID() {
         return userID;
@@ -57,11 +57,11 @@ public class Account extends BaseEntity {
         this.campus = campus;
     }
 
-    public Student getStudent() {
+    public entity.Student getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(entity.Student student) {
         this.student = student;
     }
 

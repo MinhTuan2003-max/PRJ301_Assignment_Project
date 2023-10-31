@@ -34,19 +34,16 @@ public class StudentDetailController extends BaseRequiredAuthenticationControlle
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
-        int userID = Integer.parseInt(request.getParameter("user_id"));
+
         StudentDBContext studb = new StudentDBContext();
-        Student students = studb.getStudent(userID);
-        
-        MajorDBContext mdbc = new MajorDBContext();
-        Major majors = mdbc.get(students.getStudent_ID());
+        Student students = studb.getStudent(loggedAccount.getUserID());
+
         request.setAttribute("students", students);
-        request.setAttribute("majors", majors);
 
         CampusDBContext cdb = new CampusDBContext();
-        ArrayList<Campus> campus = cdb.search(userID);
+        ArrayList<Campus> campus = cdb.search(loggedAccount.getUserID());
         request.setAttribute("campus", campus);
         request.getRequestDispatcher("view/detail/userdetail.jsp").forward(request, response);
 
@@ -54,12 +51,12 @@ public class StudentDetailController extends BaseRequiredAuthenticationControlle
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account loggedAccount) throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response, loggedAccount);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response, Account loggedAccount) throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response, loggedAccount);
     }
 
 }

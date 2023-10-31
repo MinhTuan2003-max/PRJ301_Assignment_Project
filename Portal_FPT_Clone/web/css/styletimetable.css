@@ -35,6 +35,35 @@
     font-size: 13px;
 }
 
+.get_materials {
+    background-color: #ec971f;
+    font-size: 10px;
+    color: #FFF;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+.ghichu {
+    font-size: 13px;
+    margin: 0 0 10px;
+    text-align: left;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.divfoot {
+    font-size: 13px;
+    text-align: left;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.time_study {
+    background-color: #5cb85c;
+    font-size: 11px;
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
 
 
 

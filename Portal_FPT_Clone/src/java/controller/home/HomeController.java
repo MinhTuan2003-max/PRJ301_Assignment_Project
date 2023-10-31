@@ -23,16 +23,15 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "HomeController", urlPatterns = {"/home"})
 public class HomeController extends BaseRequiredAuthenticationController {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
-        int userID = Integer.parseInt(request.getParameter("user_id"));
         StudentDBContext studb = new StudentDBContext();
-        Student students = studb.getStudent(userID);
+        Student students = studb.getStudent(loggedAccount.getUserID());
 
-        MajorDBContext mdbc = new MajorDBContext();
-        Major majors = mdbc.get(students.getStudent_ID());
+//        MajorDBContext mdbc = new MajorDBContext();
+//        Major majors = mdbc.get(students.getStudent_ID());
         request.setAttribute("students", students);
-        request.setAttribute("majors", majors);
+//        request.setAttribute("majors", majors);
     }
 
     @Override

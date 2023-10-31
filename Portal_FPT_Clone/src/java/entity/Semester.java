@@ -5,16 +5,26 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
-/**
- *
- * @author MINH TUAN
- */
 public class Semester extends BaseEntity {
+
     private int semester_id;
     private String semester_name;
-    private Date semester_startDate;
-    private Date semester_endDate;
+    private Date start_date;
+    private Date end_date;
+    private ArrayList<Group> groups;
+
+    public Semester() {
+    }
+
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
+    }
 
     public int getSemester_id() {
         return semester_id;
@@ -32,20 +42,20 @@ public class Semester extends BaseEntity {
         this.semester_name = semester_name;
     }
 
-    public Date getSemester_startDate() {
-        return semester_startDate;
+    public Date getStart_date() {
+        return start_date;
     }
 
-    public void setSemester_startDate(Date semester_startDate) {
-        this.semester_startDate = semester_startDate;
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
     }
 
-    public Date getSemester_endDate() {
-        return semester_endDate;
+    public Date getEnd_date() {
+        return end_date;
     }
 
-    public void setSemester_endDate(Date semester_endDate) {
-        this.semester_endDate = semester_endDate;
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
     }
-    
+
 }

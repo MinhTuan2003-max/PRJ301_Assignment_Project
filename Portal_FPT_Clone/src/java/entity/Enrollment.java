@@ -4,52 +4,51 @@
  */
 package entity;
 
-import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author MINH TUAN
  */
-public class Enrollment extends BaseEntity {
+public class Enrollment {
 
-    private String enrollment_ID;
-    private Date startDate;
-    private Date endDate;
-    private Course course;
+    private int enrollment_id;
     private Student student;
-    private Semester semester;
     private Group group;
+    private int total_slot;
+    private int total_absent_slot;
+    private ArrayList<Attendance> attendances;
 
-    public String getEnrollment_ID() {
-        return enrollment_ID;
+    public int getTotal_slot() {
+        return total_slot;
     }
 
-    public void setEnrollment_ID(String enrollment_ID) {
-        this.enrollment_ID = enrollment_ID;
+    public void setTotal_slot(int total_slot) {
+        this.total_slot = total_slot;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public int getTotal_absent_slot() {
+        return total_absent_slot;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setTotal_absent_slot(int total_absent_slot) {
+        this.total_absent_slot = total_absent_slot;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public ArrayList<Attendance> getAttendances() {
+        return attendances;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setAttendances(ArrayList<Attendance> attendances) {
+        this.attendances = attendances;
     }
 
-    public Course getCourse() {
-        return course;
+    public int getEnrollment_id() {
+        return enrollment_id;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setEnrollment_id(int enrollment_id) {
+        this.enrollment_id = enrollment_id;
     }
 
     public Student getStudent() {
@@ -60,14 +59,6 @@ public class Enrollment extends BaseEntity {
         this.student = student;
     }
 
-    public Semester getSemester() {
-        return semester;
-    }
-
-    public void setSemester(Semester semester) {
-        this.semester = semester;
-    }
-
     public Group getGroup() {
         return group;
     }
@@ -75,5 +66,4 @@ public class Enrollment extends BaseEntity {
     public void setGroup(Group group) {
         this.group = group;
     }
-
 }

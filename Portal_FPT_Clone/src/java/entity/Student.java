@@ -5,6 +5,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Student extends BaseEntity {
     private boolean student_Gender;
     private Date student_dob;
     private Account account;
+    private ArrayList<Enrollment> enrollments;
 
     public String getStudent_ID() {
         return student_ID;
@@ -95,12 +97,20 @@ public class Student extends BaseEntity {
         this.student_dob = student_dob;
     }
 
-    public Account getAccount() {
+    public entity.Account getAccount() {
         return account;
     }
 
-    public void setAccount(Account account) {
+    public void setAccount(entity.Account account) {
         this.account = account;
+    }
+
+    public ArrayList<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(ArrayList<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
 
 }

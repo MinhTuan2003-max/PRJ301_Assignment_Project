@@ -55,7 +55,7 @@
                     <tr>
                         <td>
                             <p>
-                                <a href="userdetail?user_id=${sessionScope.account.userID}&studentID=${requestScope.students.student_ID}">
+                                <a href="userdetail">
                                     <strong>${sessionScope.account.displayname}</strong>
                                 </a>
                                 &nbsp;|&nbsp;<a href="logout">
@@ -75,10 +75,10 @@
                 </div> 
                 <div class="col-md-6">
                     <section class="hero">
-                        <h1>Mark Report</h1>
-                        <p>View scores for each subject by Semester</p>
-                        <a href="mark?user_id=${sessionScope.account.userID}" class="cta-button">
-                            <strong>Mark Report</strong>
+                        <h1>Weekly Timetable</h1>
+                        <p>View schedule by week or by day</p>
+                        <a href="timetable" class="cta-button">
+                            <strong>Weekly Timetable</strong>
                         </a>
                     </section>
                 </div>
