@@ -21,6 +21,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,31 +34,50 @@ public class WeeklyTimeTableController extends BaseRequiredAuthenticationControl
             throws ServletException, IOException {
 
         AttendanceDBContext attdb = new AttendanceDBContext();
-        String raw_date = request.getParameter("date");
-        LocalDate date;
-        if (raw_date == null) {
-            date = LocalDate.now();
-        } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            date = LocalDate.parse(raw_date, formatter);
-        }
-        request.setAttribute("date", date);
+        String startDateStr = request.getParameter("startDate");
+        String endDateStr = request.getParameter("endDate");
 
-        LocalDate monday = date;
-        while (monday.getDayOfWeek() != DayOfWeek.MONDAY) {
-            monday = monday.minusDays(1);
-        }
-        Date sqlMon = Date.valueOf(monday);
-
+        Date startDate = null;
+        Date endDate = null;
         ArrayList<Date> week_date = new ArrayList<>();
-        for (int i = 0; i <= 6; i++) {
-            week_date.add(Date.valueOf(monday.plusDays(i)));
+        if (startDateStr != null && endDateStr != null) {
+            startDate = Date.valueOf(startDateStr);
+            startDate = Date.valueOf(startDateStr);
+            endDate = Date.valueOf(endDateStr);
+            LocalDate current = startDate.toLocalDate();
+
+            ArrayList<String> formattedDates = new ArrayList<>(); // To store formatted date strings
+            week_date = new ArrayList<>(); // To store Date objects
+
+            // Populate the lists with formatted strings and Date objects
+            while (!current.isAfter(endDate.toLocalDate())) {
+                String formattedDate = current.getDayOfWeek().toString() + " " + current.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                formattedDates.add(formattedDate);
+                week_date.add(Date.valueOf(current));
+                current = current.plusDays(1);
+            }
+        } else {
+            // Calculate the current week's start and end dates
+            LocalDate today = LocalDate.now();
+            LocalDate currentMonday = today.with(DayOfWeek.MONDAY);
+            LocalDate currentSunday = today.with(DayOfWeek.SUNDAY);
+
+            startDate = Date.valueOf(currentMonday);
+            endDate = Date.valueOf(currentSunday);
+
+            // Populate the lists with formatted strings and Date objects
+            ArrayList<String> formattedDates = new ArrayList<>();
+            week_date = new ArrayList<>();
+            LocalDate current = currentMonday;
+            while (!current.isAfter(currentSunday)) {
+                String formattedDate = current.getDayOfWeek().toString() + " " + current.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                formattedDates.add(formattedDate);
+                week_date.add(Date.valueOf(current));
+                current = current.plusDays(1);
+            }
         }
-        request.setAttribute("week_date", week_date);
-        Date sqlSun = week_date.get(6);
 
-        ArrayList<Attendance> weeklyTimetable = attdb.getWeeklyTimetable(loggedAccount.getUserID(), sqlMon, sqlSun);
-
+        List<Attendance> weeklyTimetable = attdb.getWeeklyTimetable(loggedAccount.getUserID(), startDate, endDate);
         int size = 10;
         ArrayList<Integer> slot_index = new ArrayList<>();
         for (int i = 0; i <= size; i++) {
@@ -76,6 +96,9 @@ public class WeeklyTimeTableController extends BaseRequiredAuthenticationControl
         Student students = studb.getStudent(loggedAccount.getUserID());
         request.setAttribute("campus", campus);
         request.setAttribute("students", students);
+        request.setAttribute("startDate", startDate);
+        request.setAttribute("endDate", endDate);
+        request.setAttribute("week_date", week_date);
         request.setAttribute("weeklyTimetable", weeklyTimetable);
         request.getRequestDispatcher("view/student/weeklytimetable.jsp").forward(request, response);
 

@@ -90,12 +90,12 @@
             </h2>
             <p class="ghichu">
                 <b>Note:</b>
-                 These activities do not include extra-curriculum activities, such as
+                These activities do not include extra-curriculum activities, such as
                 club activities ...
             </p>
             <p class="ghichu">
                 <b>Chú thích:</b>
-                 Các hoạt động trong bảng dưới không bao gồm hoạt động ngoại khóa,
+                Các hoạt động trong bảng dưới không bao gồm hoạt động ngoại khóa,
                 ví dụ như hoạt động câu lạc bộ ...
             </p>
             <div>
@@ -107,12 +107,14 @@
                     Các phòng bắt đầu bằng DE thuộc tòa nhà Delta. VD: DE,..<br/>Little UK (LUK) thuộc tầng 5 tòa nhà Delta
                 </p>
             </div>
+
             <table style="width: 100%">
                 <tr>
-                    <td style="border-right: 1px solid #fff;border-bottom: 1px solid #fff; background-color: #6b90da; color: #333; text-transform: uppercase">
+                    <td style="border-right: 1px solid #fff;border-bottom: 1px solid #fff; background-color: #6b90da;font-size: 14px; color: #333; text-transform: uppercase">
                         <form action="timetable" method="GET">
-                            Date
-                            <input type="date" id="date" name="date" value="${requestScope.date}" onchange="submitForm()"><br/>
+                            From <input type="date" name="startDate" value="${requestScope.startDate}"/> <br/>
+                            To <input type="date" name="endDate" value="${requestScope.endDate}"/>
+                            <input type="submit" value="View"/>
                         </form>
                     </td>
                     <c:forEach items="${requestScope.week_date}" var="d">
@@ -131,12 +133,12 @@
                             <c:set var="found" value="false" />
                             <c:forEach items="${requestScope.weeklyTimetable}" var="w">
                                 <c:if test="${slot_index eq w.slot and w.date eq d}">
-                                    <td style="padding-right: 23px; border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">
+                                    <td style="border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">
                                         <span style="color: #124DA3; font-size: 15px">${w.enrollment.group.course.course_code}</span>-<a class="get_materials" href="https://flm.fpt.edu.vn/DefaultSignin">View Materials</a> <br>
                                         at <span style="font-size: 15px">${w.classroom.room_code}</span> <br>
                                         <span style="${w.status eq 'attended' ? 'color: green;' : w.status eq 'absent' ? 'color: red;' : 'color: rgb(255,0,0);'}">
                                             (${w.status})
-                                        </span>
+                                        </span> <br>
                                         <span class="time_study">
                                             (<fmt:formatDate value="${w.start_time}" pattern="HH:mm"/> - <fmt:formatDate value="${w.end_time}" pattern="HH:mm"/>)
                                         </span>
