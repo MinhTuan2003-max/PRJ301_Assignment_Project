@@ -137,7 +137,7 @@
                                     <td style="padding-right: 23px; border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">
                                         <span style="color: #124DA3; font-size: 15px">${w.enrollment.group.course.course_code}</span>-<a class="get_materials" href="https://flm.fpt.edu.vn/DefaultSignin">View Materials</a> <br>
                                         at <span style="font-size: 15px">${w.classroom.room_code}</span> <br>
-                                        <span style="${w.status eq 'attended' ? 'color: green;' : w.status eq 'absent' ? 'color: red;' : 'color: gray;'}">
+                                        <span style="${w.status eq 'attended' ? 'color: green;' : w.status eq 'absent' ? 'color: red;' : 'color: rgb(255,0,0);'}">
                                             (${w.status})
                                         </span>
                                         <span class="time_study">

@@ -71,7 +71,7 @@
             <div><br></div>
             <div class="row overlay content">
                 <div class="tag">
-                    <p>Grading Information</p>
+                    <p>Attendance Information</p>
                 </div> 
                 <div class="col-md-6">
                     <section class="hero">
@@ -85,10 +85,10 @@
 
                 <div class="col-md-6">
                     <section class="contact">
-                        <h1>Student Transcript</h1>
-                        <p>View the final score of all subjects you have studied</p>
+                        <h1>Attendance Report</h1>
+                        <p>Report attendance for students by each subject</p>
                         <a href="${pageContext.request.contextPath}/transcriptstudent" class="cta-button">
-                            <strong>Student Transcript</strong>
+                            <strong>Attendance Reportt</strong>
                         </a>
                     </section>
                 </div>
