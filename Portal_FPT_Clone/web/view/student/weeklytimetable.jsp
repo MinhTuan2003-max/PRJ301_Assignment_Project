@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Weekly Timetable</title>
+        <title>View Schedule</title>
         <script>
             function submitForm() {
                 document.getElementsByTagName('form')[0].submit();
@@ -92,13 +92,11 @@
                 <b>Note:</b>
                  These activities do not include extra-curriculum activities, such as
                 club activities ...
-
             </p>
             <p class="ghichu">
                 <b>Chú thích:</b>
                  Các hoạt động trong bảng dưới không bao gồm hoạt động ngoại khóa,
                 ví dụ như hoạt động câu lạc bộ ...
-
             </p>
             <div>
                 <p class="ghichu">
@@ -107,7 +105,6 @@
                     Các phòng bắt đầu bằng G thuộc tòa nhà Gamma. VD: G201,...<br/>
                     Các phòng tập bằng đầu bằng R thuộc khu vực sân tập Vovinam.<br/>
                     Các phòng bắt đầu bằng DE thuộc tòa nhà Delta. VD: DE,..<br/>Little UK (LUK) thuộc tầng 5 tòa nhà Delta
-
                 </p>
             </div>
             <table style="width: 100%">
@@ -148,7 +145,7 @@
                                 </c:if>
                             </c:forEach>
                             <c:if test="${not found}">
-                                <td style="padding-right: 23px; border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">-</td>
+                                <td style="border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">-</td>
                             </c:if>
                         </c:forEach>
                     </tr>
