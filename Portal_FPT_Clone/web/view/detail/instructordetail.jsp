@@ -1,6 +1,6 @@
 <%-- 
-    Document   : activitydetail
-    Created on : 01-Nov-2023, 15:11:20
+    Document   : instructordetail
+    Created on : 01-Nov-2023, 17:19:22
     Author     : MINH TUAN
 --%>
 
@@ -10,9 +10,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Activity Detail</title>
-        <link href="${pageContext.request.contextPath}/css/viewactivity.css" rel="stylesheet" type="text/css"/>
+        <title>JSP Page</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="${pageContext.request.contextPath}/css/viewactivity.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header>
@@ -56,7 +56,7 @@
                         <div class="divControl">
                             <a href="${pageContext.request.contextPath}/home">Home</a>
                             &nbsp;|&nbsp;<a href="${pageContext.request.contextPath}/timetable">Activity</a>
-                            &nbsp;|&nbsp;<b>View</b>
+                            &nbsp;|&nbsp;<b>User Detail</b>
                         </div>
                         <div class="divUser">
                             <table style="width: 100%;margin-left: 7px;">
@@ -81,43 +81,37 @@
             </div>
             <br>
             <h2>
-                Activity Detail
+                User Detail
             </h2>
             <br>
             <div class="activity_view">
                 <table style="width: 99%; margin-left: 7px">
-                    <c:forEach items="${requestScope.detailTimetable}" var="d">
+                    <c:forEach items="${requestScope.instructures}" var="i">
                         <tr>
-                            <td class="title">Date</td>
-                            <td class="description">${d.date}</td>
+                            <td class="title">
+                                <strong>Login</strong>
+                            </td>
+                            <td class="description">${i.instructure_code}</td>
                         </tr>
                         <tr>
-                            <td class="title">Slot</td>
-                            <td class="description">${d.slot}</td>
+                            <td class="title">
+                                <strong>Full Name</strong>
+                            </td>
+                            <td class="description">${i.instructure_name}</td>
                         </tr>
                         <tr>
-                            <td class="title">Student group</td>
+                            <td class="title">
+                                <strong>Image</strong>
+                            </td>
                             <td class="description">
-                                <a href="#">${d.enrollment.group.group_name}</a>
+                                <img src="${i.instructure_img}" alt="alt" style="width: 38%"/>
                             </td>
                         </tr>
                         <tr>
-                            <td class="title">Instructor</td>
-                            <td class="description">
-                                <a href="${pageContext.request.contextPath}/user_detail?login=${d.instructure.instructure_code}">${d.instructure.instructure_code}</a>
+                            <td class="title">
+                                <strong>Email</strong>
                             </td>
-                        </tr>
-                        <tr>
-                            <td class="title">Course</td>
-                            <td class="description">${d.enrollment.group.course.course_name} (${d.enrollment.group.course.course_code})</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Campus/Programme</td>
-                            <td class="description">FPTU-${requestScope.campus[0].cname}</td>
-                        </tr>
-                        <tr>
-                            <td class="title" style="border-bottom: none">Attendance</td>
-                            <td class="description" style="text-transform: capitalize; border-bottom: none">${d.status}</td>
+                            <td class="description">${i.email}</td>
                         </tr>
                     </c:forEach>
                 </table>
