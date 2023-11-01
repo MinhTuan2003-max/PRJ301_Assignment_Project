@@ -1,0 +1,50 @@
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(240,240,240);
+    border-radius: 4px;
+}
+
+.divControl {
+    padding-left: 8px;
+}
+
+.divUser {
+    padding-right: 7px;
+
+}
+
+.divUser a {
+    background-color: rgb(92,184,92);
+    border-radius: 5px;
+    padding: 0 7px 2px 7px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.divUser a:hover {
+    color: #fff;
+}
+
+.divUser b {
+    background-color: rgb(92,184,92);
+    border-radius: 5px;
+    padding: 0 7px 2px 7px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.title {
+    padding: 15px 45px;
+    border-bottom: 1px solid rgb(240,240,240);
+}
+.description {
+    padding: 15px 178px;
+    border-bottom: 1px solid rgb(240,240,240);
+}
+.activity_view {
+    border: 1px solid rgb(221,221,221);
+    border-radius: 6px 6px 5px 5px;
+    box-shadow: 0 5px 13px #c4cacc;
+}

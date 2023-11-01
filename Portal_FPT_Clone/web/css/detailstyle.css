@@ -55,7 +55,6 @@
     display: flex;
     border-radius: 0 5px 5px 0;
     box-shadow: 0 0 5px #c4cacc;
-
 }
 
 .profile-table th, .academic-table th {
@@ -76,7 +75,6 @@
 .profile-table td, .academic-table td {
     padding: 10px;
     border-bottom: 1px solid rgb(221,221,221);
-
 }
 
 

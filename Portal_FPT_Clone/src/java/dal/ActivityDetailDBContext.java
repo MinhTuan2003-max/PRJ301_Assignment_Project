@@ -12,7 +12,6 @@ import entity.Instructure;
 import entity.Room;
 import entity.Semester;
 import entity.Student;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,9 +23,9 @@ import java.util.logging.Logger;
  *
  * @author MINH TUAN
  */
-public class AttendanceDBContext extends DBContext<Attendance> {
+public class ActivityDetailDBContext extends DBContext<Attendance> {
 
-    public ArrayList<Attendance> getWeeklyTimetable(int user_id, Date start_date, Date end_date) {
+    public ArrayList<Attendance> getDetailWeeklyTimetable(int user_id, int course_id, int attendance_id) {
         ArrayList<Attendance> attendances = new ArrayList<>();
         try {
             String sql = "SELECT a.[attendance_id]\n"
@@ -34,8 +33,10 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                     + "      ,s.student_ID\n"
                     + "      ,c.course_code\n"
                     + "      ,c.course_id\n"
+                    + "      ,c.[course_name]\n"
                     + "      ,se.semester_id\n"
                     + "      ,g.group_id\n"
+                    + "      ,g.group_name\n"
                     + "      ,a.day_of_week\n"
                     + "      ,r.room_code\n"
                     + "      ,a.[date]\n"
@@ -51,10 +52,10 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                     + "  INNER JOIN [Instructure] i ON i.instructure_id = a.instructure_id\n"
                     + "  INNER JOIN [Semester] se ON se.semester_id = g.semester_id\n"
                     + "  INNER JOIN [Account] ac ON ac.[user_id] = s.[user_id]\n"
-                    + "  WHERE a.[date] >= ? AND a.[date] <= ? AND ac.[user_id] = ?";
+                    + "  WHERE c.course_id = ? AND a.attendance_id = ? AND ac.[user_id] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setDate(1, start_date);
-            stm.setDate(2, end_date);
+            stm.setInt(1, course_id);
+            stm.setInt(2, attendance_id);
             stm.setInt(3, user_id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -73,13 +74,15 @@ public class AttendanceDBContext extends DBContext<Attendance> {
 
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_id(rs.getInt("course_id"));
-
+                c.setCourse_name(rs.getString("course_name"));
+                
                 r.setRoom_code(rs.getString("room_code"));
 
                 se.setSemester_id(rs.getInt("semester_id"));
 
                 g.setCourse(c);
                 g.setGroup_id(rs.getInt("group_id"));
+                g.setGroup_name(rs.getString("group_name"));
                 g.setSemester(se);
 
                 en.setStudent(stu);

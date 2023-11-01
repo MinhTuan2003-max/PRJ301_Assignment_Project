@@ -11,14 +11,34 @@
 <html>
     <head>
         <title>View Schedule</title>
-        <script>
-            function submitForm() {
-                document.getElementsByTagName('form')[0].submit();
-            }
-        </script>
         <link href="${pageContext.request.contextPath}/css/styletimetable.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
+    <style>
+        .week_date {
+            border-bottom: 1px solid rgb(240,240,240);
+            border-top: 1px solid rgb(240,240,240);
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+        .timetable_getdate {
+            border-right: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            background-color: #6b90da;
+            font-size: 14px;
+            color: #333;
+            text-transform: uppercase;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+        .date_in_week {
+            border-right: 1px solid #fff;
+            background-color: #6b90da;
+            color: #333;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark">
@@ -110,7 +130,7 @@
 
             <table style="width: 100%">
                 <tr>
-                    <td style="border-right: 1px solid #fff;border-bottom: 1px solid #fff; background-color: #6b90da;font-size: 14px; color: #333; text-transform: uppercase">
+                    <td class="timetable_getdate">
                         <form action="timetable" method="GET">
                             From <input type="date" name="startDate" value="${requestScope.startDate}"/> <br/>
                             To <input type="date" name="endDate" value="${requestScope.endDate}"/>
@@ -118,7 +138,7 @@
                         </form>
                     </td>
                     <c:forEach items="${requestScope.week_date}" var="d">
-                        <td style="border-right: 1px solid #fff; background-color: #6b90da; color: #333; text-transform: uppercase; font-size: 14px"> 
+                        <td class="date_in_week"> 
                             <fmt:formatDate value="${d}" pattern="EEE"/> <br>
                             <div style="border-top: 1px solid #fff;">
                                 <fmt:formatDate value="${d}" pattern="dd-MM"/>
@@ -128,14 +148,16 @@
                 </tr>
                 <c:forEach items="${requestScope.slot_index}" var="slot_index">
                     <tr>
-                        <td style="border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">Slot ${slot_index}</td>
+                        <td class="week_date">Slot ${slot_index}</td>
                         <c:forEach items="${requestScope.week_date}" var="d">
                             <c:set var="found" value="false" />
                             <c:forEach items="${requestScope.weeklyTimetable}" var="w">
                                 <c:if test="${slot_index eq w.slot and w.date eq d}">
-                                    <td style="border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">
-                                        <span style="color: #124DA3; font-size: 15px">${w.enrollment.group.course.course_code}</span>-<a class="get_materials" href="https://flm.fpt.edu.vn/DefaultSignin">View Materials</a> <br>
-                                        at <span style="font-size: 15px">${w.classroom.room_code}</span> <br>
+                                    <td class="week_date">
+                                        <span >
+                                            <a style="font-size: 14px" href="${pageContext.request.contextPath}/activitydetail?courseID=${w.enrollment.group.course.course_id}&attendance_id=${w.attendance_id}">${w.enrollment.group.course.course_code}</a>
+                                        </span>-<a class="get_materials" href="https://flm.fpt.edu.vn/DefaultSignin">View Materials</a> <br>
+                                        at <span style="font-size: 14px">${w.classroom.room_code}</span> <br>
                                         <span style="${w.status eq 'attended' ? 'color: green;' : w.status eq 'absent' ? 'color: red;' : 'color: rgb(255,0,0);'}">
                                             (${w.status})
                                         </span> <br>
