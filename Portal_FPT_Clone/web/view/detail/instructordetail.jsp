@@ -81,7 +81,7 @@
             </div>
             <br>
             <h2>
-                User Detail
+                Instructor Information
             </h2>
             <br>
             <div class="activity_view">

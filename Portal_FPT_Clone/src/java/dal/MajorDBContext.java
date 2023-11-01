@@ -8,7 +8,6 @@ import entity.Major;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,21 +17,22 @@ import java.util.logging.Logger;
  */
 public class MajorDBContext extends DBContext<Major> {
 
-    public ArrayList<Major> getAll() {
-        ArrayList<Major> majors = new ArrayList<>();
+    public Major get(String studentID) {
+
         try {
-            String sql = "SSELECT [major_id]\n"
+            String sql = "SELECT m.[major_id]\n"
                     + "      ,[major_name]\n"
-                    + "  FROM [Major]";
+                    + "  FROM [Major] m INNER JOIN Student s ON m.major_id = s.major_ID\n"
+                    + "  WHERE s.student_ID = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, studentID);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Major m = new Major();
+            Major m = new Major();
+            if (rs.next()) {
                 m.setMajor_id(rs.getInt("major_id"));
                 m.setMajor_name(rs.getString("major_name"));
-                majors.add(m);
+                return m;
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(MajorDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -42,35 +42,6 @@ public class MajorDBContext extends DBContext<Major> {
                 Logger.getLogger(MajorDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return majors;
+        return null;
     }
-
-//    public Major get(String studentID) {
-//
-//        try {
-//            String sql = "SELECT [major_id]\n"
-//                    + "      ,[major_name]\n"
-//                    + "  FROM [Major]"
-//                    + "WHERE major_id = ?";
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setInt(1, id);
-//            ResultSet rs = stm.executeQuery();
-//            Major m = new Major();
-//            if (rs.next()) {
-//                m.setMajor_id(rs.getInt("major_id"));
-//                m.setMajor_name(rs.getString("major_name"));
-//                return m;
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(MajorDBContext.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            try {
-//                connection.close();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(MajorDBContext.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        return null;
-//    }
-
 }

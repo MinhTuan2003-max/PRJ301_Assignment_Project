@@ -5,6 +5,7 @@
 package dal;
 
 import entity.Account;
+import entity.Major;
 import entity.Student;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,14 +30,19 @@ public class StudentDBContext extends DBContext<Student> {
                     + "      ,s.[student_IDCard]\n"
                     + "      ,s.[student_Phone]\n"
                     + "      ,s.[student_Email]\n"
+                    + "      ,s.[current_gpa]\n"
+                    + "      ,s.[current_semester]\n"
                     + "      ,s.[student_Img]\n"
+                    + "      ,m.[major_id]\n"
+                    + "      ,m.[major_name]\n"
                     + "      ,a.[user_id]\n"
-                    + "  FROM [Student] s INNER JOIN Account a ON s.[user_id] = a.[user_id]"
-                    + " WHERE s.[user_id] = ?";
+                    + "  FROM [Student] s INNER JOIN Account a ON s.[user_id] = a.[user_id]\n"
+                    + "  INNER JOIN Major m ON s.[major_id] = m.[major_id]"
+                    + "  WHERE s.[user_id] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, userID);
             ResultSet rs = stm.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 Student student = new Student();
                 student.setStudent_ID(rs.getString("student_ID"));
                 student.setStudent_Name(rs.getString("student_Name"));
@@ -47,6 +53,12 @@ public class StudentDBContext extends DBContext<Student> {
                 student.setStudent_IDCard(rs.getInt("student_IDCard"));
                 student.setStudent_Phone(rs.getInt("student_Phone"));
                 student.setStudent_Img(rs.getString("student_Img"));
+                student.setCurrent_gpa(rs.getDouble("current_gpa"));
+                student.setCurrent_semester(rs.getInt("current_semester"));
+                Major major = new Major();
+                major.setMajor_id(rs.getInt("major_id"));
+                major.setMajor_name(rs.getString("major_name"));
+                student.setMajor(major);
                 Account account = new Account();
                 account.setUserID(rs.getInt("user_id"));
                 student.setAccount(account);

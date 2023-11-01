@@ -14,31 +14,6 @@
         <link href="${pageContext.request.contextPath}/css/styletimetable.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
-    <style>
-        .week_date {
-            border-bottom: 1px solid rgb(240,240,240);
-            border-top: 1px solid rgb(240,240,240);
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-        }
-
-        .timetable_getdate {
-            border-right: 1px solid #fff;
-            border-bottom: 1px solid #fff;
-            background-color: #6b90da;
-            font-size: 14px;
-            color: #333;
-            text-transform: uppercase;
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-        }
-        .date_in_week {
-            border-right: 1px solid #fff;
-            background-color: #6b90da;
-            color: #333;
-            text-transform: uppercase;
-            font-size: 14px;
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-        }
-    </style>
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark">

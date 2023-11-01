@@ -96,7 +96,6 @@
                             <tr>
                                 <th colspan="2"></th>
                             </tr>
-
                             <tr>
                                 <td class="row-1">Full Name</td>
                                 <td>${s.student_Name}</td>
@@ -155,15 +154,15 @@
                             </tr>
                             <tr>
                                 <td>Current Term No</td>
-                                <td>4</td>
+                                <td>${requestScope.students.current_semester}</td>
                             </tr>
                             <tr>
                                 <td>Curriculum</td>
-                                <td>${requestScope.majors.major_name}</td>
+                                <td>${requestScope.students.major.major_name}</td>
                             </tr>
                             <tr>
                                 <td>Cumulative GPA</td>
-                                <td>8.02</td>
+                                <td>${requestScope.students.current_gpa}</td>
                             </tr>
                         </table>
                     </div>

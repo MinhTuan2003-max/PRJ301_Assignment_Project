@@ -22,7 +22,10 @@ public class Student extends BaseEntity {
     private int student_Phone;
     private boolean student_Gender;
     private Date student_dob;
+    private int current_semester;
+    private double current_gpa;
     private Account account;
+    private Major major;
     private ArrayList<Enrollment> enrollments;
 
     public String getStudent_ID() {
@@ -111,6 +114,30 @@ public class Student extends BaseEntity {
 
     public void setEnrollments(ArrayList<Enrollment> enrollments) {
         this.enrollments = enrollments;
+    }
+
+    public int getCurrent_semester() {
+        return current_semester;
+    }
+
+    public void setCurrent_semester(int current_semester) {
+        this.current_semester = current_semester;
+    }
+
+    public double getCurrent_gpa() {
+        return current_gpa;
+    }
+
+    public void setCurrent_gpa(double current_gpa) {
+        this.current_gpa = current_gpa;
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
     }
 
 }
