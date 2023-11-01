@@ -78,7 +78,7 @@ public class WeeklyTimeTableController extends BaseRequiredAuthenticationControl
         }
 
         List<Attendance> weeklyTimetable = attdb.getWeeklyTimetable(loggedAccount.getUserID(), startDate, endDate);
-        int size = 10;
+        int size = 7;
         ArrayList<Integer> slot_index = new ArrayList<>();
         for (int i = 0; i <= size; i++) {
             slot_index.add(i);

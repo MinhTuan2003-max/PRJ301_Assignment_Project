@@ -13,6 +13,15 @@
         <title>View Schedule</title>
         <link href="${pageContext.request.contextPath}/css/styletimetable.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .weeklyTimetable_view {
+                border: 1px solid rgb(221,221,221);
+                border-radius: 2px 4px 4px 4px;
+                box-shadow: 3px 5px 13px #c4cacc;
+                max-width: 100%;
+                overflow-x: auto;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -81,7 +90,7 @@
             <br>
             <h2>
                 Activities for
-                <span id="lblStudent">${account.displayname} (${requestScope.students.student_ID})</span>
+                <span>${account.displayname} (${requestScope.students.student_ID})</span>
             </h2>
             <p class="ghichu">
                 <b>Note:</b>
@@ -103,54 +112,56 @@
                 </p>
             </div>
 
-            <table style="width: 100%">
-                <tr>
-                    <td class="timetable_getdate">
-                        <form action="timetable" method="GET">
-                            From <input type="date" name="startDate" value="${requestScope.startDate}"/> <br/>
-                            To <input type="date" name="endDate" value="${requestScope.endDate}"/>
-                            <input type="submit" value="View"/>
-                        </form>
-                    </td>
-                    <c:forEach items="${requestScope.week_date}" var="d">
-                        <td class="date_in_week"> 
-                            <fmt:formatDate value="${d}" pattern="EEE"/> <br>
-                            <div style="border-top: 1px solid #fff;">
-                                <fmt:formatDate value="${d}" pattern="dd-MM"/>
-                            </div>
-                        </td>
-                    </c:forEach>
-                </tr>
-                <c:forEach items="${requestScope.slot_index}" var="slot_index">
+            <div class="weeklyTimetable_view">
+                <table style="width: 100%">
                     <tr>
-                        <td class="week_date">Slot ${slot_index}</td>
+                        <td class="timetable_getdate" style="padding-left: 3px;">
+                            <form action="timetable" method="GET">
+                                From <input type="date" name="startDate" value="${requestScope.startDate}"/> <br/>
+                                To <input type="date" name="endDate" value="${requestScope.endDate}"/>
+                                <input type="submit" value="View"/>
+                            </form>
+                        </td>
                         <c:forEach items="${requestScope.week_date}" var="d">
-                            <c:set var="found" value="false" />
-                            <c:forEach items="${requestScope.weeklyTimetable}" var="w">
-                                <c:if test="${slot_index eq w.slot and w.date eq d}">
-                                    <td class="week_date">
-                                        <span >
-                                            <a style="font-size: 14px" href="${pageContext.request.contextPath}/activitydetail?courseID=${w.enrollment.group.course.course_id}&attendance_id=${w.attendance_id}">${w.enrollment.group.course.course_code}</a>
-                                        </span>-<a class="get_materials" href="https://flm.fpt.edu.vn/DefaultSignin">View Materials</a> <br>
-                                        at <span style="font-size: 14px">${w.classroom.room_code}</span> <br>
-                                        <span style="${w.status eq 'attended' ? 'color: green;' : w.status eq 'absent' ? 'color: red;' : 'color: rgb(255,0,0);'}">
-                                            (${w.status})
-                                        </span> <br>
-                                        <span class="time_study">
-                                            (<fmt:formatDate value="${w.start_time}" pattern="HH:mm"/> - <fmt:formatDate value="${w.end_time}" pattern="HH:mm"/>)
-                                        </span>
-                                    </td>
-                                    <c:set var="found" value="true" />
-                                </c:if>
-                            </c:forEach>
-                            <c:if test="${not found}">
-                                <td style="border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">-</td>
-                            </c:if>
+                            <td class="date_in_week"> 
+                                <fmt:formatDate value="${d}" pattern="EEE"/> <br>
+                                <div style="border-top: 1px solid #fff;">
+                                    <fmt:formatDate value="${d}" pattern="dd-MM"/>
+                                </div>
+                            </td>
                         </c:forEach>
                     </tr>
-                </c:forEach>
-
-            </table>
+                    <c:forEach items="${requestScope.slot_index}" var="slot_index">
+                        <tr>
+                            <td class="week_date" style="padding-left: 3px; font-size: 15px;">Slot ${slot_index}</td>
+                            <c:forEach items="${requestScope.week_date}" var="d">
+                                <c:set var="found" value="false" />
+                                <c:forEach items="${requestScope.weeklyTimetable}" var="w">
+                                    <c:if test="${slot_index eq w.slot and w.date eq d}">
+                                        <td class="week_date">
+                                            <span >
+                                                <a style="font-size: 14px" href="${pageContext.request.contextPath}/activitydetail?courseID=${w.enrollment.group.course.course_id}&attendance_id=${w.attendance_id}">${w.enrollment.group.course.course_code}</a>
+                                            </span>-<a class="get_materials" href="https://flm.fpt.edu.vn/DefaultSignin" target="_blank">View Materials</a> <br>
+                                            at <span style="font-size: 14px">${w.classroom.room_code}</span> <br>
+                                            <span style="${w.status eq 'attended' ? 'color: green;' : w.status eq 'absent' ? 'color: red;' : 'color: rgb(255,0,0);'}">
+                                                (${w.status})
+                                            </span> <br>
+                                            <span class="time_study">
+                                                (<fmt:formatDate value="${w.start_time}" pattern="HH:mm"/> - <fmt:formatDate value="${w.end_time}" pattern="HH:mm"/>)
+                                            </span>
+                                        </td>
+                                        <c:set var="found" value="true" />
+                                    </c:if>
+                                </c:forEach>
+                                <c:if test="${not found}">
+                                    <td style="border-bottom: 1px solid rgb(240,240,240); border-top: 1px solid rgb(240,240,240)">-</td>
+                                </c:if>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+            <br>
             <p class="divfoot">
                 <b>More note / Chú thích thêm:</b>
             </p>
