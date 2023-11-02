@@ -32,8 +32,6 @@ public class WeeklyTimeTableController extends BaseRequiredAuthenticationControl
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
-
-        AttendanceDBContext attdb = new AttendanceDBContext();
         String startDateStr = request.getParameter("startDate");
         String endDateStr = request.getParameter("endDate");
 
@@ -76,20 +74,15 @@ public class WeeklyTimeTableController extends BaseRequiredAuthenticationControl
                 current = current.plusDays(1);
             }
         }
-
+        AttendanceDBContext attdb = new AttendanceDBContext();
         List<Attendance> weeklyTimetable = attdb.getWeeklyTimetable(loggedAccount.getUserID(), startDate, endDate);
-        int size = 7;
+
         ArrayList<Integer> slot_index = new ArrayList<>();
-        for (int i = 0; i <= size; i++) {
+        for (int i = 0; i <= 7; i++) {
             slot_index.add(i);
         }
         request.setAttribute("slot_index", slot_index);
-
-        ArrayList<Integer> slots = new ArrayList<>();
-        for (Attendance w : weeklyTimetable) {
-            slots.add(w.getSlot());
-        }
-        request.setAttribute("slots", slots);
+        
         CampusDBContext cdb = new CampusDBContext();
         ArrayList<Campus> campus = cdb.search(loggedAccount.getUserID());
         StudentDBContext studb = new StudentDBContext();
@@ -101,7 +94,6 @@ public class WeeklyTimeTableController extends BaseRequiredAuthenticationControl
         request.setAttribute("week_date", week_date);
         request.setAttribute("weeklyTimetable", weeklyTimetable);
         request.getRequestDispatcher("view/student/weeklytimetable.jsp").forward(request, response);
-
     }
 
     @Override

@@ -5,7 +5,6 @@
 package entity;
 
 import java.sql.Date;
-import java.sql.Time;
 
 /**
  *
@@ -17,8 +16,7 @@ public class Attendance extends BaseEntity {
     private Enrollment enrollment;
     private Instructure instructure;
     private Date date;
-    private Time start_time;
-    private Time end_time;
+    private TimeSlot timeSlot;
     private Room classroom;
     private String status;
     private int slot;
@@ -66,20 +64,12 @@ public class Attendance extends BaseEntity {
         this.date = date;
     }
 
-    public Time getStart_time() {
-        return start_time;
+    public TimeSlot getTimeSlot() {
+        return timeSlot;
     }
 
-    public void setStart_time(Time start_time) {
-        this.start_time = start_time;
-    }
-
-    public Time getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(Time end_time) {
-        this.end_time = end_time;
+    public void setTimeSlot(TimeSlot timeSlot) {
+        this.timeSlot = timeSlot;
     }
 
     public Room getClassroom() {

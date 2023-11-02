@@ -12,6 +12,7 @@ import entity.Instructure;
 import entity.Room;
 import entity.Semester;
 import entity.Student;
+import entity.TimeSlot;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,8 +41,8 @@ public class ActivityDetailDBContext extends DBContext<Attendance> {
                     + "      ,a.day_of_week\n"
                     + "      ,r.room_code\n"
                     + "      ,a.[date]\n"
-                    + "      ,a.start_time\n"
-                    + "      ,a.end_time\n"
+                    + "      ,t.[timeslot_id]\n"
+                    + "      ,t.[description]\n"
                     + "      ,a.slot\n"
                     + "      ,a.[status]\n"
                     + "  FROM [Attendance] a INNER JOIN [Enrollment] e ON a.enrollment_id = e.enrollment_id\n"
@@ -49,6 +50,7 @@ public class ActivityDetailDBContext extends DBContext<Attendance> {
                     + "  INNER JOIN [Course] c ON c.course_id = g.course_id\n"
                     + "  INNER JOIN [Rooms] r ON r.room_id = a.room_id\n"
                     + "  INNER JOIN [Student] s ON s.student_ID = e.student_id\n"
+                    + "  INNER JOIN [TimeSlot] t ON a.timeslot_id = t.timeslot_id\n"
                     + "  INNER JOIN [Instructure] i ON i.instructure_id = a.instructure_id\n"
                     + "  INNER JOIN [Semester] se ON se.semester_id = g.semester_id\n"
                     + "  INNER JOIN [Account] ac ON ac.[user_id] = s.[user_id]\n"
@@ -67,6 +69,7 @@ public class ActivityDetailDBContext extends DBContext<Attendance> {
                 Enrollment en = new Enrollment();
                 Group g = new Group();
                 Semester se = new Semester();
+                TimeSlot timeSlot = new TimeSlot();
 
                 pro.setInstructure_code(rs.getString("instructure_code"));
 
@@ -84,6 +87,9 @@ public class ActivityDetailDBContext extends DBContext<Attendance> {
                 g.setGroup_id(rs.getInt("group_id"));
                 g.setGroup_name(rs.getString("group_name"));
                 g.setSemester(se);
+                
+                timeSlot.setTimeslot_id(rs.getInt("timeslot_id"));
+                timeSlot.setDescription(rs.getString("description"));
 
                 en.setStudent(stu);
                 en.setGroup(g);
@@ -92,8 +98,8 @@ public class ActivityDetailDBContext extends DBContext<Attendance> {
                 att.setEnrollment(en);
                 att.setInstructure(pro);
                 att.setDate(rs.getDate("date"));
-                att.setStart_time(rs.getTime("start_time"));
-                att.setEnd_time(rs.getTime("end_time"));
+                att.setTimeSlot(timeSlot);
+
                 att.setClassroom(r);
                 att.setStatus(rs.getString("status"));
                 att.setSlot(rs.getInt("slot"));

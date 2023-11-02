@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author MINH TUAN
  */
-public class Room {
+public class Room extends BaseEntity {
 
     private int room_id;
     private int room_name;

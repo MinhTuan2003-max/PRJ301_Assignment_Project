@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author MINH TUAN
  */
-public class Course {
+public class Course extends BaseEntity {
 
     private int course_id;
     private String course_code;

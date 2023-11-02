@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author MINH TUAN
  */
-public class Department {
+public class Department extends BaseEntity {
 
     private int department_id;
     private String department_name;

@@ -96,11 +96,7 @@
                                         <strong>
                                             Sign In
                                         </strong> 
-                                    </button>
-                                    <label  style="margin-top: 10px;" for="remember" class="remember-label">
-                                        <input type="checkbox" name="remember" id="remember" class="remember-checkbox">
-                                        Remember Account
-                                    </label>
+                                    </button>                           
                                 </div>
                             </form>
                         </div>

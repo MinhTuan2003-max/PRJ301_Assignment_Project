@@ -13,15 +13,6 @@
         <title>View Schedule</title>
         <link href="${pageContext.request.contextPath}/css/styletimetable.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <style>
-            .weeklyTimetable_view {
-                border: 1px solid rgb(221,221,221);
-                border-radius: 2px 4px 4px 4px;
-                box-shadow: 3px 5px 13px #c4cacc;
-                max-width: 100%;
-                overflow-x: auto;
-            }
-        </style>
     </head>
     <body>
         <header>
@@ -145,9 +136,9 @@
                                             at <span style="font-size: 14px">${w.classroom.room_code}</span> <br>
                                             <span style="${w.status eq 'attended' ? 'color: green;' : w.status eq 'absent' ? 'color: red;' : 'color: rgb(255,0,0);'}">
                                                 (${w.status})
-                                            </span> <br>
+                                            </span><br>
                                             <span class="time_study">
-                                                (<fmt:formatDate value="${w.start_time}" pattern="HH:mm"/> - <fmt:formatDate value="${w.end_time}" pattern="HH:mm"/>)
+                                                (${w.timeSlot.description})
                                             </span>
                                         </td>
                                         <c:set var="found" value="true" />

@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>StudentDetailController</servlet-name>
-        <servlet-class>controller.student.StudentDetailController</servlet-class>
+        <servlet-class>controller.detail.StudentDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MarkReportController</servlet-name>
@@ -30,11 +30,15 @@
     </servlet>
     <servlet>
         <servlet-name>ActivityDetailController</servlet-name>
-        <servlet-class>controller.student.ActivityDetailController</servlet-class>
+        <servlet-class>controller.detail.ActivityDetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InstructorDetailController</servlet-name>
-        <servlet-class>controller.student.InstructorDetailController</servlet-class>
+        <servlet-class>controller.detail.InstructorDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAttendstudentController</servlet-name>
+        <servlet-class>controller.student.ViewAttendstudentController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>InstructorDetailController</servlet-name>
         <url-pattern>/user_detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAttendstudentController</servlet-name>
+        <url-pattern>/viewattendance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

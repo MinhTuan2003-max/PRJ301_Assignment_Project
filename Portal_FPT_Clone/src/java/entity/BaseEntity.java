@@ -4,8 +4,6 @@
  */
 package entity;
 
-import entity.*;
-
 /**
  *
  * @author MINH TUAN

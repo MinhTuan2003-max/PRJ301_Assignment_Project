@@ -7,6 +7,10 @@ package entity;
 import java.sql.Date;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author MINH TUAN
+ */
 public class Semester extends BaseEntity {
 
     private int semester_id;
@@ -14,9 +18,6 @@ public class Semester extends BaseEntity {
     private Date start_date;
     private Date end_date;
     private ArrayList<Group> groups;
-
-    public Semester() {
-    }
 
     public ArrayList<Group> getGroups() {
         return groups;
