@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class GroupDBContext extends DBContext<Group> {
 
-    public ArrayList<Group> getGroupByUserAndSemester(int user_id, int semester_id) {
+    public ArrayList<Group> getGroupByStudentIDAndSemester(String studentID, int semester_id) {
         ArrayList<Group> groups = new ArrayList<>();
         try {
             String sql = "SELECT g.[group_id]\n"
@@ -34,9 +34,9 @@ public class GroupDBContext extends DBContext<Group> {
                     + "  INNER JOIN [Student] s ON e.student_id = s.student_ID\n"
                     + "  INNER JOIN [Course] c ON g.course_id = c.course_id\n"
                     + "  INNER JOIN [Semester] se ON se.semester_id = g.semester_id\n"
-                    + "  WHERE s.[user_id] = ? AND se.semester_id = ?";
+                    + "  WHERE s.[student_id] = ? AND se.semester_id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, user_id);
+            stm.setString(1, studentID);
             stm.setInt(2, semester_id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

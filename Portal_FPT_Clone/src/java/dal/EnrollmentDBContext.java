@@ -94,7 +94,7 @@ public class EnrollmentDBContext extends DBContext<Enrollment> {
         return enrollments;
     }
 
-    public Enrollment getEnrollmentByUserAndGroup(int user_id, int group_id) {
+    public Enrollment getEnrollmentByStudentIDAndGroup(String studentID, int group_id) {
         try {
             String sql = "SELECT [enrollment_id]\n"
                     + "		  ,s.[student_id]\n"
@@ -103,9 +103,9 @@ public class EnrollmentDBContext extends DBContext<Enrollment> {
                     + "		  ,g.[group_id] \n"
                     + "	  FROM [Enrollment] e INNER JOIN [Student] s ON s.student_ID = e.student_id\n"
                     + "	  INNER JOIN [Group] g ON e.group_id = g.group_id\n"
-                    + "	  WHERE s.[user_id] = ? AND g.group_id = ?";
+                    + "	  WHERE s.[student_ID] = ? AND g.group_id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, user_id);
+            stm.setString(1, studentID);
             stm.setInt(2, group_id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {

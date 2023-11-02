@@ -115,7 +115,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         return attendances;
     }
 
-    public ArrayList<Attendance> getViewAttendance(int user_id, int group_id) {
+    public ArrayList<Attendance> getViewAttendance(String studentID, int group_id) {
         ArrayList<Attendance> attendances = new ArrayList<>();
 
         try {
@@ -141,49 +141,39 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                     + "  INNER JOIN [TimeSlot] t ON a.timeslot_id = t.timeslot_id\n"
                     + "  INNER JOIN [Instructure] i ON i.instructure_id = a.instructure_id\n"
                     + "  INNER JOIN [Account] ac ON ac.[user_id] = s.[user_id]\n"
-                    + "  WHERE s.[user_id] = ? AND g.[group_id] = ?";
+                    + "  WHERE s.[student_ID] = ? AND g.[group_id] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, user_id);
+            stm.setString(1, studentID);
             stm.setInt(2, group_id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Attendance att = new Attendance();
-                Instructure i = new Instructure();
-                Course c = new Course();
-                Room r = new Room();
-                Enrollment en = new Enrollment();
-                Group g = new Group();
-                Semester se = new Semester();
-                TimeSlot timeSlot = new TimeSlot();
-
-                i.setInstructure_code(rs.getString("instructure_code"));
-
-                c.setCourse_code(rs.getString("course_code"));
-                c.setCourse_name(rs.getString("course_name"));
-                c.setCourse_id(rs.getInt("course_id"));
-
-                r.setRoom_code(rs.getString("room_code"));
-
-                timeSlot.setTimeslot_id(rs.getInt("timeslot_id"));
-                timeSlot.setDescription(rs.getString("description"));
-
-                g.setCourse(c);
-                g.setGroup_id(rs.getInt("group_id"));
-                g.setGroup_name(rs.getString("group_name"));
-                g.setSemester(se);
-
-                en.setGroup(g);
-
                 att.setAttendance_id(rs.getInt("attendance_id"));
-                att.setEnrollment(en);
-                att.setInstructure(i);
                 att.setDate(rs.getDate("date"));
-                att.setTimeSlot(timeSlot);
-
-                att.setClassroom(r);
                 att.setStatus(rs.getString("status"));
                 att.setSlot(rs.getInt("slot"));
                 att.setDay_of_week(rs.getString("day_of_week"));
+                Instructure i = new Instructure();
+                i.setInstructure_code(rs.getString("instructure_code"));
+                att.setInstructure(i);
+                Course c = new Course();
+                c.setCourse_code(rs.getString("course_code"));
+                c.setCourse_name(rs.getString("course_name"));
+                c.setCourse_id(rs.getInt("course_id"));
+                Room r = new Room();
+                r.setRoom_code(rs.getString("room_code"));
+                att.setClassroom(r);
+                TimeSlot timeSlot = new TimeSlot();
+                timeSlot.setTimeslot_id(rs.getInt("timeslot_id"));
+                timeSlot.setDescription(rs.getString("description"));
+                att.setTimeSlot(timeSlot);
+                Group g = new Group();
+                g.setCourse(c);
+                g.setGroup_id(rs.getInt("group_id"));
+                g.setGroup_name(rs.getString("group_name"));
+                Enrollment en = new Enrollment();
+                en.setGroup(g);
+                att.setEnrollment(en);
                 attendances.add(att);
             }
         } catch (SQLException ex) {

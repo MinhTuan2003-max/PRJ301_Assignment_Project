@@ -5,11 +5,25 @@
 package controller.student;
 
 import controller.BaseRequiredAuthenticationController;
+import dal.AttendanceDBContext;
+import dal.CampusDBContext;
+import dal.EnrollmentDBContext;
+import dal.GroupDBContext;
+import dal.SemesterDBContext;
+import dal.StudentDBContext;
 import entity.Account;
+import entity.Attendance;
+import entity.Campus;
+import entity.Enrollment;
+import entity.Group;
+import entity.Semester;
+import entity.Student;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +33,47 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        CampusDBContext cdb = new CampusDBContext();
+        ArrayList<Campus> campus = cdb.search(loggedAccount.getUserID());
+        StudentDBContext studb = new StudentDBContext();
+        Student students = studb.getStudent(loggedAccount.getUserID());
+
+        SemesterDBContext sedb = new SemesterDBContext();
+        ArrayList<Semester> semesters = sedb.getAllSemester();
+        int semester_id = getDefaultIfNull(request.getSession().getAttribute("semester_id"), semesters.size());
+        String raw_semester_id = request.getParameter("semester_id");
+        if (raw_semester_id != null) {
+            semester_id = Integer.parseInt(raw_semester_id);
+        }
+        request.getSession().setAttribute("semester_id", semester_id);
+
+        GroupDBContext grdb = new GroupDBContext();
+        ArrayList<Group> groups = grdb.getGroupByStudentIDAndSemester(students.getStudent_ID(), semester_id);
+        int group_id = getDefaultIfNull(request.getSession().getAttribute("group_id"), groups.size());
+        String raw_group_id = request.getParameter("group_id");
+        if (raw_group_id != null) {
+            group_id = Integer.parseInt(raw_group_id);
+        }
+        request.getSession().setAttribute("group_id", group_id);
+
+        AttendanceDBContext atdb = new AttendanceDBContext();
+        ArrayList<Attendance> attendances = atdb.getViewAttendance(students.getStudent_ID(), group_id);
+        request.setAttribute("attendances", attendances);
+
+        EnrollmentDBContext endb = new EnrollmentDBContext();
+        Enrollment enrollment = endb.getEnrollmentByStudentIDAndGroup(students.getStudent_ID(), group_id);
+
+        request.setAttribute("total_slot", enrollment.getTotal_slot());
+        request.setAttribute("total_absent_slot", enrollment.getTotal_absent_slot());
+        int absent_percentage = Math.round((float) enrollment.getTotal_absent_slot() / enrollment.getTotal_slot() * 100);
+        request.setAttribute("absent_percentage", absent_percentage);
+        request.setAttribute("enrollment", enrollment);
+        request.setAttribute("groups", groups);
+        request.setAttribute("campus", campus);
+        request.setAttribute("students", students);
+        request.setAttribute("semesters", semesters);
 
         request.getRequestDispatcher("/view/student/viewattendance.jsp").forward(request, response);
     }
@@ -35,4 +90,11 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
         processRequest(request, response, loggedAccount);
     }
 
+    private static int getDefaultIfNull(Object value, int defaultValue) {
+        if (value != null) {
+            return (int) value;
+        } else {
+            return defaultValue;
+        }
+    }
 }

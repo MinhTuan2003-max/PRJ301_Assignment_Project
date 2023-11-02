@@ -28,10 +28,8 @@ public class HomeController extends BaseRequiredAuthenticationController {
         StudentDBContext studb = new StudentDBContext();
         Student students = studb.getStudent(loggedAccount.getUserID());
 
-//        MajorDBContext mdbc = new MajorDBContext();
-//        Major majors = mdbc.get(students.getStudent_ID());
         request.setAttribute("students", students);
-//        request.setAttribute("majors", majors);
+
     }
 
     @Override

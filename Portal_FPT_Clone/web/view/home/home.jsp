@@ -87,7 +87,7 @@
                     <section class="contact">
                         <h1>Attendance Report</h1>
                         <p>Report attendance for students by each subject</p>
-                        <a href="viewattendance?user_id=${sessionScope.account.userID}" class="cta-button">
+                        <a href="viewattendance" class="cta-button">
                             <strong>Attendance Report</strong>
                         </a>
                     </section>
