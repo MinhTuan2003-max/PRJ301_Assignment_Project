@@ -29,6 +29,7 @@ public class GroupDBContext extends DBContext<Group> {
                     + "      ,c.[course_id]\n"
                     + "	     ,c.[course_name]\n"
                     + "	     ,c.[course_code]\n"
+                    + "	     ,c.[start_date]\n"
                     + "	     ,se.[semester_name]\n"
                     + "  FROM [Group] g INNER JOIN [Enrollment] e ON g.group_id = e.group_id\n"
                     + "  INNER JOIN [Student] s ON e.student_id = s.student_ID\n"
@@ -47,6 +48,7 @@ public class GroupDBContext extends DBContext<Group> {
                 c.setCourse_id(rs.getInt("course_id"));
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_name(rs.getString("course_name"));
+                c.setStart_date(rs.getDate("start_date"));
                 g.setCourse(c);
                 Semester se = new Semester();
                 se.setSemester_id(semester_id);

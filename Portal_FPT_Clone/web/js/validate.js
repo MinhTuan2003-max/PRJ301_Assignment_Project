@@ -7,7 +7,7 @@ function validateLoginForm() {
     var selectedCampus = document.getElementById("studentLecturerCampusSelect").value;
 
     if (selectedCampus === "studentLecturerCampusSelect") {
-        alert("Please select campus before.");
+        alert("Please select campus to join");
         return false;
     }
     return true;

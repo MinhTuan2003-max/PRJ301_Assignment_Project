@@ -19,7 +19,6 @@ import entity.Group;
 import entity.Semester;
 import entity.Student;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -51,7 +50,7 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
 
         GroupDBContext grdb = new GroupDBContext();
         ArrayList<Group> groups = grdb.getGroupByStudentIDAndSemester(students.getStudent_ID(), semester_id);
-        int group_id = getDefaultIfNull(request.getSession().getAttribute("group_id"), groups.size());
+        int group_id = getDefaultIfNull(request.getSession().getAttribute("group_id"), 1);
         String raw_group_id = request.getParameter("group_id");
         if (raw_group_id != null) {
             group_id = Integer.parseInt(raw_group_id);

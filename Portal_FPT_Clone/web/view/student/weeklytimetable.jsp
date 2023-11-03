@@ -14,6 +14,14 @@
         <link href="${pageContext.request.contextPath}/css/styletimetable.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
+    <style>
+        .title_body {
+            font-family: cursive;
+            font-weight: bold;
+            color: #fff;
+            padding-left: 10px;
+        }
+    </style>
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark">
@@ -79,48 +87,32 @@
                 </div>
             </div>
             <br>
-            <h2>
-                Activities for
-                <span>${account.displayname} (${requestScope.students.student_ID})</span>
-            </h2>
-            <p class="ghichu">
-                <b>Note:</b>
-                These activities do not include extra-curriculum activities, such as
-                club activities ...
-            </p>
-            <p class="ghichu">
-                <b>Chú thích:</b>
-                Các hoạt động trong bảng dưới không bao gồm hoạt động ngoại khóa,
-                ví dụ như hoạt động câu lạc bộ ...
-            </p>
-            <div>
-                <p class="ghichu">
-                    Các phòng bắt đầu bằng AL thuộc tòa nhà Alpha. VD: AL...<br/>
-                    Các phòng bắt đầu bằng BE thuộc tòa nhà Beta. VD: BE,..<br/>
-                    Các phòng bắt đầu bằng G thuộc tòa nhà Gamma. VD: G201,...<br/>
-                    Các phòng tập bằng đầu bằng R thuộc khu vực sân tập Vovinam.<br/>
-                    Các phòng bắt đầu bằng DE thuộc tòa nhà Delta. VD: DE,..<br/>Little UK (LUK) thuộc tầng 5 tòa nhà Delta
-                </p>
+            <br>
+            <div style="background-color: #ef8d01; text-align: center; padding: 10px;border-radius: 10px;">
+                <h2 class="title_body">Weekly Schedule for ${sessionScope.account.displayname} (${requestScope.students.student_ID})</h2>      
             </div>
-
+            <br>
+            <br>
             <div class="weeklyTimetable_view">
                 <table style="width: 100%">
                     <tr>
                         <td class="timetable_getdate" style="padding-left: 3px;">
                             <form action="timetable" method="GET">
-                                From <input type="date" name="startDate" value="${requestScope.startDate}"/> <br/>
-                                To <input type="date" name="endDate" value="${requestScope.endDate}"/>
-                                <input type="submit" value="View"/>
+                                From <input type="date" name="startDate" id="startDate" value="${requestScope.startDate}"/> <br/>
+                                To <input type="date" name="endDate" id="endDate" value="${requestScope.endDate}"/>
+                                <!--                                <input type="submit" value="View"/>-->
                             </form>
                         </td>
+                        <c:set var="currentDate" value="<%= new java.util.Date() %>" />
                         <c:forEach items="${requestScope.week_date}" var="d">
-                            <td class="date_in_week"> 
+                            <c:set var="isToday" value="${d.time == currentDate.time}" />
+                            <td class="date_in_week${isToday ? ' today' : ''}">
                                 <fmt:formatDate value="${d}" pattern="EEE"/> <br>
                                 <div style="border-top: 1px solid #fff;">
                                     <fmt:formatDate value="${d}" pattern="dd-MM"/>
                                 </div>
                             </td>
-                        </c:forEach>
+                        </c:forEach>                           
                     </tr>
                     <c:forEach items="${requestScope.slot_index}" var="slot_index">
                         <tr>
@@ -183,7 +175,7 @@
                             <p style="text-align: center">
                                 © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>
                                 &nbsp;|&nbsp;<a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>
-                                &nbsp;|&nbsp;<a href="http://library.fpt.edu.vn" target="_blank">Library</a>
+                                &nbsp;|&nbsp;<a href="http://library.fpt.edu.vn" target="_blank">library</a>
                                 &nbsp;|&nbsp;<a href="http://library.books24x7.com" target="_blank">books24x7</a>
                             </p>
                         </td>
@@ -192,9 +184,25 @@
             </footer>
         </div>
     </body>
+    <script>
+        // Lấy tham chiếu đến các trường nhập ngày
+        var startDateInput = document.getElementById("startDate");
+        var endDateInput = document.getElementById("endDate");
+
+        // Lắng nghe sự kiện onChange trên cả hai trường nhập ngày
+        startDateInput.addEventListener("change", updateView);
+        endDateInput.addEventListener("change", updateView);
+
+        // Hàm cập nhật URL và gửi yêu cầu tự động
+        function updateView() {
+            var startDate = startDateInput.value;
+            var endDate = endDateInput.value;
+
+            // Tạo URL cần gửi yêu cầu đến (thay thế "/timetable" bằng URL của trang hiển thị thời khoá biểu)
+            var newURL = "${pageContext.request.contextPath}/timetable?startDate=" + startDate + "&endDate=" + endDate;
+
+            // Chuyển hướng đến URL mới
+            window.location.href = newURL;
+        }
+    </script>
 </html>
-
-
-
-
-

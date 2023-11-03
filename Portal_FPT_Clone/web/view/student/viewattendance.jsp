@@ -10,21 +10,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>View Schedule</title>
-        <link href="${pageContext.request.contextPath}/css/styletimetable.css" rel="stylesheet" type="text/css"/>
+        <title>View Attendance</title>
+        <link href="${pageContext.request.contextPath}/css/viewattendance.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            h2 {
+                font-family: cursive;
+                background-color: #ef8d01;
+                text-align: center;
+                border-radius: 10px;
+                font-weight: bold;
+                color: #fff;
+                padding: 10px;
+            }
+
+            .total_absent {
+                border-radius: 4px;
+                border: 1px solid rgb(210,210,210);
+                padding: 5px 10px;
+                box-shadow: 2px 3px 3px 1px #c4cacc
+            }
+        </style>
     </head>
-    <style>
-        .selected {
-            color: #333; /* Text color for selected link */
-            font-weight: bold; /* Bold text for selected link */
-        }
-
-        .choose_term_course a:hover {
-            color: #333; /* Text color for selected link */
-        }
-    </style>
-
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark">
@@ -90,31 +97,37 @@
                 </div>
             </div>
             <br>
-            <h2>View attendance for ${requestScope.students.student_Name} (${sessionScope.account.displayname})</h2>
+            <h2>
+                View Attendance Report for ${sessionScope.account.displayname} (${requestScope.students.student_ID})
+            </h2>
             <br>
             <div class="choose_term_course">
                 <table style="width: 100%">
                     <tr>
-                        <th>CAMPUS/PROGRAM</th>
-                        <th style="padding-right: 259px; padding-left: 277px;">SEMESTER</th>
-                        <th>COURSE</th>
+                        <th class="title" style="padding-left: 3px">CAMPUS/PROGRAM</th>
+                        <th class="title" style="padding: 0 100px 0 3px">SEMESTER</th>
+                        <th class="title" style="padding-left: 3px">COURSE</th>
                     </tr>
                     <tr>
-                        <th>FU-${requestScope.campus[0].cname}</th>
+                        <td>
+                            <table>
+                                <th>FU-${requestScope.campus[0].cname}</th>
+                            </table>
+                        </td>
                         <td>
                             <table>
                                 <c:forEach var="se" items="${requestScope.semesters}">
-                                    <tr>
+                                    <tr style="border-bottom: 1px solid rgb(210,210,210);">
                                         <c:choose>
                                             <c:when test="${se.semester_id == sessionScope.semester_id}">
-                                                <td style="padding-right: 259px; padding-left: 277px;">
-                                                    <a style="font-size: medium;" class="selected"
+                                                <td style="padding: 0 100px 0 3px; ">
+                                                    <a style="font-size: 14px;" class="selected"
                                                        href="viewattendance?semester_id=${se.semester_id}">${se.semester_name}</a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td style="padding-right: 259px; padding-left: 277px;">
-                                                    <a style="font-size: medium;"
+                                                <td style="padding: 0 100px 0 3px">
+                                                    <a style="font-size: small;"
                                                        href="viewattendance?semester_id=${se.semester_id}">${se.semester_name}</a>
                                                 </td>
                                             </c:otherwise>
@@ -126,18 +139,20 @@
                         <td>
                             <table>
                                 <c:forEach var="g" items="${requestScope.groups}">
-                                    <tr>
+                                    <tr style="border-bottom: 1px solid rgb(210,210,210);">
                                         <c:choose>
                                             <c:when test="${g.group_id == sessionScope.group_id}">
-                                                <td>
-                                                    <a style="font-size: medium" class="selected"
-                                                       href="viewattendance?semester_id=${sessionScope.semester_id}&group_id=${g.group_id}">${g.course.course_name} - ${g.group_name}</a>
+                                                <td style="padding-left: 3px">
+                                                    <a class="selected" id="showGridLink" href="viewattendance?semester_id=${sessionScope.semester_id}&group_id=${g.group_id}">
+                                                        ${g.course.course_name}(${g.course.course_code}) (${g.group_name},start ${g.course.start_date})
+                                                    </a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td>
-                                                    <a style="font-size: medium"
-                                                       href="viewattendance?semester_id=${sessionScope.semester_id}&group_id=${g.group_id}">${g.course.course_name} - ${g.group_name}</a>
+                                                <td style="padding-left: 3px">
+                                                    <a href="viewattendance?semester_id=${sessionScope.semester_id}&group_id=${g.group_id}">
+                                                        ${g.course.course_name}(${g.course.course_code}) (${g.group_name},start ${g.course.start_date})
+                                                    </a>
                                                 </td>
                                             </c:otherwise>
                                         </c:choose>
@@ -149,48 +164,93 @@
                 </table>
             </div>
             <br>
-            <table>
-                <tr>
-                    <td>NO</td>
-                    <td>DATE</td>
-                    <td>TIME</td>
-                    <td>SLOT</td>
-                    <td>ROOM</td>
-                    <td>LECTURER</td>
-                    <td>GROUP NAME</td>
-                    <td>ATTENDANCE STATUS</td>
-                </tr>
-                <c:forEach items="${requestScope.attendances}" var="att" varStatus="loop">
-                    <tr>
-                        <td>${loop.index + 1}</td>
-                        <td>${att.day_of_week} <fmt:formatDate value="${att.date}" pattern="dd/MM/yyyy"/></td>
-                        <td>
-                            ${att.timeSlot.description}
-                        </td>
-                        <td>${att.slot}</td>
-                        <td>${att.classroom.room_code}</td>
-                        <td>${att.instructure.instructure_code}</td>
-                        <td>${att.enrollment.group.group_name}</td>
-                        <td>
-                            <div style="${att.status eq 'present' ? 'color: green;' : att.status eq 'absent' ? 'color: red;' : 'color: gray;'}">
-                                ${att.status}
-                            </div>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
-            <table>
-                <tr>
-                    <th>
+            <c:if test="${not empty requestScope.groups}">     
+                <div id="Grid">
+                    <table class="table table-hover" style="width: 100%">
+                        <tr>
+                            <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">NO</th>
+                            <th class="thead-inverse" style="width:116px; border-right: 1px solid #fff">DATE</th>
+                            <th class="thead-inverse" style="width:80px; border-right: 1px solid #fff">TIME</th>
+                            <th class="thead-inverse" style="width:60px; border-right: 1px solid #fff">SLOT</th>
+                            <th class="thead-inverse" style="width:60px; border-right: 1px solid #fff">ROOM</th>
+                            <th class="thead-inverse" style="width:80px; border-right: 1px solid #fff">LECTURER</th>
+                            <th class="thead-inverse" style="width:83px; border-right: 1px solid #fff;">GROUP NAME</th>
+                            <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">ATTENDANCE STATUS</th>
+                        </tr>
+                        <c:forEach items="${requestScope.attendances}" var="att" varStatus="loop">
+                            <tr>
+                                <td>${loop.index + 1}</td>
+                                <td>${att.day_of_week} <fmt:formatDate value="${att.date}" pattern="dd/MM/yyyy"/></td>
+                                <td>
+                                    ${att.timeSlot.description}
+                                </td>
+                                <td>${att.slot}</td>
+                                <td>${att.classroom.room_code}</td>
+                                <td>${att.instructure.instructure_code}</td>
+                                <td>${att.enrollment.group.group_name}</td>
+                                <td>
+                                    <div style="text-transform: capitalize; ;${att.status eq 'attended' ? 'color: green;' : att.status eq 'absent' ? 'color: red;' : 'color: gray;'}">
+                                        ${att.status}
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>     
+                    <br>
+                    <div style="text-align: center">
                         <c:choose>
-                            <c:when test="${requestScope.absent_percentage > 10}">
-                                <span style="color: red;">ABSENT : ${requestScope.absent_percentage}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)</span>
+                            <c:when test="${requestScope.absent_percentage > 20 and requestScope.enrollment.total_slot eq 20}">
+                                <span class="total_absent" style="color: red;">
+                                    <strong>
+                                        ABSENT : ${requestScope.absent_percentage}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
+                                    </strong>
+                                </span>
+                            </c:when>
+                            <c:when test="${requestScope.absent_percentage > 10 and requestScope.enrollment.total_slot eq 10}">
+                                <span class="total_absent" style="color: red;">
+                                    <strong>
+                                        ABSENT : ${requestScope.absent_percentage}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
+                                    </strong>
+                                </span>
                             </c:when>
                             <c:otherwise>
-                                ABSENT : ${requestScope.absent_percentage}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
+                                <span class="total_absent">
+                                    <strong>
+                                        ABSENT : ${requestScope.absent_percentage}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
+                                    </strong>
+                                </span>
                             </c:otherwise>
                         </c:choose>
-                    </th>
+                    </div>
+                </div>
+            </c:if>  
+            <br>
+            <table>
+                <tr>
+                    <td>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <b>Mọi góp ý, thắc mắc xin liên hệ:</b>
+                                        <span>Phòng dịch vụ sinh viên</span>: Email:
+                                        <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a>.
+                                        Điện thoại: (024)7308.13.13
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="text-align: center">
+                                            © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>
+                                            &nbsp;|&nbsp;<a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>
+                                            &nbsp;|&nbsp;<a href="http://library.fpt.edu.vn" target="_blank">library</a>
+                                            &nbsp;|&nbsp;<a href="http://library.books24x7.com" target="_blank">books24x7</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>

@@ -82,7 +82,7 @@ public class WeeklyTimeTableController extends BaseRequiredAuthenticationControl
             slot_index.add(i);
         }
         request.setAttribute("slot_index", slot_index);
-        
+
         CampusDBContext cdb = new CampusDBContext();
         ArrayList<Campus> campus = cdb.search(loggedAccount.getUserID());
         StudentDBContext studb = new StudentDBContext();

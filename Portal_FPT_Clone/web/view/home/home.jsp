@@ -72,18 +72,26 @@
             <div class="row overlay content">
                 <div class="tag">
                     <p>Attendance Information</p>
-                </div> 
-                <div class="col-md-6">
+                </div>
+                <div class="col-md-4">
                     <section class="hero">
                         <h1>Weekly Timetable</h1>
-                        <p>View schedule by week or by day</p>
+                        <p>View schedule by week or by day and extracurricular activities</p>
                         <a href="timetable" class="cta-button">
                             <strong>Weekly Timetable</strong>
                         </a>
                     </section>
                 </div>
-
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <section class="contact">
+                        <h1>View Group</h1>
+                        <p>View the total student list by department and subject</p>
+                        <a href="#  " class="cta-button">
+                            <strong>View Group</strong>
+                        </a>
+                    </section>
+                </div>
+                <div class="col-md-4">
                     <section class="contact">
                         <h1>Attendance Report</h1>
                         <p>Report attendance for students by each subject</p>

@@ -4,6 +4,7 @@
  */
 package entity;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,7 @@ public class Course extends BaseEntity {
     private Department department;
     private float credit;
     private String preq_Course;
+    private Date start_date;
     private ArrayList<Major> majors;
     private ArrayList<Group> groups;
 
@@ -85,5 +87,12 @@ public class Course extends BaseEntity {
         this.preq_Course = preq_Course;
     }
 
+    public Date getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+    }
 
 }

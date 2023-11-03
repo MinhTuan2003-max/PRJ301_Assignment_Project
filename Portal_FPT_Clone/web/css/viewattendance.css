@@ -1,0 +1,71 @@
+.content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(240,240,240);
+    border-radius: 4px;
+}
+
+.divControl {
+    padding-left: 8px;
+}
+
+.divUser {
+    padding-right: 7px;
+
+}
+
+.divUser a {
+    background-color: rgb(92,184,92);
+    border-radius: 5px;
+    padding: 0 7px 2px 7px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.divUser a:hover {
+    color: #fff;
+}
+
+.divUser b {
+    background-color: rgb(92,184,92);
+    border-radius: 5px;
+    padding: 0 7px 2px 7px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.selected {
+    color: #333; /* Text color for selected link */
+    font-weight: bold; /* Bold text for selected link */
+}
+
+.choose_term_course a:hover {
+    color: #333; /* Text color for selected link */
+}
+
+.title {
+    background-color: #6b90da;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-right: 1px solid #fff;
+}
+
+.thead-inverse {
+    background-color: rgb(107,144,218);
+    color: #333;
+    padding: 10px 0 10px 3px;
+}
+
+table th {
+    padding: 0.35rem;
+}
+
+table td {
+    font-size: 0.92rem;
+}
+
+.choose_term_course a {
+    font-size: 14px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
