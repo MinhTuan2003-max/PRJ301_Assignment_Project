@@ -199,24 +199,24 @@
                     <br>
                     <div style="text-align: center">
                         <c:choose>
-                            <c:when test="${requestScope.absent_percentage > 20 and requestScope.enrollment.total_slot eq 20}">
+                            <c:when test="${requestScope.absent_percent > 20 and requestScope.enrollment.total_slot eq 20}">
                                 <span class="total_absent" style="color: red;">
                                     <strong>
-                                        ABSENT : ${requestScope.absent_percentage}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
+                                        ABSENT : ${requestScope.absent_percent}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
                                     </strong>
                                 </span>
                             </c:when>
-                            <c:when test="${requestScope.absent_percentage > 10 and requestScope.enrollment.total_slot eq 10}">
+                            <c:when test="${requestScope.absent_percent > 10 and requestScope.enrollment.total_slot eq 10}">
                                 <span class="total_absent" style="color: red;">
                                     <strong>
-                                        ABSENT : ${requestScope.absent_percentage}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
+                                        ABSENT : ${requestScope.absent_percent}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
                                     </strong>
                                 </span>
                             </c:when>
                             <c:otherwise>
                                 <span class="total_absent">
                                     <strong>
-                                        ABSENT : ${requestScope.absent_percentage}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
+                                        ABSENT : ${requestScope.absent_percent}% ABSENT SO FAR (${requestScope.enrollment.total_absent_slot} ABSENT ON ${requestScope.enrollment.total_slot} TOTAL)
                                     </strong>
                                 </span>
                             </c:otherwise>

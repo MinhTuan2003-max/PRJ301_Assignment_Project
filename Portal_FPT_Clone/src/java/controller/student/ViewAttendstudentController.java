@@ -41,20 +41,12 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
 
         SemesterDBContext sedb = new SemesterDBContext();
         ArrayList<Semester> semesters = sedb.getAllSemester();
-        int semester_id = getDefaultIfNull(request.getSession().getAttribute("semester_id"), semesters.size());
-        String raw_semester_id = request.getParameter("semester_id");
-        if (raw_semester_id != null) {
-            semester_id = Integer.parseInt(raw_semester_id);
-        }
+        int semester_id = (request.getParameter("semester_id") != null) ? Integer.parseInt(request.getParameter("semester_id")) : getDefaultIfNull(request.getSession().getAttribute("semester_id"), semesters.size());
         request.getSession().setAttribute("semester_id", semester_id);
 
         GroupDBContext grdb = new GroupDBContext();
         ArrayList<Group> groups = grdb.getGroupByStudentIDAndSemester(students.getStudent_ID(), semester_id);
-        int group_id = getDefaultIfNull(request.getSession().getAttribute("group_id"), 1);
-        String raw_group_id = request.getParameter("group_id");
-        if (raw_group_id != null) {
-            group_id = Integer.parseInt(raw_group_id);
-        }
+        int group_id = (request.getParameter("group_id") != null) ? Integer.parseInt(request.getParameter("group_id")) : getDefaultIfNull(request.getSession().getAttribute("group_id"), 1);
         request.getSession().setAttribute("group_id", group_id);
 
         AttendanceDBContext atdb = new AttendanceDBContext();
@@ -66,8 +58,8 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
 
         request.setAttribute("total_slot", enrollment.getTotal_slot());
         request.setAttribute("total_absent_slot", enrollment.getTotal_absent_slot());
-        int absent_percentage = Math.round((float) enrollment.getTotal_absent_slot() / enrollment.getTotal_slot() * 100);
-        request.setAttribute("absent_percentage", absent_percentage);
+        int absent_percent = Math.round((float) enrollment.getTotal_absent_slot() / enrollment.getTotal_slot() * 100);
+        request.setAttribute("absent_percent", absent_percent);
         request.setAttribute("enrollment", enrollment);
         request.setAttribute("groups", groups);
         request.setAttribute("campus", campus);
