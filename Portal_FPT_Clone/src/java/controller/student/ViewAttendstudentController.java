@@ -32,7 +32,6 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
         CampusDBContext cdb = new CampusDBContext();
         ArrayList<Campus> campus = cdb.search(loggedAccount.getUserID());
@@ -46,21 +45,21 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
 
         GroupDBContext grdb = new GroupDBContext();
         ArrayList<Group> groups = grdb.getGroupByStudentIDAndSemester(students.getStudent_ID(), semester_id);
-        int group_id = (request.getParameter("group_id") != null) ? Integer.parseInt(request.getParameter("group_id")) : getDefaultIfNull(request.getSession().getAttribute("group_id"), 1);
-        request.getSession().setAttribute("group_id", group_id);
+        int course_id = (request.getParameter("course_id") != null) ? Integer.parseInt(request.getParameter("course_id")) : getDefaultIfNull(request.getSession().getAttribute("course_id"), 1);
+        request.getSession().setAttribute("course_id", course_id);
 
         AttendanceDBContext atdb = new AttendanceDBContext();
-        ArrayList<Attendance> attendances = atdb.getViewAttendance(students.getStudent_ID(), group_id);
-        request.setAttribute("attendances", attendances);
+        ArrayList<Attendance> attendances = atdb.getViewAttendance(students.getStudent_ID(), course_id);
+        int getAbsentCount = atdb.getAbsentCount(attendances);
 
         EnrollmentDBContext endb = new EnrollmentDBContext();
-        Enrollment enrollment = endb.getEnrollmentByStudentIDAndGroup(students.getStudent_ID(), group_id);
+        Enrollment enrollment = endb.getEnrollmentByStudentIDAndGroup(students.getStudent_ID(), course_id);
 
-        request.setAttribute("total_slot", enrollment.getTotal_slot());
-        request.setAttribute("total_absent_slot", enrollment.getTotal_absent_slot());
-        int absent_percent = Math.round((float) enrollment.getTotal_absent_slot() / enrollment.getTotal_slot() * 100);
+        int absent_percent = endb.calculateAbsentPercent(enrollment, getAbsentCount);
         request.setAttribute("absent_percent", absent_percent);
         request.setAttribute("enrollment", enrollment);
+        request.setAttribute("attendances", attendances);
+        request.setAttribute("absent", getAbsentCount);
         request.setAttribute("groups", groups);
         request.setAttribute("campus", campus);
         request.setAttribute("students", students);

@@ -187,4 +187,14 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         }
         return attendances;
     }
+
+    public int getAbsentCount(ArrayList<Attendance> attendances) {
+        int absentCount = 0;
+        for (Attendance attendance : attendances) {
+            if (attendance.getStatus() != null && attendance.getStatus().toLowerCase().contains("absent")) {
+                absentCount++;
+            }
+        }
+        return absentCount;
+    }
 }

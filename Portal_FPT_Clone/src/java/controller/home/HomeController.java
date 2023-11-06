@@ -39,7 +39,7 @@ public class HomeController extends BaseRequiredAuthenticationController {
         request.getRequestDispatcher("view/home/home.jsp").forward(request, response);
         HttpSession session = request.getSession();
         session.removeAttribute("semester_id");
-        session.removeAttribute("group_id");
+        session.removeAttribute("course_id");
     }
 
     @Override
