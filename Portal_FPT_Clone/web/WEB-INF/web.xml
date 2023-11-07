@@ -40,6 +40,10 @@
         <servlet-name>ViewAttendstudentController</servlet-name>
         <servlet-class>controller.student.ViewAttendstudentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GroupDBContext</servlet-name>
+        <servlet-class>controller.student.GroupController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ViewAttendstudentController</servlet-name>
         <url-pattern>/viewattendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupDBContext</servlet-name>
+        <url-pattern>/group</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

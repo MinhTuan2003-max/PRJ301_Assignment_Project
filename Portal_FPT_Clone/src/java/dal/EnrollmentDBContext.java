@@ -5,6 +5,7 @@
 package dal;
 
 import entity.Account;
+import entity.Course;
 import entity.Enrollment;
 import entity.Group;
 import entity.Student;
@@ -21,25 +22,31 @@ import java.util.logging.Logger;
  */
 public class EnrollmentDBContext extends DBContext<Enrollment> {
 
-    public ArrayList<Enrollment> getByGroup(int group_id) {
+    public ArrayList<Enrollment> getByGroupAndCourse(int group_id, int course_id) {
         ArrayList<Enrollment> enrollments = new ArrayList<>();
         try {
-            String sql = "SELECT [enrollment_id]\n"
-                    + "      ,[student_id]\n"
-                    + "      ,[total_slot]\n"
-                    + "      ,[group_id] \n"
-                    + "  FROM [Enrollment]\n"
-                    + "  WHERE [group_id] = ?";
+            String sql = "SELECT s.[student_id]\n"
+                    + "      ,s.[student_Name]\n"
+                    + "      ,s.[student_Img]\n"
+                    + "      ,g.[group_name]\n"
+                    + "  FROM [Enrollment] e INNER JOIN [Group] g ON e.group_id = g.group_id\n"
+                    + "  INNER JOIN [Student] s ON e.student_id = s.student_ID\n"
+                    + "  WHERE g.[group_id] = ? AND g.[course_id] = ?\n"
+                    + "  ORDER BY s.student_ID";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, group_id);
+            stm.setInt(2, course_id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Enrollment e = new Enrollment();
-                e.setEnrollment_id(rs.getInt("enrollment_id"));
-                e.setTotal_slot(rs.getInt("total_slot"));
                 Student s = new Student();
                 s.setStudent_ID(rs.getString("student_id"));
+                s.setStudent_Name(rs.getString("student_Name"));
+                s.setStudent_Img(rs.getString("student_Img"));
                 e.setStudent(s);
+                Group g = new Group();
+                g.setGroup_name(rs.getString("group_name"));
+                e.setGroup(g);
                 enrollments.add(e);
             }
         } catch (SQLException ex) {

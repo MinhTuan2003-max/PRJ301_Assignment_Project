@@ -67,4 +67,38 @@ public class GroupDBContext extends DBContext<Group> {
         }
         return groups;
     }
+
+    public ArrayList<Group> getGroupByCourse(int course_id) {
+        ArrayList<Group> groups = new ArrayList<>();
+        try {
+            String sql = "SELECT g.[group_id]\n"
+                    + "      ,g.[group_name]\n"
+                    + "      ,c.[course_id]\n"
+                    + "	     ,c.[course_name]\n"
+                    + "  FROM [Group] g INNER JOIN [Course] c ON g.course_id = c.course_id\n"
+                    + "  WHERE c.[course_id] = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, course_id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Group g = new Group();
+                g.setGroup_id(rs.getInt("group_id"));
+                g.setGroup_name(rs.getString("group_name"));
+                Course c = new Course();
+                c.setCourse_id(rs.getInt("course_id"));
+                c.setCourse_name(rs.getString("course_name"));
+                g.setCourse(c);
+                groups.add(g);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return groups;
+    }
 }

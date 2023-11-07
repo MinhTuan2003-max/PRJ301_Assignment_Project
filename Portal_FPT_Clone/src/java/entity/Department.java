@@ -15,7 +15,7 @@ public class Department extends BaseEntity {
     private int department_id;
     private String department_name;
     private String department_description;
-    private ArrayList<Course> courses;
+    private Course courses;
     private ArrayList<Instructure> instructure;
 
     public ArrayList<Instructure> getInstructure() {
@@ -50,11 +50,11 @@ public class Department extends BaseEntity {
         this.department_description = department_description;
     }
 
-    public ArrayList<Course> getCourses() {
+    public Course getCourses() {
         return courses;
     }
 
-    public void setCourses(ArrayList<Course> courses) {
+    public void setCourses(Course courses) {
         this.courses = courses;
     }
 

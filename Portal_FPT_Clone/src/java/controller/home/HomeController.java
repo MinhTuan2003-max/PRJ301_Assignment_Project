@@ -5,10 +5,8 @@
 package controller.home;
 
 import controller.BaseRequiredAuthenticationController;
-import dal.MajorDBContext;
 import dal.StudentDBContext;
 import entity.Account;
-import entity.Major;
 import entity.Student;
 import java.io.IOException;
 import jakarta.servlet.ServletException;

@@ -13,6 +13,7 @@
         <title>View Schedule</title>
         <link href="${pageContext.request.contextPath}/css/styletimetable.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="${pageContext.request.contextPath}/js/display.js" type="text/javascript"></script>
     </head>
     <style>
         .title_body {
@@ -100,7 +101,6 @@
                             <form action="timetable" method="GET">
                                 From <input type="date" name="startDate" id="startDate" value="${requestScope.startDate}"/> <br/>
                                 To <input type="date" name="endDate" id="endDate" value="${requestScope.endDate}"/>
-                                <!--                                <input type="submit" value="View"/>-->
                             </form>
                         </td>
                         <c:set var="currentDate" value="<%= new java.util.Date() %>" />
@@ -114,13 +114,13 @@
                             </td>
                         </c:forEach>                           
                     </tr>
-                    <c:forEach items="${requestScope.slot_index}" var="slot_index">
+                    <c:forEach items="${requestScope.timeslot}" var="t">
                         <tr>
-                            <td class="week_date" style="padding-left: 3px; font-size: 15px;">Slot ${slot_index}</td>
+                            <td class="week_date" style="padding-left: 3px; font-size: 15px;">Slot ${t.timeslot_id}</td>
                             <c:forEach items="${requestScope.week_date}" var="d">
                                 <c:set var="found" value="false" />
                                 <c:forEach items="${requestScope.weeklyTimetable}" var="w">
-                                    <c:if test="${slot_index eq w.slot and w.date eq d}">
+                                    <c:if test="${t.timeslot_id eq w.slot and w.date eq d}">
                                         <td class="week_date">
                                             <span >
                                                 <a style="font-size: 14px" href="${pageContext.request.contextPath}/activitydetail?courseID=${w.enrollment.group.course.course_id}&attendance_id=${w.attendance_id}">${w.enrollment.group.course.course_code}</a>

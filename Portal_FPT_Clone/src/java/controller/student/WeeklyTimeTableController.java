@@ -8,10 +8,12 @@ import controller.BaseRequiredAuthenticationController;
 import dal.AttendanceDBContext;
 import dal.CampusDBContext;
 import dal.StudentDBContext;
+import dal.TimeSlotDBContext;
 import entity.Account;
 import entity.Attendance;
 import entity.Campus;
 import entity.Student;
+import entity.TimeSlot;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -77,18 +79,18 @@ public class WeeklyTimeTableController extends BaseRequiredAuthenticationControl
         AttendanceDBContext attdb = new AttendanceDBContext();
         List<Attendance> weeklyTimetable = attdb.getWeeklyTimetable(loggedAccount.getUserID(), startDate, endDate);
 
-        ArrayList<Integer> slot_index = new ArrayList<>();
-        for (int i = 0; i <= 7; i++) {
-            slot_index.add(i);
-        }
-        request.setAttribute("slot_index", slot_index);
+        TimeSlotDBContext tsdbc = new TimeSlotDBContext();
+        ArrayList<TimeSlot> timeSlots = tsdbc.getTimeSlot();
 
         CampusDBContext cdb = new CampusDBContext();
         ArrayList<Campus> campus = cdb.search(loggedAccount.getUserID());
+        
         StudentDBContext studb = new StudentDBContext();
         Student students = studb.getStudent(loggedAccount.getUserID());
+        
         request.setAttribute("campus", campus);
         request.setAttribute("students", students);
+        request.setAttribute("timeslot", timeSlots);
         request.setAttribute("startDate", startDate);
         request.setAttribute("endDate", endDate);
         request.setAttribute("week_date", week_date);

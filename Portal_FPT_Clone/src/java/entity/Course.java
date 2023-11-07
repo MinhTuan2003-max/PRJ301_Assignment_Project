@@ -21,7 +21,7 @@ public class Course extends BaseEntity {
     private String preq_Course;
     private Date start_date;
     private ArrayList<Major> majors;
-    private ArrayList<Group> groups;
+    private Group groups;
 
     public ArrayList<Major> getMajors() {
         return majors;
@@ -31,11 +31,11 @@ public class Course extends BaseEntity {
         this.majors = majors;
     }
 
-    public ArrayList<Group> getGroups() {
+    public Group getGroups() {
         return groups;
     }
 
-    public void setGroups(ArrayList<Group> groups) {
+    public void setGroups(Group groups) {
         this.groups = groups;
     }
 

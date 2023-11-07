@@ -86,7 +86,7 @@
                     <section class="contact">
                         <h1>View Group</h1>
                         <p>View the total student list by department and subject</p>
-                        <a href="#  " class="cta-button">
+                        <a href="${pageContext.request.contextPath}/group" class="cta-button">
                             <strong>View Group</strong>
                         </a>
                     </section>

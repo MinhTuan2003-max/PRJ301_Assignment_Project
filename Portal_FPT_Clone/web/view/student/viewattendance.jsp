@@ -13,24 +13,6 @@
         <title>View Attendance</title>
         <link href="${pageContext.request.contextPath}/css/viewattendance.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <style>
-            h2 {
-                font-family: cursive;
-                background-color: #ef8d01;
-                text-align: center;
-                border-radius: 10px;
-                font-weight: bold;
-                color: #fff;
-                padding: 10px;
-            }
-
-            .total_absent {
-                border-radius: 4px;
-                border: 1px solid rgb(210,210,210);
-                padding: 5px 10px;
-                box-shadow: 2px 3px 3px 1px #c4cacc
-            }
-        </style>
     </head>
     <body>
         <header>
@@ -143,7 +125,7 @@
                                         <c:choose>
                                             <c:when test="${g.group_id == sessionScope.course_id}">
                                                 <td style="padding-left: 3px">
-                                                    <a class="selected" id="showGridLink" href="viewattendance?semester_id=${sessionScope.semester_id}&course_id=${g.group_id}">
+                                                    <a class="selected" href="viewattendance?semester_id=${sessionScope.semester_id}&course_id=${g.group_id}">
                                                         ${g.course.course_name}(${g.course.course_code}) (${g.group_name},start ${g.course.start_date})
                                                     </a>
                                                 </td>
@@ -189,7 +171,7 @@
                                 <td>${att.instructure.instructure_code}</td>
                                 <td>${att.enrollment.group.group_name}</td>
                                 <td>
-                                    <div style="text-transform: capitalize; ;${att.status eq 'attended' ? 'color: green;' : att.status eq 'absent' ? 'color: red;' : 'color: gray;'}">
+                                    <div style="text-transform: capitalize; ${att.status eq 'attended' ? 'color: green;' : att.status eq 'absent' ? 'color: red;' : 'color: gray;'}">
                                         ${att.status}
                                     </div>
                                 </td>

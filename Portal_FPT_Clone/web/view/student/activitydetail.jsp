@@ -98,7 +98,9 @@
                         <tr>
                             <td class="title">Student group</td>
                             <td class="description">
-                                <a href="#">${d.enrollment.group.group_name}</a>
+                                <a href="${pageContext.request.contextPath}/group?group_id=${d.enrollment.group.group_id}&course_id=${d.enrollment.group.course.course_id}">
+                                    ${d.enrollment.group.group_name}
+                                </a>
                             </td>
                         </tr>
                         <tr>

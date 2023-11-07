@@ -117,3 +117,10 @@ h2 {
     box-shadow: 2px 3px 3px 1px #c4cacc
 }
 
+.title_body {
+    font-family: cursive;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 10px;
+}
+
