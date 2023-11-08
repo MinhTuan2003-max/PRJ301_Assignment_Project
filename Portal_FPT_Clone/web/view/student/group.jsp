@@ -13,7 +13,13 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <title>FPT University Academic Portal</title>
         <link href="${pageContext.request.contextPath}/css/groupstyle.css" rel="stylesheet" type="text/css"/>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            .table td, .table th {
+                padding: .75rem;
+                vertical-align: top;
+                border-bottom: 1px solid #dee2e6;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -85,11 +91,11 @@
             <div class="choose_term_course">
                 <table style="width: 100%">
                     <tr>
-                        <td class="title" style="padding-left: 3px">CAMPUS</td>
-                        <td class="title" style="padding: 0 100px 0 3px">TERM</td>
-                        <td class="title" style="padding: 0 100px 0 3px">DEPARTMENT</td>
-                        <td class="title" style="padding-left: 3px">COURSE</td>
-                        <td class="title" style="padding-left: 3px">GROUP</td>
+                        <th class="title" style="padding-left: 3px">CAMPUS</th>
+                        <th class="title" style="padding: 0 100px 0 3px">TERM</th>
+                        <th class="title" style="padding: 0 100px 0 3px">DEPARTMENT</th>
+                        <th class="title" style="padding-left: 3px">COURSE</th>
+                        <th class="title" style="padding-left: 3px">GROUP</th>
                     </tr>
 
                     <tr>
@@ -151,14 +157,14 @@
                                         <c:choose>
                                             <c:when test="${c.course_id == sessionScope.course_id}">
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a class="selected"  href="group?semester_id=${sessionScope.semester_id}&department_id=${sessionScope.department_id}&course_id=${c.course_id}" onclick="changeFontWeight(this)">
+                                                    <a class="selected"  href="group?semester_id=${sessionScope.semester_id}&department_id=${sessionScope.department_id}&course_id=${c.course_id}">
                                                         ${c.course_name}(${c.course_code})
                                                     </a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a href="group?semester_id=${sessionScope.semester_id}&department_id=${sessionScope.department_id}&course_id=${c.course_id}" onclick="changeFontWeight(this)">
+                                                    <a href="group?semester_id=${sessionScope.semester_id}&department_id=${sessionScope.department_id}&course_id=${c.course_id}">
                                                         ${c.course_name}(${c.course_code})
                                                     </a>
                                                 </td>
@@ -175,14 +181,14 @@
                                         <c:choose>
                                             <c:when test="${g.group_id == sessionScope.group_id}">
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a id="showStudentList" class="selected" href="group?semester_id=${sessionScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
+                                                    <a class="selected" href="group?semester_id=${sessionScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
                                                         ${g.group_name}                                           
                                                     </a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a id="showStudentList" href="group?semester_id=${sessionScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
+                                                    <a href="group?semester_id=${sessionScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
                                                         ${g.group_name}                                           
                                                     </a>
                                                 </td>
@@ -215,6 +221,35 @@
                     </c:forEach>
                 </table>
             </c:if>
+            <br>
+            <table>
+                <tr>
+                    <td>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <b>Mọi góp ý, thắc mắc xin liên hệ:</b>
+                                        <span>Phòng dịch vụ sinh viên</span>: Email:
+                                        <a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a>.
+                                        Điện thoại: (024)7308.13.13
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p style="text-align: center">
+                                            © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>
+                                            &nbsp;|&nbsp;<a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>
+                                            &nbsp;|&nbsp;<a href="http://library.fpt.edu.vn" target="_blank">library</a>
+                                            &nbsp;|&nbsp;<a href="http://library.books24x7.com" target="_blank">books24x7</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </body>
 </html>

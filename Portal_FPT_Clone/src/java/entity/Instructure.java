@@ -17,7 +17,7 @@ public class Instructure extends BaseEntity {
     private String instructure_code;
     private String email;
     private String instructure_img;
-    private ArrayList<Department> departments;
+    private String meet_link;
     private ArrayList<Attendance> attendances;
 
     public int getInstructure_id() {
@@ -60,14 +60,14 @@ public class Instructure extends BaseEntity {
         this.instructure_img = instructure_img;
     }
 
-    public ArrayList<Department> getDepartments() {
-        return departments;
+    public String getMeet_link() {
+        return meet_link;
     }
 
-    public void setDepartments(ArrayList<Department> departments) {
-        this.departments = departments;
+    public void setMeet_link(String meet_link) {
+        this.meet_link = meet_link;
     }
-
+    
     public ArrayList<Attendance> getAttendances() {
         return attendances;
     }

@@ -4,8 +4,6 @@
  */
 package dal;
 
-import entity.Account;
-import entity.Course;
 import entity.Enrollment;
 import entity.Group;
 import entity.Student;
@@ -22,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class EnrollmentDBContext extends DBContext<Enrollment> {
 
-    public ArrayList<Enrollment> getByGroupAndCourse(int group_id, int course_id, int semester_id) {
+    public ArrayList<Enrollment> getByGroupAndCourse(int group_id, int course_id, int semester_id, int department_id) {
         ArrayList<Enrollment> enrollments = new ArrayList<>();
         try {
             String sql = "SELECT s.[student_id]\n"
@@ -31,12 +29,14 @@ public class EnrollmentDBContext extends DBContext<Enrollment> {
                     + "      ,g.[group_name]\n"
                     + "  FROM [Enrollment] e INNER JOIN [Group] g ON e.group_id = g.group_id\n"
                     + "  INNER JOIN [Student] s ON e.student_id = s.student_ID\n"
-                    + "  WHERE g.[group_id] = ? AND g.[course_id] = ? AND g.semester_id = ?\n"
+                    + "  INNER JOIN [Course] c ON c.course_id = g.course_id\n"
+                    + "  WHERE g.[group_id] = ? AND g.[course_id] = ? AND g.semester_id = ? AND c.[department_id] = ?\n"
                     + "  ORDER BY s.student_ID";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, group_id);
             stm.setInt(2, course_id);
             stm.setInt(3, semester_id);
+            stm.setInt(4, department_id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Enrollment e = new Enrollment();
@@ -100,9 +100,6 @@ public class EnrollmentDBContext extends DBContext<Enrollment> {
     }
 
     public int calculateAbsentPercent(Enrollment enrollments, int absentCount) {
-        if (enrollments.getTotal_slot() == 0) {
-            return 0;
-        }
         return Math.round((float) absentCount / enrollments.getTotal_slot() * 100);
     }
 }

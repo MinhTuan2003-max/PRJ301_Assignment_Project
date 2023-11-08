@@ -181,14 +181,43 @@
                         <c:forEach items="${requestScope.attendances}" var="att" varStatus="loop">
                             <tr>
                                 <td>${loop.index + 1}</td>
-                                <td>${att.day_of_week} <fmt:formatDate value="${att.date}" pattern="dd/MM/yyyy"/></td>
-                                <td>${att.slot}_(${att.timeSlot.description})</td>
+                                <td>
+                                    <span style="background-color: rgb(51,122,183);
+                                          color: #fff;
+                                          font-weight: bold;
+                                          border-radius: 3px;
+                                          padding: 3px;
+                                          font-size: 12px;">
+                                        ${att.day_of_week} <fmt:formatDate value="${att.date}" pattern="dd/MM/yyyy"/>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span style="background-color: rgb(217,83,79);
+                                          color: #fff;
+                                          font-weight: bold;
+                                          border-radius: 3px;
+                                          padding: 3px;
+                                          font-size: 12px;">
+                                        ${att.slot}_(${att.timeSlot.description})
+                                    </span>
+                                </td>
                                 <td>${att.classroom.room_code}</td>
                                 <td>${att.instructure.instructure_code}</td>
                                 <td>${att.enrollment.group.group_name}</td>
                                 <td>
-                                    <div style="text-transform: capitalize; ${att.status eq 'attended' ? 'color: green;' : att.status eq 'absent' ? 'color: red;' : 'color: gray;'}">
-                                        ${att.status}
+                                    <div style="text-transform: capitalize;
+                                         ${att.status eq 'attended' ? 'color: green;' 
+                                           : att.status eq 'absent' ? 'color: red;' 
+                                           : 'color: gray;'}">
+                                         <c:choose>
+                                             <c:when test="${att.status eq 'not yet'}">
+                                                 <span style="display: none;">not yet</span>
+                                                 <span style="color: black">Future</span>
+                                             </c:when>
+                                             <c:otherwise>
+                                                 ${att.status}
+                                             </c:otherwise>
+                                         </c:choose>
                                     </div>
                                 </td>
                                 <td>${att.comments}</td>

@@ -22,6 +22,26 @@
             color: #fff;
             padding-left: 10px;
         }
+
+        .link_meet {
+            background-color: rgb(94,94,94);
+            color: #fff;
+            font-size: 11px;
+            padding: 3px 8px;
+            margin-left: 3px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .link_to_join a:hover {
+            background-color: orangered;
+            color: #fff;
+        }
+
+        .instructure_meet a:hover {
+            background-color: #333;
+            color: #fff;
+        }
     </style>
     <body>
         <header>
@@ -118,14 +138,19 @@
                         <tr>
                             <td class="week_date" style="padding-left: 3px; font-size: 15px;">Slot ${t.timeslot_id}</td>
                             <c:forEach items="${requestScope.week_date}" var="d">
+                                <c:set var="isTodayOrFuture" value="${d.time >= currentDate.time}" />
                                 <c:set var="found" value="false" />
                                 <c:forEach items="${requestScope.weeklyTimetable}" var="w">
                                     <c:if test="${t.timeslot_id eq w.slot and w.date eq d}">
                                         <td class="week_date">
                                             <span >
                                                 <a style="font-size: 14px" href="${pageContext.request.contextPath}/activitydetail?courseID=${w.enrollment.group.course.course_id}&attendance_id=${w.attendance_id}">${w.enrollment.group.course.course_code}</a>
-                                            </span>-<a class="get_materials" href="https://flm.fpt.edu.vn/DefaultSignin" target="_blank">View Materials</a> <br>
-                                            at <span style="font-size: 14px">${w.classroom.room_code}</span> <br>
+                                            </span>-<span class="link_to_join" style="margin-left: 3px;"><a class="get_materials" href="https://flm.fpt.edu.vn/DefaultSignin" target="_blank">View Materials</a> </span> <br>
+                                            at <span style="font-size: 14px">${w.classroom.room_code}</span>
+                                            <c:if test="${isTodayOrFuture}">
+                                                <span class="instructure_meet">-<a class="link_meet" href="${w.instructure.meet_link}">Meet URL</a></span>
+                                            </c:if>
+                                            <br>
                                             <span style="${w.status eq 'attended' ? 'color: green;' : w.status eq 'absent' ? 'color: red;' : 'color: rgb(255,0,0);'}">
                                                 (${w.status})
                                             </span><br>

@@ -27,6 +27,7 @@ public class InstructorDBContext extends DBContext<Instructure> {
                     + "      ,[instructure_code]\n"
                     + "      ,[instructure_email]\n"
                     + "      ,[instructure_img]\n"
+                    + "      ,[meet_link]\n"
                     + "  FROM [Instructure]\n"
                     + "  WHERE instructure_code = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -39,6 +40,7 @@ public class InstructorDBContext extends DBContext<Instructure> {
                 i.setInstructure_code(rs.getString("instructure_code"));
                 i.setInstructure_img(rs.getString("instructure_img"));
                 i.setEmail(rs.getString("instructure_email"));
+                i.setMeet_link(rs.getString("meet_link"));
                 instructures.add(i);
             }
         } catch (SQLException ex) {

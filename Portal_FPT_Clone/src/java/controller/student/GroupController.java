@@ -24,6 +24,7 @@ import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
@@ -62,7 +63,7 @@ public class GroupController extends BaseRequiredAuthenticationController {
         request.getSession().setAttribute("group_id", group_id);
 
         EnrollmentDBContext edbc = new EnrollmentDBContext();
-        ArrayList<Enrollment> enrollments = edbc.getByGroupAndCourse(group_id, course_id, semester_id);
+        ArrayList<Enrollment> enrollments = edbc.getByGroupAndCourse(group_id, course_id, semester_id, department_id);
 
         request.setAttribute("campus", campus);
         request.setAttribute("students", students);
@@ -80,6 +81,8 @@ public class GroupController extends BaseRequiredAuthenticationController {
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
         processRequest(request, response, loggedAccount);
+        HttpSession session = request.getSession();
+        session.removeAttribute("group_id");
     }
 
     @Override

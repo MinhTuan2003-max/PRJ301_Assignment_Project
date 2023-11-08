@@ -32,6 +32,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         try {
             String sql = "SELECT a.[attendance_id]\n"
                     + "      ,i.instructure_code\n"
+                    + "      ,i.[meet_link]\n"
                     + "      ,s.student_ID\n"
                     + "      ,c.course_code\n"
                     + "      ,c.course_id\n"
@@ -70,6 +71,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 att.setComments(rs.getString("comments"));
                 Instructure i = new Instructure();
                 i.setInstructure_code(rs.getString("instructure_code"));
+                i.setMeet_link(rs.getString("meet_link"));
                 att.setInstructure(i);
                 Student s = new Student();
                 s.setStudent_ID(rs.getString("student_ID"));

@@ -7,10 +7,14 @@ package controller.detail;
 import controller.BaseRequiredAuthenticationController;
 import dal.ActivityDetailDBContext;
 import dal.CampusDBContext;
+import dal.CourseDBContext;
+import dal.DepartmentDBContext;
 import dal.StudentDBContext;
 import entity.Account;
 import entity.Attendance;
 import entity.Campus;
+import entity.Course;
+import entity.Department;
 import entity.Student;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -30,7 +34,6 @@ public class ActivityDetailController extends BaseRequiredAuthenticationControll
         int courseID = Integer.parseInt(request.getParameter("courseID"));
         int attendanceID = Integer.parseInt(request.getParameter("attendance_id"));
         ArrayList<Attendance> detailTimetable = addbc.getDetailWeeklyTimetable(loggedAccount.getUserID(), courseID, attendanceID);
-
         CampusDBContext cdb = new CampusDBContext();
         ArrayList<Campus> campus = cdb.search(loggedAccount.getUserID());
         StudentDBContext studb = new StudentDBContext();
@@ -53,4 +56,11 @@ public class ActivityDetailController extends BaseRequiredAuthenticationControll
         processRequest(request, response, loggedAccount);
     }
 
+    private static int getDefaultIfNull(Object value, int defaultValue) {
+        if (value != null) {
+            return (int) value;
+        } else {
+            return defaultValue;
+        }
+    }
 }

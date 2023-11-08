@@ -13,6 +13,18 @@
         <title>Activity Detail</title>
         <link href="${pageContext.request.contextPath}/css/viewactivity.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .url_meet_instructor {
+                background-color: #ec971f;
+                padding: 10px 11px;
+                border-radius: 4px;
+            }
+
+            .url_meet_instructor:hover {
+                text-decoration: none;
+                background-color: #ff6600;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -98,7 +110,7 @@
                         <tr>
                             <td class="title">Student group</td>
                             <td class="description">
-                                <a href="${pageContext.request.contextPath}/group?group_id=${d.enrollment.group.group_id}&course_id=${d.enrollment.group.course.course_id}">
+                                <a href="${pageContext.request.contextPath}/group?department_id=${d.enrollment.group.course.department.department_id}&group_id=${d.enrollment.group.group_id}&course_id=${d.enrollment.group.course.course_id}">
                                     ${d.enrollment.group.group_name}
                                 </a>
                             </td>
@@ -107,6 +119,9 @@
                             <td class="title">Instructor</td>
                             <td class="description">
                                 <a href="${pageContext.request.contextPath}/user_detail?login=${d.instructure.instructure_code}">${d.instructure.instructure_code}</a>
+                                <span class="url_meet_instructor">
+                                    <a style="color: #fff; text-decoration: none;" href="${d.instructure.meet_link}" target="_blank">MeetURL</a>
+                                </span>
                             </td>
                         </tr>
                         <tr>

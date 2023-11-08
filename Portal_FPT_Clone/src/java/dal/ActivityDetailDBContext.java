@@ -6,6 +6,7 @@ package dal;
 
 import entity.Attendance;
 import entity.Course;
+import entity.Department;
 import entity.Enrollment;
 import entity.Group;
 import entity.Instructure;
@@ -45,6 +46,7 @@ public class ActivityDetailDBContext extends DBContext<Attendance> {
                     + "      ,t.[description]\n"
                     + "      ,a.slot\n"
                     + "      ,a.[status]\n"
+                    + "      ,d.department_id\n"
                     + "  FROM [Attendance] a INNER JOIN [Enrollment] e ON a.enrollment_id = e.enrollment_id\n"
                     + "  INNER JOIN [Group] g ON e.group_id = g.group_id\n"
                     + "  INNER JOIN [Course] c ON c.course_id = g.course_id\n"
@@ -54,6 +56,7 @@ public class ActivityDetailDBContext extends DBContext<Attendance> {
                     + "  INNER JOIN [Instructure] i ON i.instructure_id = a.instructure_id\n"
                     + "  INNER JOIN [Semester] se ON se.semester_id = g.semester_id\n"
                     + "  INNER JOIN [Account] ac ON ac.[user_id] = s.[user_id]\n"
+                    + "  INNER JOIN [Department] d ON c.department_id = d.department_id\n"
                     + "  WHERE c.course_id = ? AND a.attendance_id = ? AND ac.[user_id] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, course_id);
@@ -62,48 +65,41 @@ public class ActivityDetailDBContext extends DBContext<Attendance> {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Attendance att = new Attendance();
-                Instructure pro = new Instructure();
-                Student stu = new Student();
+                att.setAttendance_id(rs.getInt("attendance_id"));
+                att.setDate(rs.getDate("date"));
+                att.setStatus(rs.getString("status"));
+                att.setSlot(rs.getInt("slot"));
+                att.setDay_of_week(rs.getString("day_of_week"));
+                Instructure i = new Instructure();
+                i.setInstructure_code(rs.getString("instructure_code"));
+                att.setInstructure(i);
+                Student s = new Student();
+                s.setStudent_ID(rs.getString("student_ID"));
                 Course c = new Course();
-                Room r = new Room();
-                Enrollment en = new Enrollment();
-                Group g = new Group();
-                Semester se = new Semester();
-                TimeSlot timeSlot = new TimeSlot();
-
-                pro.setInstructure_code(rs.getString("instructure_code"));
-
-                stu.setStudent_ID(rs.getString("student_ID"));
-
                 c.setCourse_code(rs.getString("course_code"));
                 c.setCourse_id(rs.getInt("course_id"));
                 c.setCourse_name(rs.getString("course_name"));
-                
+                Room r = new Room();
                 r.setRoom_code(rs.getString("room_code"));
-
+                att.setClassroom(r);
+                Semester se = new Semester();
                 se.setSemester_id(rs.getInt("semester_id"));
-
+                Group g = new Group();
                 g.setCourse(c);
                 g.setGroup_id(rs.getInt("group_id"));
                 g.setGroup_name(rs.getString("group_name"));
                 g.setSemester(se);
-                
+                Enrollment en = new Enrollment();
+                en.setStudent(s);
+                en.setGroup(g);
+                att.setEnrollment(en);
+                TimeSlot timeSlot = new TimeSlot();
                 timeSlot.setTimeslot_id(rs.getInt("timeslot_id"));
                 timeSlot.setDescription(rs.getString("description"));
-
-                en.setStudent(stu);
-                en.setGroup(g);
-
-                att.setAttendance_id(rs.getInt("attendance_id"));
-                att.setEnrollment(en);
-                att.setInstructure(pro);
-                att.setDate(rs.getDate("date"));
                 att.setTimeSlot(timeSlot);
-
-                att.setClassroom(r);
-                att.setStatus(rs.getString("status"));
-                att.setSlot(rs.getInt("slot"));
-                att.setDay_of_week(rs.getString("day_of_week"));
+                Department d = new Department();
+                d.setDepartment_id(rs.getInt("department_id"));
+                c.setDepartment(d);
                 attendances.add(att);
             }
         } catch (SQLException ex) {
