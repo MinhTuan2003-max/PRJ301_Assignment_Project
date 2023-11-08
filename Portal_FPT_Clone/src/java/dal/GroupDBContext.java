@@ -68,7 +68,7 @@ public class GroupDBContext extends DBContext<Group> {
         return groups;
     }
 
-    public ArrayList<Group> getGroupByCourse(int course_id) {
+    public ArrayList<Group> getGroupByCourse(int course_id, int semester_id) {
         ArrayList<Group> groups = new ArrayList<>();
         try {
             String sql = "SELECT g.[group_id]\n"
@@ -76,9 +76,10 @@ public class GroupDBContext extends DBContext<Group> {
                     + "      ,c.[course_id]\n"
                     + "	     ,c.[course_name]\n"
                     + "  FROM [Group] g INNER JOIN [Course] c ON g.course_id = c.course_id\n"
-                    + "  WHERE c.[course_id] = ?";
+                    + "  WHERE c.[course_id] = ? AND g.semester_id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, course_id);
+            stm.setInt(2, semester_id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Group g = new Group();

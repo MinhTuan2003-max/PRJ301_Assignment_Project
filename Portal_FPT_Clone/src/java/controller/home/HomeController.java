@@ -38,6 +38,8 @@ public class HomeController extends BaseRequiredAuthenticationController {
         HttpSession session = request.getSession();
         session.removeAttribute("semester_id");
         session.removeAttribute("course_id");
+        session.removeAttribute("group_id");
+        session.removeAttribute("department_id");
     }
 
     @Override

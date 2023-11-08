@@ -13,6 +13,13 @@
         <title>View Attendance</title>
         <link href="${pageContext.request.contextPath}/css/viewattendance.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .table td, .table th {
+                padding: .75rem;
+                vertical-align: top;
+                border: 1px solid #dee2e6;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -35,12 +42,14 @@
                             <tr>
                                 <td>
                                     <a href="https://apps.apple.com/app/id1527723314">
-                                        <img style="width: 120px; height: 40px" src="img/img-app-store.png" alt="appstore"/>
+                                        <img style="width: 120px;
+                                             height: 40px" src="img/img-app-store.png" alt="appstore"/>
                                     </a>
                                 </td>
                                 <td>
                                     <a href="https://play.google.com/store/apps/details?id=com.fuct" class="">
-                                        <img style="width: 120px; height: 43px" src="img/img-play-store.png" alt=""/>
+                                        <img style="width: 120px;
+                                             height: 43px" src="img/img-play-store.png" alt=""/>
                                     </a>
                                 </td>
                             </tr>
@@ -80,7 +89,9 @@
             </div>
             <br>
             <h2>
-                View Attendance Report for ${sessionScope.account.displayname} (${requestScope.students.student_ID})
+                <strong>
+                    View Attendance Report for ${sessionScope.account.displayname} (${requestScope.students.student_ID})
+                </strong>
             </h2>
             <br>
             <div class="choose_term_course">
@@ -150,23 +161,28 @@
                 <div id="Grid">
                     <table class="table table-hover" style="width: 100%">
                         <tr>
-                            <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">NO</th>
-                            <th class="thead-inverse" style="width:116px; border-right: 1px solid #fff">DATE</th>
-                            <th class="thead-inverse" style="width:80px; border-right: 1px solid #fff">TIME</th>
-                            <th class="thead-inverse" style="width:60px; border-right: 1px solid #fff">SLOT</th>
-                            <th class="thead-inverse" style="width:60px; border-right: 1px solid #fff">ROOM</th>
-                            <th class="thead-inverse" style="width:80px; border-right: 1px solid #fff">LECTURER</th>
-                            <th class="thead-inverse" style="width:83px; border-right: 1px solid #fff;">GROUP NAME</th>
-                            <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">ATTENDANCE STATUS</th>
+                            <th class="thead-inverse" style="width:10px;
+                                border-right: 1px solid #fff">NO</th>
+                            <th class="thead-inverse" style="width:161px;
+                                border-right: 1px solid #fff">DATE</th>
+                            <th class="thead-inverse" style="width:104px;
+                                border-right: 1px solid #fff">SLOT</th>
+                            <th class="thead-inverse" style="width:60px;
+                                border-right: 1px solid #fff">ROOM</th>
+                            <th class="thead-inverse" style="width:80px;
+                                border-right: 1px solid #fff">LECTURER</th>
+                            <th class="thead-inverse" style="width:83px;
+                                border-right: 1px solid #fff;">GROUP NAME</th>
+                            <th class="thead-inverse" style="width:10px;
+                                border-right: 1px solid #fff">ATTENDANCE STATUS</th>
+                            <th class="thead-inverse" style="width:10px;
+                                border-right: 1px solid #fff">LECTURER'S COMMENT</th>
                         </tr>
                         <c:forEach items="${requestScope.attendances}" var="att" varStatus="loop">
                             <tr>
                                 <td>${loop.index + 1}</td>
                                 <td>${att.day_of_week} <fmt:formatDate value="${att.date}" pattern="dd/MM/yyyy"/></td>
-                                <td>
-                                    ${att.timeSlot.description}
-                                </td>
-                                <td>${att.slot}</td>
+                                <td>${att.slot}_(${att.timeSlot.description})</td>
                                 <td>${att.classroom.room_code}</td>
                                 <td>${att.instructure.instructure_code}</td>
                                 <td>${att.enrollment.group.group_name}</td>
@@ -175,6 +191,7 @@
                                         ${att.status}
                                     </div>
                                 </td>
+                                <td>${att.comments}</td>
                             </tr>
                         </c:forEach>
                     </table>     

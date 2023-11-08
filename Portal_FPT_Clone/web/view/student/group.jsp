@@ -11,80 +11,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <title>JSP Page</title>
-        <style>
-            .content-container {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: rgb(240,240,240);
-                border-radius: 4px;
-            }
-
-            .divControl {
-                padding-left: 8px;
-            }
-
-            .divUser {
-                padding-right: 7px;
-
-            }
-
-            .divUser a {
-                background-color: rgb(92,184,92);
-                border-radius: 5px;
-                padding: 0 7px 2px 7px;
-                color: #fff;
-                font-size: 13px;
-            }
-
-            .divUser a:hover {
-                color: #fff;
-            }
-
-            .divUser b {
-                background-color: rgb(92,184,92);
-                border-radius: 5px;
-                padding: 0 7px 2px 7px;
-                color: #fff;
-                font-size: 13px;
-            }
-            .selected {
-                color: #333; /* Text color for selected link */
-                font-weight: bold; /* Bold text for selected link */
-            }
-
-            .choose_term_course a:hover {
-                color: #333; /* Text color for selected link */
-            }
-
-            .title {
-                background-color: #6b90da;
-                padding-top: 10px;
-                padding-bottom: 10px;
-                border-right: 1px solid #fff;
-            }
-
-            .thead-inverse {
-                background-color: rgb(107,144,218);
-                color: #333;
-                padding: 10px 0 10px 3px;
-            }
-
-            table th {
-                padding: 0.35rem;
-            }
-
-            table td {
-                font-size: 0.92rem;
-            }
-
-            .choose_term_course a {
-                font-size: 14px;
-                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-            }
-
-        </style>
+        <title>FPT University Academic Portal</title>
+        <link href="${pageContext.request.contextPath}/css/groupstyle.css" rel="stylesheet" type="text/css"/>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <header>
@@ -127,7 +56,6 @@
                     <div class="content-container">
                         <div class="divControl">
                             <a href="${pageContext.request.contextPath}/home">Home</a>
-                            &nbsp;|&nbsp;<a href="${pageContext.request.contextPath}/timetable">Activity</a>
                             &nbsp;|&nbsp;<b>Groups</b>
                         </div>
                         <div class="divUser">
@@ -151,6 +79,9 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <h2 style="color: rgb(119,119,119)">Select a course, then a group ...</h2>
+
             <div class="choose_term_course">
                 <table style="width: 100%">
                     <tr>
@@ -244,14 +175,14 @@
                                         <c:choose>
                                             <c:when test="${g.group_id == sessionScope.group_id}">
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a class="selected" href="group?course_id=${g.course.course_id}&group_id=${g.group_id}">
+                                                    <a id="showStudentList" class="selected" href="group?semester_id=${sessionScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
                                                         ${g.group_name}                                           
                                                     </a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a href="group?course_id=${g.course.course_id}&group_id=${g.group_id}">
+                                                    <a id="showStudentList" href="group?semester_id=${sessionScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
                                                         ${g.group_name}                                           
                                                     </a>
                                                 </td>
@@ -265,22 +196,25 @@
                 </table>
             </div>
             <br>
-            <table class="table table-hover" style="width: 100%">
-                <tr>
-                    <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">INDEX</th>
-                    <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">IMAGE</th>
-                    <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">ROLL NUMBER</th>
-                    <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">NAME</th>
-                </tr>
-                <c:forEach items="${requestScope.enrollments}" var="e" varStatus="loop">
+            <c:if test="${not empty requestScope.groups}">
+                <table class="table table-hover" style="width: 100%">
+                    <h2 style="color: rgb(119,119,119)">... then see student list</h2>
                     <tr>
-                        <td>${loop.index + 1}</td>
-                        <td><img src="/${e.student.student_Img}"></td>
-                        <td>${e.student.student_ID}</td>
-                        <td>${e.student.student_Name}</td>
+                        <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">INDEX</th>
+                        <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">IMAGE</th>
+                        <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">ROLL NUMBER</th>
+                        <th class="thead-inverse" style="width:10px; border-right: 1px solid #fff">FULL NAME</th>
                     </tr>
-                </c:forEach>
-            </table>
+                    <c:forEach items="${requestScope.enrollments}" var="e" varStatus="loop">
+                        <tr>
+                            <td>${loop.index + 1}</td>
+                            <td><img src="/${e.student.student_Img}"></td>
+                            <td>${e.student.student_ID}</td>
+                            <td>${e.student.student_Name}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
         </div>
     </body>
 </html>

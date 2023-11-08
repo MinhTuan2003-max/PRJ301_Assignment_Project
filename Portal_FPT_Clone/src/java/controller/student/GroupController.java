@@ -14,7 +14,7 @@ import dal.StudentDBContext;
 import entity.Account;
 import entity.Campus;
 import entity.Course;
-import entity.CourseDBContext;
+import dal.CourseDBContext;
 import entity.Department;
 import entity.Enrollment;
 import entity.Group;
@@ -57,12 +57,12 @@ public class GroupController extends BaseRequiredAuthenticationController {
         request.getSession().setAttribute("course_id", course_id);
 
         GroupDBContext gdbc = new GroupDBContext();
-        ArrayList<Group> groups = gdbc.getGroupByCourse(course_id);
+        ArrayList<Group> groups = gdbc.getGroupByCourse(course_id, semester_id);
         int group_id = (request.getParameter("group_id") != null) ? Integer.parseInt(request.getParameter("group_id")) : getDefaultIfNull(request.getSession().getAttribute("group_id"), 0);
         request.getSession().setAttribute("group_id", group_id);
 
         EnrollmentDBContext edbc = new EnrollmentDBContext();
-        ArrayList<Enrollment> enrollments = edbc.getByGroupAndCourse(group_id, course_id);
+        ArrayList<Enrollment> enrollments = edbc.getByGroupAndCourse(group_id, course_id, semester_id);
 
         request.setAttribute("campus", campus);
         request.setAttribute("students", students);

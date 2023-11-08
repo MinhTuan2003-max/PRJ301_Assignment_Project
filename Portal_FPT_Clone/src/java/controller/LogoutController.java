@@ -30,7 +30,8 @@ public class LogoutController extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("semester_id");
         session.removeAttribute("course_id");
-
+        session.removeAttribute("group_id");
+        session.removeAttribute("department_id");
         // Hủy bỏ phiên làm việc (session) của người dùng
         session.invalidate();
 

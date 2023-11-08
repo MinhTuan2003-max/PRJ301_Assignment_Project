@@ -22,7 +22,7 @@ public class Attendance extends BaseEntity {
     private int slot;
     private String taken_by;
     private String day_of_week;
-    private String notes;
+    private String comments;
 
     public String getTaken_by() {
         return taken_by;
@@ -104,12 +104,11 @@ public class Attendance extends BaseEntity {
         this.day_of_week = day_of_week;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getComments() {
+        return comments;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setComments(String notes) {
+        this.comments = notes;
     }
-
 }
