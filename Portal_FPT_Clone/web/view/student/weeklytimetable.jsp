@@ -123,10 +123,8 @@
                                 To <input type="date" name="endDate" id="endDate" value="${requestScope.endDate}"/>
                             </form>
                         </td>
-                        <c:set var="currentDate" value="<%= new java.util.Date() %>" />
                         <c:forEach items="${requestScope.week_date}" var="d">
-                            <c:set var="isToday" value="${d.time == currentDate.time}" />
-                            <td class="date_in_week${isToday ? ' today' : ''}">
+                            <td class="date_in_week">
                                 <fmt:formatDate value="${d}" pattern="EEE"/> <br>
                                 <div style="border-top: 1px solid #fff;">
                                     <fmt:formatDate value="${d}" pattern="dd-MM"/>

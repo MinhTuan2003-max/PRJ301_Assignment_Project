@@ -112,7 +112,7 @@
                                 <c:forEach var="se" items="${requestScope.semesters}">
                                     <tr style="border-bottom: 1px solid rgb(210,210,210);">
                                         <c:choose>
-                                            <c:when test="${se.semester_id == sessionScope.semester_id}">
+                                            <c:when test="${se.semester_id == requestScope.semester_id}">
                                                 <td style="padding: 0 100px 0 3px; ">
                                                     <a style="font-size: 14px;" class="selected"
                                                        href="viewattendance?semester_id=${se.semester_id}">${se.semester_name}</a>
@@ -134,16 +134,16 @@
                                 <c:forEach var="g" items="${requestScope.groups}">
                                     <tr style="border-bottom: 1px solid rgb(210,210,210);">
                                         <c:choose>
-                                            <c:when test="${g.group_id == sessionScope.course_id}">
+                                            <c:when test="${g.group_id == requestScope.course_id}">
                                                 <td style="padding-left: 3px">
-                                                    <a class="selected" href="viewattendance?semester_id=${sessionScope.semester_id}&course_id=${g.group_id}">
+                                                    <a class="selected" href="viewattendance?semester_id=${requestScope.semester_id}&course_id=${g.group_id}">
                                                         ${g.course.course_name}(${g.course.course_code}) (${g.group_name},start ${g.course.start_date})
                                                     </a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td style="padding-left: 3px">
-                                                    <a href="viewattendance?semester_id=${sessionScope.semester_id}&course_id=${g.group_id}">
+                                                    <a href="viewattendance?semester_id=${requestScope.semester_id}&course_id=${g.group_id}">
                                                         ${g.course.course_name}(${g.course.course_code}) (${g.group_name},start ${g.course.start_date})
                                                     </a>
                                                 </td>

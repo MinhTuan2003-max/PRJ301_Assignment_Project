@@ -13,7 +13,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -35,11 +34,7 @@ public class HomeController extends BaseRequiredAuthenticationController {
     protected void doGet(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
         request.getRequestDispatcher("view/home/home.jsp").forward(request, response);
-        HttpSession session = request.getSession();
-        session.removeAttribute("semester_id");
-        session.removeAttribute("course_id");
-        session.removeAttribute("group_id");
-        session.removeAttribute("department_id");
+
     }
 
     @Override

@@ -23,6 +23,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import util.GetNullDefault;
 
 /**
  *
@@ -32,6 +33,7 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
+        GetNullDefault gnd = new GetNullDefault();
 
         CampusDBContext cdb = new CampusDBContext();
         ArrayList<Campus> campus = cdb.search(loggedAccount.getUserID());
@@ -40,13 +42,11 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
 
         SemesterDBContext sedb = new SemesterDBContext();
         ArrayList<Semester> semesters = sedb.getAllSemester();
-        int semester_id = (request.getParameter("semester_id") != null) ? Integer.parseInt(request.getParameter("semester_id")) : getDefaultIfNull(request.getSession().getAttribute("semester_id"), semesters.size());
-        request.getSession().setAttribute("semester_id", semester_id);
+        int semester_id = (request.getParameter("semester_id") != null) ? Integer.parseInt(request.getParameter("semester_id")) : gnd.getDefaultIfNull(request.getAttribute("semester_id"), semesters.size());
 
         GroupDBContext grdb = new GroupDBContext();
         ArrayList<Group> groups = grdb.getGroupByStudentIDAndSemester(students.getStudent_ID(), semester_id);
-        int course_id = (request.getParameter("course_id") != null) ? Integer.parseInt(request.getParameter("course_id")) : getDefaultIfNull(request.getSession().getAttribute("course_id"), 1);
-        request.getSession().setAttribute("course_id", course_id);
+        int course_id = (request.getParameter("course_id") != null) ? Integer.parseInt(request.getParameter("course_id")) : gnd.getDefaultIfNull(request.getAttribute("course_id"), 1);
 
         AttendanceDBContext atdb = new AttendanceDBContext();
         ArrayList<Attendance> attendances = atdb.getViewAttendance(students.getStudent_ID(), course_id);
@@ -58,6 +58,8 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
         int absent_percent = endb.calculateAbsentPercent(enrollment, getAbsentCount);
         request.setAttribute("absent_percent", absent_percent);
         request.setAttribute("enrollment", enrollment);
+        request.setAttribute("course_id", course_id);
+        request.setAttribute("semester_id", semester_id);
         request.setAttribute("attendances", attendances);
         request.setAttribute("absent", getAbsentCount);
         request.setAttribute("groups", groups);
@@ -78,13 +80,5 @@ public class ViewAttendstudentController extends BaseRequiredAuthenticationContr
     protected void doPost(HttpServletRequest request, HttpServletResponse response, Account loggedAccount)
             throws ServletException, IOException {
         processRequest(request, response, loggedAccount);
-    }
-
-    private static int getDefaultIfNull(Object value, int defaultValue) {
-        if (value != null) {
-            return (int) value;
-        } else {
-            return defaultValue;
-        }
     }
 }
