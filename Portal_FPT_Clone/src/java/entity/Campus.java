@@ -14,7 +14,7 @@ public class Campus extends BaseEntity {
 
     private int cid;
     private String cname;
-    ArrayList<Account> accounts = new ArrayList<>();
+        ArrayList<Account> accounts = new ArrayList<>();
 
     public int getCid() {
         return cid;

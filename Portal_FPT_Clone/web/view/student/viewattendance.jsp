@@ -120,7 +120,7 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <td style="padding: 0 100px 0 3px">
-                                                    <a style="font-size: small;"
+                                                    <a style="font-size: 14px;"
                                                        href="viewattendance?semester_id=${se.semester_id}">${se.semester_name}</a>
                                                 </td>
                                             </c:otherwise>

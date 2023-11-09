@@ -109,7 +109,7 @@
                                 <c:forEach items="${requestScope.semesters}" var="se">
                                     <tr style="border-bottom: 1px solid rgb(210,210,210);">
                                         <c:choose>
-                                            <c:when test="${se.semester_id == requestScope.semester_id}">
+                                            <c:when test="${se.semester_id == sessionScope.semester_id}">
                                                 <td style="padding: 0 100px 0 3px; ">
                                                     <a style="font-size: 14px;" class="selected"
                                                        href="group?semester_id=${se.semester_id}">${se.semester_name}</a>
@@ -131,16 +131,16 @@
                                 <c:forEach items="${requestScope.departments}" var="d">
                                     <tr style="border-bottom: 1px solid rgb(210,210,210);">
                                         <c:choose>
-                                            <c:when test="${d.department_id == requestScope.department_id}">
+                                            <c:when test="${d.department_id == sessionScope.department_id}">
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a style="font-size: 14px;" class="selected" href="group?semester_id=${requestScope.semester_id}&department_id=${d.department_id}">
+                                                    <a style="font-size: 14px;" class="selected" href="group?semester_id=${sessionScope.semester_id}&department_id=${d.department_id}">
                                                         ${d.department_name}
                                                     </a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a style="font-size: 14px;" href="group?semester_id=${requestScope.semester_id}&department_id=${d.department_id}">
+                                                    <a style="font-size: 14px;" href="group?semester_id=${sessionScope.semester_id}&department_id=${d.department_id}">
                                                         ${d.department_name}
                                                     </a>
                                                 </td>
@@ -155,16 +155,16 @@
                                 <c:forEach items="${requestScope.courses}" var="c">
                                     <tr style="border-bottom: 1px solid rgb(210,210,210);">
                                         <c:choose>
-                                            <c:when test="${c.course_id == requestScope.course_id}">
+                                            <c:when test="${c.course_id == sessionScope.course_id}">
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a class="selected"  href="group?semester_id=${requestScope.semester_id}&department_id=${requestScope.department_id}&course_id=${c.course_id}">
+                                                    <a class="selected"  href="group?semester_id=${sessionScope.semester_id}&department_id=${sessionScope.department_id}&course_id=${c.course_id}">
                                                         ${c.course_name}(${c.course_code})
                                                     </a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a href="group?semester_id=${requestScope.semester_id}&department_id=${requestScope.department_id}&course_id=${c.course_id}">
+                                                    <a href="group?semester_id=${sessionScope.semester_id}&department_id=${sessionScope.department_id}&course_id=${c.course_id}">
                                                         ${c.course_name}(${c.course_code})
                                                     </a>
                                                 </td>
@@ -179,16 +179,16 @@
                                 <c:forEach items="${requestScope.groups}" var="g">
                                     <tr style="border-bottom: 1px solid rgb(210,210,210);">
                                         <c:choose>
-                                            <c:when test="${g.group_id == requestScope.group_id}">
+                                            <c:when test="${g.group_id == sessionScope.group_id}">
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a class="selected" href="group?semester_id=${requestScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
+                                                    <a class="selected" href="group?semester_id=${sessionScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
                                                         ${g.group_name}                                           
                                                     </a>
                                                 </td>
                                             </c:when>
                                             <c:otherwise>
                                                 <td style="padding: 0 100px 0 3px; ">
-                                                    <a href="group?semester_id=${requestScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
+                                                    <a href="group?semester_id=${sessionScope.semester_id}&course_id=${g.course.course_id}&group_id=${g.group_id}">
                                                         ${g.group_name}                                           
                                                     </a>
                                                 </td>
@@ -214,7 +214,9 @@
                     <c:forEach items="${requestScope.enrollments}" var="e" varStatus="loop">
                         <tr>
                             <td>${loop.index + 1}</td>
-                            <td><img src="/${e.student.student_Img}"></td>
+                            <td><img style="height: 146px;
+                                     width: 111px;
+                                     border-width: 0px;" src=""></td>
                             <td>${e.student.student_ID}</td>
                             <td>${e.student.student_Name}</td>
                         </tr>

@@ -119,8 +119,9 @@
                     <tr>
                         <td class="timetable_getdate" style="padding-left: 3px;">
                             <form action="timetable" method="GET">
-                                From <input type="date" name="startDate" id="startDate" value="${requestScope.startDate}"/> <br/>
-                                To <input type="date" name="endDate" id="endDate" value="${requestScope.endDate}"/>
+                                From <input type="date" name="startDate" value="${requestScope.startDate}"/> <br/>
+                                To <input type="date" name="endDate" value="${requestScope.endDate}"/>
+                                <input type="submit" value="View">
                             </form>
                         </td>
                         <c:forEach items="${requestScope.week_date}" var="d">
@@ -135,6 +136,7 @@
                     <c:forEach items="${requestScope.timeslot}" var="t">
                         <tr>
                             <td class="week_date" style="padding-left: 3px; font-size: 15px;">Slot ${t.timeslot_id}</td>
+                            <c:set var="currentDate" value="<%= new java.util.Date() %>" />
                             <c:forEach items="${requestScope.week_date}" var="d">
                                 <c:set var="isTodayOrFuture" value="${d.time >= currentDate.time}" />
                                 <c:set var="found" value="false" />
@@ -207,25 +209,4 @@
             </footer>
         </div>
     </body>
-    <script>
-        // Lấy tham chiếu đến các trường nhập ngày
-        var startDateInput = document.getElementById("startDate");
-        var endDateInput = document.getElementById("endDate");
-
-        // Lắng nghe sự kiện onChange trên cả hai trường nhập ngày
-        startDateInput.addEventListener("change", updateView);
-        endDateInput.addEventListener("change", updateView);
-
-        // Hàm cập nhật URL và gửi yêu cầu tự động
-        function updateView() {
-            var startDate = startDateInput.value;
-            var endDate = endDateInput.value;
-
-            // Tạo URL cần gửi yêu cầu đến (thay thế "/timetable" bằng URL của trang hiển thị thời khoá biểu)
-            var newURL = "${pageContext.request.contextPath}/timetable?startDate=" + startDate + "&endDate=" + endDate;
-
-            // Chuyển hướng đến URL mới
-            window.location.href = newURL;
-        }
-    </script>
 </html>
