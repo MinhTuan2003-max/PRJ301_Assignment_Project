@@ -77,7 +77,7 @@
                     </table>
                 </div>
             </nav>
-        </header>       
+        </header>     
         <div class="container">
             <div class="row">
                 <div class="col-md-12">                    
@@ -138,7 +138,7 @@
                             <td class="week_date" style="padding-left: 3px; font-size: 15px;">Slot ${t.timeslot_id}</td>
                             <c:set var="currentDate" value="<%= new java.util.Date() %>" />
                             <c:forEach items="${requestScope.week_date}" var="d">
-                                <c:set var="isTodayOrFuture" value="${d.time >= currentDate.time}" />
+                                <c:set var="isTodayOrFuture" value="${d.time > currentDate.time}" />
                                 <c:set var="found" value="false" />
                                 <c:forEach items="${requestScope.weeklyTimetable}" var="w">
                                     <c:if test="${t.timeslot_id eq w.slot and w.date eq d}">
